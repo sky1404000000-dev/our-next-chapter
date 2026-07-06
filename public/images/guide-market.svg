@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="260" viewBox="0 0 320 260" role="img" aria-label="죽도시장">
+  <rect width="320" height="260" fill="#f3eadf"/>
+  <path d="M0 96h320v164H0z" fill="#d9c5ae"/>
+  <path d="M18 84h284l-26 44H44z" fill="#9c8f77"/>
+  <path d="M44 128h232v96H44z" fill="#fffdf8"/>
+  <path d="M72 160h50M72 188h98M190 160h58M190 188h38" stroke="#85886f" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="72" cy="62" r="18" fill="#e8c7a8"/>
+  <circle cx="122" cy="62" r="18" fill="#e8c7a8"/>
+  <circle cx="172" cy="62" r="18" fill="#e8c7a8"/>
+</svg>

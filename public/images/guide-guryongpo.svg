@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="260" viewBox="0 0 320 260" role="img" aria-label="구룡포 해안 마을">
+  <rect width="320" height="260" fill="#dfe9ea"/>
+  <path d="M0 142c52-20 92-16 136 6 64 31 116 26 184-8v120H0z" fill="#87aebf"/>
+  <path d="M38 132l50-42 50 42v72H38z" fill="#fffdf8"/>
+  <path d="M180 124l44-36 44 36v74h-88z" fill="#fffdf8"/>
+  <path d="M30 132h116M172 124h106" stroke="#b8795d" stroke-width="12" stroke-linecap="round"/>
+  <path d="M0 214h320" stroke="#fffdf8" stroke-width="10"/>
+</svg>

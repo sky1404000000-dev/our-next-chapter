@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="680" viewBox="0 0 520 680" role="img" aria-label="포항 더퀸 예식장 이미지">
+  <rect width="520" height="680" fill="#f4efe7"/>
+  <rect x="82" y="132" width="356" height="420" rx="28" fill="#fffdf8" stroke="#d8d0c4"/>
+  <path d="M122 262h276M148 220h224M176 176h168" stroke="#c9bfae" stroke-width="10" stroke-linecap="round"/>
+  <path d="M145 552V262M215 552V262M305 552V262M375 552V262" stroke="#d8d0c4" stroke-width="12"/>
+  <path d="M194 552V384c0-47 30-84 66-84s66 37 66 84v168" fill="#ebe4da"/>
+  <circle cx="260" cy="428" r="30" fill="#b8a783"/>
+  <path d="M110 580c82-54 218-54 300 0" fill="none" stroke="#85886f" stroke-width="12" stroke-linecap="round"/>
+  <text x="260" y="110" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#514a42">THE QUEEN</text>
+</svg>
