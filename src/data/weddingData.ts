@@ -57,45 +57,34 @@ export type AboutPerson = {
 
 export const weddingData = {
   metadata: {
-    title: '은진 & 동균 결혼식에 초대합니다',
-    description: '2026년 10월 10일 포항 더퀸에서 은진과 동균이 결혼합니다.',
-    ogImage: '/images/og-image.svg'
+    title: '대진 & 동균 결혼식에 초대합니다',
+    description: '2026년 10월 10일, 포항 더퀸에서 대진과 동균이 결혼합니다.',
+    ogImage: '/images/og-image.jpg'
   },
-
   music: {
     src: '/audio/wedding.mp3',
-    title: 'wedding music'
+    title: 'Wedding music'
   },
-
   hero: {
     image: '/images/main.png',
     video: '/video/hero.mp4',
-    introVideo: '',
-    names: '은진 & 동균',
-    dateLabel: '2026.10.10 토요일 오후 12:30',
-    timeLabel: '포항 더퀸 (구 UA 컨벤션)',
-    message: '친구에서 연인으로, 연인에서 부부로'
+    names: '대진 & 동균',
+    dateLabel: '2026.10.10 SAT',
+    timeLabel: '12:30 PM',
+    message: '친구에서 연인으로,\n연인에서 부부로\n우리의 다음 장이 시작됩니다.'
   },
-
-  intro: {
-    eyebrow: 'THANK YOU',
-    title: '감사합니다',
-    message: '소중한 마음으로\n저희의 시작을 함께해 주세요.'
-  },
-
   invitation: {
     title: '초대합니다',
     image: '/images/invite.png',
-    imageAlt: '은진과 동균의 초대 사진',
+    imageAlt: '대진과 동균의 초대 사진',
     message:
-      '대학교에서 만나\n친구에서 연인으로,\n이제는 부부로 새로운 장을 시작합니다.\n소중한 분들을 초대합니다.'
+      '같은 계절을 지나며 서로에게 가장 편안한 사람이 되었습니다.\n이제 부부라는 이름으로 새로운 페이지를 시작하려 합니다.\n소중한 분들을 모시고 그 첫날을 함께 나누고 싶습니다.'
   },
-
   calendar: {
     date: '2026-10-10T12:30:00+09:00',
     displayDate: '2026. 10. 10',
     displayTime: '토요일 오후 12시 30분',
-    coupleLabel: '은진 ♥ 동균',
+    coupleLabel: '대진과 동균',
     days: [
       { date: 27, currentMonth: false },
       { date: 28, currentMonth: false },
@@ -134,62 +123,57 @@ export const weddingData = {
       { date: 31, currentMonth: true }
     ] as CalendarDay[]
   },
-
   story: {
     title: '우리의 이야기',
     kicker: 'INTERVIEW',
-    intro: '결혼을 앞두고 저희 두 사람의 인터뷰를 준비했습니다.',
+    intro: '결혼을 앞두고 서로에게 남기고 싶은 마음을 짧은 편지처럼 담았습니다.',
     coverImage: '/images/1.png',
-    coverAlt: '은진과 동균의 인터뷰 사진',
-    buttonLabel: '신랑 & 신부의 인터뷰 읽어보기',
+    coverAlt: '대진과 동균의 추억 사진',
+    buttonLabel: '우리 이야기 읽어보기',
     questions: [
       {
-        question: 'Q1. 신랑 신부를 소개해주세요',
+        question: 'Q1. 서로는 어떤 사람인가요?',
         answer:
-          '신랑 동균은 조용하지만 마음이 깊고, 맡은 일에는 끝까지 책임을 다하는 사람입니다.\n신부 은진은 밝은 에너지로 주변을 환하게 만들고, 작은 순간도 소중하게 기억하는 사람입니다.\n서로 다른 듯 닮은 두 사람이 이제 같은 방향을 바라보려 합니다.',
+          '동균은 조용하지만 마음이 깊고, 작은 약속도 오래 기억하는 사람입니다.\n대진은 밝은 에너지로 주변을 환하게 만들고, 평범한 하루도 특별하게 바꾸는 사람입니다.',
         image: '/images/donggyun.png',
-        imageAlt: '신랑 신부 소개 사진'
+        imageAlt: '동균 소개 사진'
       },
       {
-        question: 'Q2. 두 분은 어떻게 만나게 되었나요?',
+        question: 'Q2. 함께하며 가장 좋았던 순간은요?',
         answer:
-          '서로의 이름도 몰랐던 어느 날, 지인의 모임에서 처음 마주 앉았습니다.\n처음엔 가벼운 대화로 시작했지만 시간이 지날수록 편안함이 쌓였고, 자연스럽게 연락이 이어졌습니다.',
+          '거창한 날보다 함께 걷고 밥 먹고 웃던 평범한 날들이 가장 오래 남았습니다.\n서로의 일상에 자연스럽게 스며든 시간이 우리의 확신이 되었습니다.',
         image: '/images/2.png',
-        imageAlt: '처음 만난 날을 떠올리는 사진'
+        imageAlt: '함께한 추억 사진'
       },
       {
-        question: 'Q3. 결혼을 결심한 순간은 언제인가요?',
+        question: 'Q3. 앞으로 어떤 부부가 되고 싶나요?',
         answer:
-          '특별한 한순간보다 함께 보낸 평범한 날들이 답이 되었습니다.\n기쁜 날에도 힘든 날에도 가장 먼저 떠오르는 사람이 서로였고, 앞으로의 계절도 함께 건너고 싶다는 마음이 자연스럽게 들었습니다.',
+          '완벽하기보다 다정한 사람이 되고 싶습니다.\n서로의 속도를 존중하며, 긴 계절을 함께 건너는 든든한 편이 되겠습니다.',
         image: '/images/3.png',
-        imageAlt: '결혼을 결심한 순간의 사진'
+        imageAlt: '결혼을 앞둔 두 사람'
       }
     ] as InterviewQuestion[],
     items: [
       {
         date: '2019.11.03',
-        title: '우리가 처음 만난 날',
-        description:
-          '가을 햇살이 따스했던 그날, 캠퍼스에서 처음 마주 앉았습니다.\n서로의 이야기에 귀 기울이며 우리의 계절이 조용히 시작되었습니다.',
-        image: '/images/gallery-1.svg'
+        title: '처음 만난 날',
+        description: '작은 인연이 천천히 자라 서로의 계절이 되었습니다.',
+        image: '/images/gallery-1.jpg'
       },
       {
         date: '함께한 시간',
         title: '친구에서 연인으로',
-        description:
-          '익숙한 하루 끝에서 가장 편안한 사람, 가장 소중한 사람이 되었습니다.\n서로의 일상을 천천히 채워가며 같은 방향을 바라보게 되었습니다.',
-        image: '/images/gallery-2.svg'
+        description: '가장 편안한 사람, 가장 소중한 사람이 되었습니다.',
+        image: '/images/gallery-2.jpg'
       },
       {
         date: '2026.10.10',
-        title: '우리의 결혼식',
-        description:
-          '포항 더퀸에서 부부라는 이름으로 우리의 다음 이야기를 시작합니다.\n기쁜 날, 소중한 분들과 함께하고 싶습니다.',
-        image: '/images/gallery-3.svg'
+        title: '우리의 다음 장',
+        description: '포항에서 부부라는 이름으로 새로운 이야기를 시작합니다.',
+        image: '/images/gallery-3.jpg'
       }
     ] as StoryItem[]
   },
-
   gallery: {
     title: '우리의 순간들',
     initialCount: 4,
@@ -197,298 +181,153 @@ export const weddingData = {
       {
         image: '/images/1.png',
         caption: '처음처럼 다정하게',
-        description: '처음 만난 날의 설렘처럼, 서로를 바라보는 마음을 오래 간직하고 싶습니다.',
-        alt: '은진과 동균의 추억 사진 1'
+        description: '처음 마음을 오래 간직하고 싶은 두 사람의 사진입니다.',
+        alt: '대진과 동균의 추억 사진 1'
       },
       {
         image: '/images/2.png',
         caption: '편안한 하루',
-        description: '가장 평범한 하루도 함께라서 오래 기억하고 싶은 장면이 되었습니다.',
-        alt: '은진과 동균의 추억 사진 2'
+        description: '함께라서 더 오래 기억하고 싶은 평범한 하루입니다.',
+        alt: '대진과 동균의 추억 사진 2'
       },
       {
         image: '/images/3.png',
         caption: '같은 방향',
-        description: '서로의 속도에 맞춰 걸으며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
+        description: '서로의 속도를 맞추며 같은 내일을 약속합니다.',
+        alt: '대진과 동균의 추억 사진 3'
       },
       {
         image: '/images/4.png',
         caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 우리의 마음도 조금씩 더 닮아갔습니다.',
-        alt: '은진과 동균의 추억 사진 4'
+        description: '함께 웃는 시간이 많아질수록 마음도 더 가까워졌습니다.',
+        alt: '대진과 동균의 추억 사진 4'
       },
       {
         image: '/images/5.png',
         caption: '계절을 건너',
-        description: '여러 계절을 지나며 쌓인 마음으로 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
-      },
-   {
-        image: '/images/1.png',
-        caption: '처음처럼 다정하게',
-        description: '처음 만난 날의 설렘처럼, 서로를 바라보는 마음을 오래 간직하고 싶습니다.',
-        alt: '은진과 동균의 추억 사진 1'
-      },
-      {
-        image: '/images/2.png',
-        caption: '편안한 하루',
-        description: '가장 평범한 하루도 함께라서 오래 기억하고 싶은 장면이 되었습니다.',
-        alt: '은진과 동균의 추억 사진 2'
-      },
-      {
-        image: '/images/3.png',
-        caption: '같은 방향',
-        description: '서로의 속도에 맞춰 걸으며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
-      },
-      {
-        image: '/images/4.png',
-        caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 우리의 마음도 조금씩 더 닮아갔습니다.',
-        alt: '은진과 동균의 추억 사진 4'
-      },
-      {
-        image: '/images/5.png',
-        caption: '계절을 건너',
-        description: '여러 계절을 지나며 쌓인 마음으로 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
-      },
-        {
-        image: '/images/1.png',
-        caption: '처음처럼 다정하게',
-        description: '처음 만난 날의 설렘처럼, 서로를 바라보는 마음을 오래 간직하고 싶습니다.',
-        alt: '은진과 동균의 추억 사진 1'
-      },
-      {
-        image: '/images/2.png',
-        caption: '편안한 하루',
-        description: '가장 평범한 하루도 함께라서 오래 기억하고 싶은 장면이 되었습니다.',
-        alt: '은진과 동균의 추억 사진 2'
-      },
-      {
-        image: '/images/3.png',
-        caption: '같은 방향',
-        description: '서로의 속도에 맞춰 걸으며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
-      },
-      {
-        image: '/images/4.png',
-        caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 우리의 마음도 조금씩 더 닮아갔습니다.',
-        alt: '은진과 동균의 추억 사진 4'
-      },
-      {
-        image: '/images/5.png',
-        caption: '계절을 건너',
-        description: '여러 계절을 지나며 쌓인 마음으로 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
-      },
-        {
-        image: '/images/1.png',
-        caption: '처음처럼 다정하게',
-        description: '처음 만난 날의 설렘처럼, 서로를 바라보는 마음을 오래 간직하고 싶습니다.',
-        alt: '은진과 동균의 추억 사진 1'
-      },
-      {
-        image: '/images/2.png',
-        caption: '편안한 하루',
-        description: '가장 평범한 하루도 함께라서 오래 기억하고 싶은 장면이 되었습니다.',
-        alt: '은진과 동균의 추억 사진 2'
-      },
-      {
-        image: '/images/3.png',
-        caption: '같은 방향',
-        description: '서로의 속도에 맞춰 걸으며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
-      },
-      {
-        image: '/images/4.png',
-        caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 우리의 마음도 조금씩 더 닮아갔습니다.',
-        alt: '은진과 동균의 추억 사진 4'
-      },
-      {
-        image: '/images/5.png',
-        caption: '계절을 건너',
-        description: '여러 계절을 지나며 쌓인 마음으로 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
-      },
-        {
-        image: '/images/1.png',
-        caption: '처음처럼 다정하게',
-        description: '처음 만난 날의 설렘처럼, 서로를 바라보는 마음을 오래 간직하고 싶습니다.',
-        alt: '은진과 동균의 추억 사진 1'
-      },
-      {
-        image: '/images/2.png',
-        caption: '편안한 하루',
-        description: '가장 평범한 하루도 함께라서 오래 기억하고 싶은 장면이 되었습니다.',
-        alt: '은진과 동균의 추억 사진 2'
-      },
-      {
-        image: '/images/3.png',
-        caption: '같은 방향',
-        description: '서로의 속도에 맞춰 걸으며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
-      },
-      {
-        image: '/images/4.png',
-        caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 우리의 마음도 조금씩 더 닮아갔습니다.',
-        alt: '은진과 동균의 추억 사진 4'
-      },
-      {
-        image: '/images/5.png',
-        caption: '계절을 건너',
-        description: '여러 계절을 지나며 쌓인 마음으로 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
-      },
+        description: '여러 계절을 지나 이제 새로운 계절을 시작합니다.',
+        alt: '대진과 동균의 추억 사진 5'
+      }
     ] as GalleryItem[]
   },
-
   weddingInfo: {
     title: '예식 안내',
-    date: '2026.10.10 토요일',
-    time: '오후 12:30',
+    date: '2026년 10월 10일 토요일',
+    time: '오후 12시 30분',
     venue: '포항 더퀸',
-    venueSub: '구 UA 컨벤션',
+    venueSub: '구 UA컨벤션',
     address: '경북 포항시 남구 대이로 18'
   },
-
   location: {
     title: '오시는 길',
-    mapImage: '/images/pohang.png',
+    mapImage: '/images/pohang.jpg',
     mapAlt: '포항 더퀸 주변 지도',
     mapDescription: '포항 더퀸',
     phone: 'Tel. 054-283-1111',
     coordinates: {
-       lat: 36.0174244,
-       lng: 129.3437087
+      lat: 36.0174244,
+      lng: 129.3437087
     },
     links: {
       kakao: 'https://map.kakao.com/link/search/포항 더퀸',
       naver: 'https://map.naver.com/p/search/포항%20더퀸'
     },
     parking:
-      '건물 내 주차 가능 / 하객 무료 주차 안내 예정\n기사님께 포항 더퀸(구 UA 컨벤션)으로 말씀해 주세요.\n포항 시내 주요 노선 이용 후 이동 가능합니다.'
+      '건물 내 주차장을 이용하실 수 있습니다.\n주말 교통 상황에 따라 여유 있게 도착해 주세요.'
   },
-
   aboutUs: {
     kicker: 'ABOUT US',
-    title: '저희 커플을 소개합니다',
-    subtitle: '하나로 이어진 두개의 우주',
+    title: '두 사람을 소개합니다',
+    subtitle: '하나의 마음으로 이어지는 작은 기록',
     people: [
       {
         role: '신랑',
         name: '김동균',
-        parents: '김응국 · 이남순의 아들',
-        birth: '1997년 2월 광양 출생',
-        note: '호기심 많은 손재주 왕 📽',
+        parents: '김영국, 이남숙의 아들',
+        birth: '1997년 2월 출생',
+        note: '묵묵하고 다정한 사람',
         image: '/images/donggyun.png',
-        imageAlt: '신랑 동균 어린 시절 사진'
+        imageAlt: '신랑 동균 사진'
       },
       {
         role: '신부',
-        name: '김은진',
-        parents: '김창성 · 이춘희의 딸',
-        birth: '1998년 9월 속초 출생',
-        note: '감성 과다 제주소녀 🍊',
+        name: '김대진',
+        parents: '김창성, 이춘자의 딸',
+        birth: '1998년 9월 출생',
+        note: '밝고 섬세한 사람',
         image: '/images/eunjin.png',
-        imageAlt: '신부 김은진 어린 시절 사진'
+        imageAlt: '신부 대진 사진'
       }
     ] as AboutPerson[]
   },
-
   account: {
     title: '마음 전하실 곳',
     message:
-      '참석이 어려우시거나 멀리서 마음을 전해주시는 분들을 위해 조심스레 안내드립니다.',
+      '참석이 어려우시거나 멀리서 마음을 전해주시는 분들을 위해 조심스럽게 안내드립니다.',
     groom: {
-      side: '신랑 측',
+      side: '신랑측',
       people: [
         { relation: '신랑', bank: '카카오뱅크', number: '3333-12-3456789', holder: '김동균' },
-        { relation: '신랑 아버지', bank: '국민은행', number: '123456-78-901234', holder: '김아버지' },
-        { relation: '신랑 어머니', bank: '우리은행', number: '1002-345-678901', holder: '박어머니' }
+        { relation: '아버지', bank: '국민은행', number: '123456-78-901234', holder: '김영국' },
+        { relation: '어머니', bank: '우리은행', number: '1002-345-678901', holder: '이남숙' }
       ]
     } as AccountGroup,
     bride: {
-      side: '신부 측',
+      side: '신부측',
       people: [
-        { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '이은진' },
-        { relation: '신부 아버지', bank: '하나은행', number: '456-910123-45607', holder: '이아버지' },
-        { relation: '신부 어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '최어머니' }
+        { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '김대진' },
+        { relation: '아버지', bank: '하나은행', number: '456-910123-45607', holder: '김창성' },
+        { relation: '어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '이춘자' }
       ]
     } as AccountGroup
   },
-
   pohangGuide: {
     title: '포항 가이드',
-    intro: '포항에서의 하루를 더 즐겁게 만들어 줄 추천 장소',
+    intro: '멀리서 와주시는 분들을 위해 예식 전후 들르기 좋은 곳을 모았습니다.',
     items: [
       {
-        label: '신부 추천',
-        title: '영일대',
-        description: '바다와 노을이 아름다운 포항의 대표 명소',
-        feature: '산책, 바다, 야경',
+        label: '바다',
+        title: '영일대 해수욕장',
+        description: '포항 바다를 가장 편하게 만날 수 있는 대표 명소입니다.',
+        feature: '바다, 산책, 사진',
         image: '/images/guide-yeongildae.svg',
         link: 'https://map.naver.com/'
       },
       {
-        label: '신부 아버지 추천',
+        label: '시장',
         title: '죽도시장',
-        description: '싱싱한 해산물과 활기찬 포항의 전통 시장',
-        feature: '해산물, 시장, 로컬 맛집',
+        description: '포항의 활기와 해산물을 함께 느낄 수 있는 전통 시장입니다.',
+        feature: '해산물, 로컬 맛집',
         image: '/images/guide-market.svg',
         link: 'https://map.naver.com/'
       },
       {
-        label: '맛집 추천',
-        title: '물회',
-        description: '포항의 바다를 담은 시원한 별미',
-        feature: '식사, 별미, 시원한 맛',
-        image: '/images/guide-food.svg',
-        link: 'https://map.naver.com/'
-      },
-      {
-        label: '가봐요',
+        label: '풍경',
         title: '스페이스워크',
-        description: '하늘을 걷는 듯한 이색적인 체험 공간',
-        feature: '전망, 산책, 사진 명소',
+        description: '하늘을 걷는 듯한 독특한 풍경을 남길 수 있는 공간입니다.',
+        feature: '전망, 산책, 사진',
         image: '/images/guide-spacewalk.svg',
         link: 'https://map.naver.com/'
       },
       {
-        label: '신부 추천',
-        title: '감성 카페',
-        description: '바다를 바라보며 즐기는 여유로운 시간',
-        feature: '커피, 오션뷰, 쉬어가기',
-        image: '/images/guide-cafe.svg',
-        link: 'https://map.naver.com/'
-      },
-      {
-        label: '꼭 가봐요',
+        label: '마을',
         title: '구룡포',
-        description: '시간이 멈춘 듯한 아름다운 해안 마을',
-        feature: '드라이브, 마을 산책, 바다',
+        description: '시간이 천천히 흐르는 듯한 해안 마을입니다.',
+        feature: '드라이브, 바다',
         image: '/images/guide-guryongpo.svg',
         link: 'https://map.naver.com/'
       }
     ] as PohangTip[]
   },
-
-  closing:
-    {
-      image: '/images/5.png',
-      imageAlt: '감사의 마음을 전하는 은진과 동균의 사진',
-      message:
-        '응원하고 격려해주신 모든 분들께 감사드리며\n행복하게 잘 살겠습니다.',
-      copyright: 'Copyright 2026. FROM TODAY. All rights reserved.'
-    },
-
+  closing: {
+    image: '/images/5.png',
+    imageAlt: '감사의 마음을 전하는 대진과 동균의 사진',
+    message: '소중한 걸음으로 함께해 주시는 마음\n오래도록 감사히 간직하겠습니다.',
+    copyright: 'Copyright 2026. Our Next Chapter. All rights reserved.'
+  },
   share: {
-    title: '은진 & 동균 결혼식에 초대합니다',
+    title: '대진 & 동균 결혼식에 초대합니다',
     description: '2026년 10월 10일 토요일 오후 12시 30분, 포항 더퀸',
-    image: '/images/og-image.svg'
+    image: '/images/og-image.jpg'
   }
 };
