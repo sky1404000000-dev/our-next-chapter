@@ -26,6 +26,9 @@ declare global {
             scaleControl: boolean;
           }
         ) => unknown;
+        Event: {
+          once: (target: unknown, eventName: string, listener: () => void) => void;
+        };
         Marker: new (options: { position: unknown; map: unknown; title: string }) => unknown;
       };
     };
@@ -38,6 +41,11 @@ function loadNaverMapScript() {
   return new Promise<void>((resolve, reject) => {
     if (window.naver?.maps) {
       resolve();
+      return;
+    }
+
+    if (!naverMapKey) {
+      reject(new Error('Missing Naver map client id'));
       return;
     }
 
@@ -65,8 +73,7 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
 
   useEffect(() => {
     let isMounted = true;
-
-    if (!naverMapKey) return;
+    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
 
     loadNaverMapScript()
       .then(() => {
@@ -82,12 +89,30 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
         });
 
         new window.naver.maps.Marker({ position, map, title });
-        setIsMapReady(true);
+
+        fallbackTimer = setTimeout(() => {
+          if (isMounted) {
+            setIsMapReady(false);
+          }
+        }, 3500);
+
+        window.naver.maps.Event.once(map, 'idle', () => {
+          if (!isMounted) return;
+          if (fallbackTimer) clearTimeout(fallbackTimer);
+          setIsMapReady(true);
+        });
       })
-      .catch(() => setIsMapReady(false));
+      .catch((error: unknown) => {
+        const message = error instanceof Error ? error.message : 'Naver map failed to load';
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('[NaverMap]', message);
+        }
+        setIsMapReady(false);
+      });
 
     return () => {
       isMounted = false;
+      if (fallbackTimer) clearTimeout(fallbackTimer);
     };
   }, [lat, lng, title]);
 
@@ -95,7 +120,10 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
     <div className="naver-map-wrap">
       <div ref={mapRef} className="naver-map" aria-label={`${title} 네이버 지도`} />
       {!isMapReady && (
-        <Image src={fallbackImage} alt={fallbackAlt} width={720} height={440} className="map-image" priority={false} />
+        <div className="map-fallback">
+          <Image src={fallbackImage} alt={fallbackAlt} width={720} height={440} className="map-image" priority={false} />
+          <span>지도가 보이지 않으면 아래 지도 앱 버튼을 눌러 확인해 주세요.</span>
+        </div>
       )}
     </div>
   );

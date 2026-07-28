@@ -21,7 +21,7 @@ export default function Closing() {
         <ShareActions />
         <p className="closing-copyright">{closing.copyright}</p>
         <Image
-          src="/images/envelope.webp"
+          src="/images/closing/envelope.webp"
           alt=""
           width={390}
           height={267}

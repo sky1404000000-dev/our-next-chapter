@@ -1,21 +1,21 @@
 'use client';
 
 import Image from 'next/image';
-import { Sparkles } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { weddingData } from '@/data/weddingData';
 
 export default function EnvelopeIntro() {
-  const { hero, invitation, weddingInfo, aboutUs } = weddingData;
-  const [groom, bride] = aboutUs.people;
-  const photoRef = useRef<HTMLDivElement>(null);
+  const { hero, invitation, weddingInfo } = weddingData;
+  const stageRef = useRef<HTMLDivElement>(null);
   const hasEnteredRef = useRef(false);
   const [showVideo, setShowVideo] = useState(Boolean(hero.video));
+  const [datePart, dayPart = 'SAT'] = hero.dateLabel.split(' ');
+  const displayDate = datePart.replaceAll('.', ' / ');
 
   useEffect(() => {
-    const photoElement = photoRef.current;
+    const stageElement = stageRef.current;
 
-    if (!hero.video || !photoElement) return;
+    if (!hero.video || !stageElement) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,65 +35,45 @@ export default function EnvelopeIntro() {
       }
     );
 
-    observer.observe(photoElement);
+    observer.observe(stageElement);
 
     return () => observer.disconnect();
   }, [hero.video]);
 
   return (
     <section className="envelope-intro section" id="invitation">
-      <div className="envelope-paper">
-        <div className="envelope-top" aria-hidden>
-          <span />
-        </div>
+      <div className="cover-intro-copy">
+        <h1>{displayDate}</h1>
+        <time>{dayPart}</time>
+      </div>
 
-        <header className="envelope-header">
-          <Sparkles aria-hidden className="envelope-icon" />
-          <p>Wedding Invitation</p>
-          <h1>
-            <span>{hero.names}</span>
-            <span>{invitation.title}</span>
-          </h1>
-          <time>{weddingInfo.date}</time>
-          <span className="envelope-cue" aria-hidden>
-            ^
-          </span>
-        </header>
-
-        <div className="envelope-photo-panel">
-          <div className="envelope-photo-frame" ref={photoRef}>
-            {hero.video && showVideo ? (
-              <video
-                className="envelope-main-photo"
-                src={hero.video}
-                poster={hero.image}
-                autoPlay
-                muted
-                loop
-                playsInline
-              />
-            ) : (
-              <Image
-                src={hero.image}
-                alt={invitation.imageAlt}
-                width={720}
-                height={860}
-                className="envelope-main-photo"
-                priority
-              />
-            )}
-          </div>
-        </div>
-
-        <article className="envelope-letter">
-          <p className="envelope-welcome">welcome</p>
-          <p className="multiline envelope-message">{invitation.message}</p>
-          <div className="envelope-divider" aria-hidden />
-          <p className="envelope-family">
-            {groom.parents} {groom.name}
-            <br />
-            {bride.parents} {bride.name}
-          </p>
+      <div className="cover-stage" aria-label={`${hero.names} 모바일 청첩장 인트로`} ref={stageRef}>
+        <article className="cover-inner-card">
+          <figure className="cover-polaroid">
+            <div className="cover-media-frame">
+              {hero.video && showVideo ? (
+                <video
+                  className="cover-photo"
+                  src={hero.video}
+                  poster={hero.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              ) : (
+                <Image src={hero.image} alt={invitation.imageAlt} width={720} height={900} className="cover-photo" priority />
+              )}
+            </div>
+            <figcaption>
+              <span>{hero.names}</span>
+              <small>
+                {weddingInfo.date} {weddingInfo.time}
+                <br />
+                {weddingInfo.venue}
+              </small>
+            </figcaption>
+          </figure>
         </article>
       </div>
     </section>

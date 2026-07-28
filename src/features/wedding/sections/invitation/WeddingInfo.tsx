@@ -34,7 +34,7 @@ export default function WeddingInfo() {
         </div>
         <div className="venue-photo card">
           <Image
-            src="/images/venue.svg"
+            src="/images/location/venue.svg"
             alt={`${weddingInfo.venue} 예식장 이미지`}
             width={260}
             height={340}

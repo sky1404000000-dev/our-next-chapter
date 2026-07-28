@@ -57,26 +57,26 @@ export type AboutPerson = {
 
 export const weddingData = {
   metadata: {
-    title: '대진 & 동균 결혼식에 초대합니다',
-    description: '2026년 10월 10일, 포항 더퀸에서 대진과 동균이 결혼합니다.',
-    ogImage: '/images/og-image.jpg'
+    title: '은진 & 동균 결혼식에 초대합니다',
+    description: '2026년 10월 10일, 포항 더퀸에서 은진과 동균이 결혼합니다.',
+    ogImage: '/images/meta/og-image.jpg'
   },
   music: {
     src: '/audio/wedding.mp3',
     title: 'Wedding music'
   },
   hero: {
-    image: '/images/main.png',
+    image: '/images/hero/main.png',
     video: '/video/hero.mp4',
-    names: '대진 & 동균',
+    names: '은진 & 동균',
     dateLabel: '2026.10.10 SAT',
     timeLabel: '12:30 PM',
     message: '친구에서 연인으로,\n연인에서 부부로\n우리의 다음 장이 시작됩니다.'
   },
   invitation: {
     title: '초대합니다',
-    image: '/images/invite.png',
-    imageAlt: '대진과 동균의 초대 사진',
+    image: '/images/invitation/invite.png',
+    imageAlt: '은진과 동균의 초대 사진',
     message:
       '같은 계절을 지나며 서로에게 가장 편안한 사람이 되었습니다.\n이제 부부라는 이름으로 새로운 페이지를 시작하려 합니다.\n소중한 분들을 모시고 그 첫날을 함께 나누고 싶습니다.'
   },
@@ -84,7 +84,7 @@ export const weddingData = {
     date: '2026-10-10T12:30:00+09:00',
     displayDate: '2026. 10. 10',
     displayTime: '토요일 오후 12시 30분',
-    coupleLabel: '대진과 동균',
+    coupleLabel: '은진과 동균',
     days: [
       { date: 27, currentMonth: false },
       { date: 28, currentMonth: false },
@@ -127,29 +127,29 @@ export const weddingData = {
     title: '우리의 이야기',
     kicker: 'INTERVIEW',
     intro: '결혼을 앞두고 서로에게 남기고 싶은 마음을 짧은 편지처럼 담았습니다.',
-    coverImage: '/images/1.png',
-    coverAlt: '대진과 동균의 추억 사진',
+    coverImage: '/images/gallery/1.png',
+    coverAlt: '은진과 동균의 추억 사진',
     buttonLabel: '우리 이야기 읽어보기',
     questions: [
       {
         question: 'Q1. 서로는 어떤 사람인가요?',
         answer:
-          '동균은 조용하지만 마음이 깊고, 작은 약속도 오래 기억하는 사람입니다.\n대진은 밝은 에너지로 주변을 환하게 만들고, 평범한 하루도 특별하게 바꾸는 사람입니다.',
-        image: '/images/donggyun.png',
+          '동균은 조용하지만 마음이 깊고, 작은 약속도 오래 기억하는 사람입니다.\n은진은 밝은 에너지로 주변을 환하게 만들고, 평범한 하루도 특별하게 바꾸는 사람입니다.',
+        image: '/images/people/donggyun.png',
         imageAlt: '동균 소개 사진'
       },
       {
         question: 'Q2. 함께하며 가장 좋았던 순간은요?',
         answer:
           '거창한 날보다 함께 걷고 밥 먹고 웃던 평범한 날들이 가장 오래 남았습니다.\n서로의 일상에 자연스럽게 스며든 시간이 우리의 확신이 되었습니다.',
-        image: '/images/2.png',
+        image: '/images/gallery/2.png',
         imageAlt: '함께한 추억 사진'
       },
       {
         question: 'Q3. 앞으로 어떤 부부가 되고 싶나요?',
         answer:
           '완벽하기보다 다정한 사람이 되고 싶습니다.\n서로의 속도를 존중하며, 긴 계절을 함께 건너는 든든한 편이 되겠습니다.',
-        image: '/images/3.png',
+        image: '/images/gallery/3.png',
         imageAlt: '결혼을 앞둔 두 사람'
       }
     ] as InterviewQuestion[],
@@ -158,19 +158,19 @@ export const weddingData = {
         date: '2019.11.03',
         title: '처음 만난 날',
         description: '작은 인연이 천천히 자라 서로의 계절이 되었습니다.',
-        image: '/images/gallery-1.jpg'
+        image: '/images/story/timeline-1.jpg'
       },
       {
         date: '함께한 시간',
         title: '친구에서 연인으로',
         description: '가장 편안한 사람, 가장 소중한 사람이 되었습니다.',
-        image: '/images/gallery-2.jpg'
+        image: '/images/story/timeline-2.jpg'
       },
       {
         date: '2026.10.10',
         title: '우리의 다음 장',
         description: '포항에서 부부라는 이름으로 새로운 이야기를 시작합니다.',
-        image: '/images/gallery-3.jpg'
+        image: '/images/story/timeline-3.jpg'
       }
     ] as StoryItem[]
   },
@@ -179,34 +179,34 @@ export const weddingData = {
     initialCount: 4,
     items: [
       {
-        image: '/images/1.png',
+        image: '/images/gallery/1.png',
         caption: '처음처럼 다정하게',
         description: '처음 마음을 오래 간직하고 싶은 두 사람의 사진입니다.',
-        alt: '대진과 동균의 추억 사진 1'
+        alt: '은진과 동균의 추억 사진 1'
       },
       {
-        image: '/images/2.png',
+        image: '/images/gallery/2.png',
         caption: '편안한 하루',
         description: '함께라서 더 오래 기억하고 싶은 평범한 하루입니다.',
-        alt: '대진과 동균의 추억 사진 2'
+        alt: '은진과 동균의 추억 사진 2'
       },
       {
-        image: '/images/3.png',
+        image: '/images/gallery/3.png',
         caption: '같은 방향',
         description: '서로의 속도를 맞추며 같은 내일을 약속합니다.',
-        alt: '대진과 동균의 추억 사진 3'
+        alt: '은진과 동균의 추억 사진 3'
       },
       {
-        image: '/images/4.png',
+        image: '/images/gallery/4.png',
         caption: '웃음이 닮아가는 우리',
         description: '함께 웃는 시간이 많아질수록 마음도 더 가까워졌습니다.',
-        alt: '대진과 동균의 추억 사진 4'
+        alt: '은진과 동균의 추억 사진 4'
       },
       {
-        image: '/images/5.png',
+        image: '/images/gallery/5.png',
         caption: '계절을 건너',
         description: '여러 계절을 지나 이제 새로운 계절을 시작합니다.',
-        alt: '대진과 동균의 추억 사진 5'
+        alt: '은진과 동균의 추억 사진 5'
       }
     ] as GalleryItem[]
   },
@@ -220,7 +220,7 @@ export const weddingData = {
   },
   location: {
     title: '오시는 길',
-    mapImage: '/images/pohang.jpg',
+    mapImage: '/images/location/pohang.png',
     mapAlt: '포항 더퀸 주변 지도',
     mapDescription: '포항 더퀸',
     phone: 'Tel. 054-283-1111',
@@ -246,17 +246,17 @@ export const weddingData = {
         parents: '김영국, 이남숙의 아들',
         birth: '1997년 2월 출생',
         note: '묵묵하고 다정한 사람',
-        image: '/images/donggyun.png',
+        image: '/images/people/donggyun.png',
         imageAlt: '신랑 동균 사진'
       },
       {
         role: '신부',
-        name: '김대진',
+        name: '김은진',
         parents: '김창성, 이춘자의 딸',
         birth: '1998년 9월 출생',
         note: '밝고 섬세한 사람',
-        image: '/images/eunjin.png',
-        imageAlt: '신부 대진 사진'
+        image: '/images/people/eunjin.png',
+        imageAlt: '신부 은진 사진'
       }
     ] as AboutPerson[]
   },
@@ -275,7 +275,7 @@ export const weddingData = {
     bride: {
       side: '신부측',
       people: [
-        { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '김대진' },
+        { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '김은진' },
         { relation: '아버지', bank: '하나은행', number: '456-910123-45607', holder: '김창성' },
         { relation: '어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '이춘자' }
       ]
@@ -290,7 +290,7 @@ export const weddingData = {
         title: '영일대 해수욕장',
         description: '포항 바다를 가장 편하게 만날 수 있는 대표 명소입니다.',
         feature: '바다, 산책, 사진',
-        image: '/images/guide-yeongildae.svg',
+        image: '/images/guide/yeongildae.svg',
         link: 'https://map.naver.com/'
       },
       {
@@ -298,7 +298,7 @@ export const weddingData = {
         title: '죽도시장',
         description: '포항의 활기와 해산물을 함께 느낄 수 있는 전통 시장입니다.',
         feature: '해산물, 로컬 맛집',
-        image: '/images/guide-market.svg',
+        image: '/images/guide/market.svg',
         link: 'https://map.naver.com/'
       },
       {
@@ -306,7 +306,7 @@ export const weddingData = {
         title: '스페이스워크',
         description: '하늘을 걷는 듯한 독특한 풍경을 남길 수 있는 공간입니다.',
         feature: '전망, 산책, 사진',
-        image: '/images/guide-spacewalk.svg',
+        image: '/images/guide/spacewalk.svg',
         link: 'https://map.naver.com/'
       },
       {
@@ -314,20 +314,20 @@ export const weddingData = {
         title: '구룡포',
         description: '시간이 천천히 흐르는 듯한 해안 마을입니다.',
         feature: '드라이브, 바다',
-        image: '/images/guide-guryongpo.svg',
+        image: '/images/guide/guryongpo.svg',
         link: 'https://map.naver.com/'
       }
     ] as PohangTip[]
   },
   closing: {
-    image: '/images/5.png',
-    imageAlt: '감사의 마음을 전하는 대진과 동균의 사진',
+    image: '/images/gallery/5.png',
+    imageAlt: '감사의 마음을 전하는 은진과 동균의 사진',
     message: '소중한 걸음으로 함께해 주시는 마음\n오래도록 감사히 간직하겠습니다.',
     copyright: 'Copyright 2026. Our Next Chapter. All rights reserved.'
   },
   share: {
-    title: '대진 & 동균 결혼식에 초대합니다',
+    title: '은진 & 동균 결혼식에 초대합니다',
     description: '2026년 10월 10일 토요일 오후 12시 30분, 포항 더퀸',
-    image: '/images/og-image.jpg'
+    image: '/images/meta/og-image.jpg'
   }
 };
