@@ -125,7 +125,7 @@ export const weddingData = {
   },
   story: {
     title: '우리의 이야기',
-    kicker: 'INTERVIEW',
+    kicker: 'OUR STORY',
     intro: '결혼을 앞두고 서로에게 남기고 싶은 마음을 짧은 편지처럼 담았습니다.',
     coverImage: '/images/gallery/1.png',
     coverAlt: '은진과 동균의 추억 사진',

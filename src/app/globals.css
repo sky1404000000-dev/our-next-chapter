@@ -333,8 +333,7 @@ button {
   padding-top: 24px;
 }
 
-.share-btn,
-.interview-open-btn {
+.share-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -349,13 +348,11 @@ button {
   box-shadow: var(--shadow-soft);
 }
 
-.share-btn svg,
-.interview-open-btn svg {
+.share-btn svg {
   color: var(--sage);
 }
 
-.share-btn svg,
-.interview-open-btn svg {
+.share-btn svg {
   width: 16px;
   height: 16px;
 }
@@ -374,7 +371,6 @@ button {
 }
 
 .invitation-image,
-.interview-cover,
 .about-photo,
 .closing-photo,
 .guide-image,
@@ -402,7 +398,6 @@ button {
 .schedule-note,
 .guide-intro,
 .about-subtitle,
-.interview-intro,
 .account-message {
   color: var(--ink-soft);
   font-family: var(--sans);
@@ -497,20 +492,6 @@ button {
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 13px;
-}
-
-.interview-cover {
-  margin-top: 24px;
-  aspect-ratio: 1 / 1;
-  border: 12px solid #fffef9;
-  border-bottom-width: 30px;
-  box-shadow: var(--shadow);
-  transform: rotate(1deg);
-}
-
-.interview-open-btn {
-  width: 100%;
-  margin-top: 16px;
 }
 
 .gallery-carousel-wrap,
@@ -764,22 +745,19 @@ button {
 
 .gallery-modal,
 .guide-modal,
-.account-copy-modal,
-.interview-modal {
+.account-copy-modal {
   position: fixed;
   inset: 0;
   z-index: 80;
 }
 
-.gallery-modal-backdrop,
-.interview-backdrop {
+.gallery-modal-backdrop {
   background: rgba(47, 42, 37, 0.38);
 }
 
 .gallery-modal,
 .guide-modal,
-.account-copy-modal,
-.interview-modal {
+.account-copy-modal {
   display: grid;
   place-items: center;
   padding: 18px;
@@ -788,7 +766,6 @@ button {
 
 .gallery-modal-content,
 .account-copy-dialog,
-.interview-panel,
 .guide-modal-panel {
   position: relative;
   width: min(100%, 390px);
@@ -834,21 +811,18 @@ button {
   right: 8px;
 }
 
-.guide-modal-panel,
-.interview-panel {
+.guide-modal-panel {
   width: min(100%, 420px);
 }
 
-.guide-modal-header,
-.interview-panel-header {
+.guide-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
 
-.guide-modal-grid,
-.interview-content {
+.guide-modal-grid {
   margin-top: 18px;
   display: grid;
   gap: 16px;
@@ -860,15 +834,13 @@ button {
   font-family: var(--sans);
 }
 
-.guide-modal-image,
-.interview-question-image {
+.guide-modal-image {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-.guide-modal-text p,
-.interview-question p {
+.guide-modal-text p {
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 14px;

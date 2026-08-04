@@ -10,7 +10,6 @@ import styles from './Location.module.css';
 
 export default function Location() {
   const { location, weddingInfo } = weddingData;
-  const [isAddressCopied, setIsAddressCopied] = useState(false);
   const [isMapImageOpen, setIsMapImageOpen] = useState(false);
 
   useEffect(() => {
@@ -26,8 +25,6 @@ export default function Location() {
 
   const copyAddress = async () => {
     await navigator.clipboard.writeText(weddingInfo.address);
-    setIsAddressCopied(true);
-    window.setTimeout(() => setIsAddressCopied(false), 1400);
   };
 
   return (
@@ -45,7 +42,6 @@ export default function Location() {
               <Copy aria-hidden />
             </button>
           </span>
-          {isAddressCopied && <small className={styles.copyNotice}>주소를 복사했어요.</small>}
           <small>{location.phone}</small>
         </div>
 
