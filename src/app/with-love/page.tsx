@@ -1,4 +1,4 @@
-import WeddingPage from '@/components/WeddingPage';
+import WeddingPage from '@/features/wedding/WeddingPage';
 
 export default function WithLovePage() {
   return <WeddingPage showAccount />;
