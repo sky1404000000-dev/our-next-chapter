@@ -7,7 +7,7 @@ export default function ScrollReveal() {
     const root = document.querySelector('.mobile-shell');
     if (!root) return;
 
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('.top-ornament, .section, .quick-menu'));
+    const targets = Array.from(root.querySelectorAll<HTMLElement>('.top-ornament, .section'));
     document.documentElement.classList.add('reveal-ready');
 
     const observer = new IntersectionObserver(
@@ -15,7 +15,8 @@ export default function ScrollReveal() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+          } else {
+            entry.target.classList.remove('is-visible');
           }
         });
       },

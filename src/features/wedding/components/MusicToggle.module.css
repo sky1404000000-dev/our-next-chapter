@@ -1,0 +1,23 @@
+.control {
+  position: fixed;
+  z-index: 40;
+  top: 68px;
+  right: max(18px, calc((100vw - var(--shell-width)) / 2 + 18px));
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(233, 224, 212, 0.7);
+  border-radius: 999px;
+  background: rgba(143, 143, 143, 0.82);
+  color: #fffef9;
+  box-shadow: 0 8px 18px rgba(47, 42, 37, 0.12);
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+}

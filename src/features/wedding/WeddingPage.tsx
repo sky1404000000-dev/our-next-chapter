@@ -1,6 +1,5 @@
 import EnvelopeIntro from './components/EnvelopeIntro';
 import MusicToggle from './components/MusicToggle';
-import QuickMenu from './components/QuickMenu';
 import ScrollReveal from './components/ScrollReveal';
 import SideTimeline from './components/SideTimeline';
 import Account from './sections/account/Account';
@@ -24,7 +23,6 @@ export default function WeddingPage({ showAccount }: WeddingPageProps) {
       <MusicToggle />
       <EnvelopeIntro />
       <CalendarSchedule />
-      <QuickMenu showAccount={showAccount} />
       <Location />
       <AboutUs />
       <OurStory />

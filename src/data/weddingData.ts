@@ -230,7 +230,8 @@ export const weddingData = {
     },
     links: {
       kakao: 'https://map.kakao.com/link/search/포항 더퀸',
-      naver: 'https://map.naver.com/p/search/포항%20더퀸'
+      naver: 'https://map.naver.com/p/search/포항%20더퀸',
+      tmap: 'https://www.tmap.co.kr/search?keyword=%ED%8F%AC%ED%95%AD%20%EB%8D%94%ED%80%B8'
     },
     parking:
       '건물 내 주차장을 이용하실 수 있습니다.\n주말 교통 상황에 따라 여유 있게 도착해 주세요.'

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import styles from './Location.module.css';
 
 type NaverMapProps = {
   lat: number;
@@ -50,19 +51,46 @@ function loadNaverMapScript() {
     }
 
     const scriptUrl = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${naverMapKey}`;
-    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${scriptUrl}"]`);
+
+    const existingScript =
+      document.querySelector<HTMLScriptElement>(
+        `script[src="${scriptUrl}"]`
+      );
 
     if (existingScript) {
-      existingScript.addEventListener('load', () => resolve(), { once: true });
-      existingScript.addEventListener('error', reject, { once: true });
+      if (window.naver?.maps) {
+        resolve();
+        return;
+      }
+
+      existingScript.addEventListener(
+        'load',
+        () => {
+          resolve();
+        },
+        { once: true }
+      );
+
+      existingScript.addEventListener(
+        'error',
+        () => {
+          reject(new Error('Naver map script failed'));
+        },
+        { once: true }
+      );
+
       return;
     }
 
     const script = document.createElement('script');
+
     script.src = scriptUrl;
     script.async = true;
+
     script.onload = () => resolve();
-    script.onerror = reject;
+
+    script.onerror = () => reject(new Error('Naver map script failed'));
+
     document.head.appendChild(script);
   });
 }
@@ -73,7 +101,6 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
 
   useEffect(() => {
     let isMounted = true;
-    let fallbackTimer: ReturnType<typeof setTimeout> | undefined;
 
     loadNaverMapScript()
       .then(() => {
@@ -89,18 +116,7 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
         });
 
         new window.naver.maps.Marker({ position, map, title });
-
-        fallbackTimer = setTimeout(() => {
-          if (isMounted) {
-            setIsMapReady(false);
-          }
-        }, 3500);
-
-        window.naver.maps.Event.once(map, 'idle', () => {
-          if (!isMounted) return;
-          if (fallbackTimer) clearTimeout(fallbackTimer);
-          setIsMapReady(true);
-        });
+        setIsMapReady(true);
       })
       .catch((error: unknown) => {
         const message = error instanceof Error ? error.message : 'Naver map failed to load';
@@ -112,16 +128,15 @@ export default function NaverMap({ lat, lng, title, fallbackImage, fallbackAlt }
 
     return () => {
       isMounted = false;
-      if (fallbackTimer) clearTimeout(fallbackTimer);
     };
   }, [lat, lng, title]);
 
   return (
-    <div className="naver-map-wrap">
-      <div ref={mapRef} className="naver-map" aria-label={`${title} 네이버 지도`} />
+    <div className={styles.naverMapWrap}>
+      <div ref={mapRef} className={styles.naverMap} aria-label={`${title} 네이버 지도`} />
       {!isMapReady && (
-        <div className="map-fallback">
-          <Image src={fallbackImage} alt={fallbackAlt} width={720} height={440} className="map-image" priority={false} />
+        <div className={styles.mapFallback}>
+          <Image src={fallbackImage} alt={fallbackAlt} width={720} height={440} className={styles.mapImage} priority={false} />
           <span>지도가 보이지 않으면 아래 지도 앱 버튼을 눌러 확인해 주세요.</span>
         </div>
       )}
