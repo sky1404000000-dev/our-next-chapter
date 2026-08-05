@@ -143,19 +143,21 @@
 
 .modal {
   position: fixed;
-  inset: 0;
+  inset: 0 auto 0 50%;
   z-index: 100;
   display: grid;
   place-items: center;
-  padding: clamp(12px, 3vw, 28px);
+  width: min(100%, var(--shell-width));
+  padding: 0;
   background: rgba(47, 42, 37, 0.28);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  transform: translateX(-50%);
   animation: modalBackdropReveal 320ms ease-out both;
 }
 
 .backdrop {
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 101;
   cursor: default;
@@ -165,12 +167,12 @@
 .panel {
   position: relative;
   z-index: 102;
-  width: min(900px, 92vw);
-  max-height: 90vh;
+  width: 100%;
+  max-height: 100dvh;
   overflow-y: auto;
   overscroll-behavior: contain;
   border: 1px solid rgba(233, 224, 212, 0.9);
-  border-radius: 18px;
+  border-radius: 0;
   background:
     radial-gradient(circle at 12% 8%, rgba(237, 200, 79, 0.1), transparent 22%),
     var(--paper);
@@ -451,14 +453,99 @@
 }
 
 @media (max-width: 768px) {
-  .modal {
-    padding: 10px;
+  .panel {
+    max-height: 100dvh;
   }
 
+  .panelHeader {
+    min-height: 62px;
+    padding: 9px 12px 6px 20px;
+  }
+
+  .panelHeader button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .content {
+    padding: 8px 24px 58px;
+  }
+
+  .timelineIntro {
+    margin-bottom: 42px;
+  }
+
+  .timelineIntro p {
+    font-size: 13px;
+  }
+
+  .timeline {
+    gap: 58px;
+  }
+
+  .timeline::before {
+    left: 13px;
+  }
+
+  .timelineItem,
+  .timelineItem.reverse {
+    grid-template-columns: 28px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .timelineMarker {
+    grid-column: 1;
+    align-self: start;
+    margin-top: 2px;
+  }
+
+  .timelineMarker span {
+    width: 22px;
+    height: 22px;
+    border-width: 4px;
+  }
+
+  .timelineImageWrap,
+  .reverse .timelineImageWrap {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 0;
+  }
+
+  .timelineText,
+  .reverse .timelineText {
+    grid-column: 2;
+    grid-row: 1;
+    justify-items: start;
+    padding: 0 0 18px;
+    text-align: left;
+  }
+
+  .timelineText time {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .timelineText h4 {
+    font-size: 18px;
+  }
+
+  .timelineText p {
+    font-size: 13px;
+  }
+
+  .timelineImage {
+    border-radius: 12px;
+  }
+
+  .timelineEnd {
+    margin: -36px 0 -3px 4px;
+  }
+}
+
+@media (min-width: 769px) {
   .panel {
-    width: min(100%, 520px);
-    max-height: 92vh;
-    border-radius: 14px;
+    max-height: 100dvh;
   }
 
   .panelHeader {
