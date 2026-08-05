@@ -158,19 +158,19 @@ export const weddingData = {
         date: '2019.11.03',
         title: '처음 만난 날',
         description: '작은 인연이 천천히 자라 서로의 계절이 되었습니다.',
-        image: '/images/story/timeline-1.jpg'
+        image: '/images/gallery/1.png'
       },
       {
         date: '함께한 시간',
         title: '친구에서 연인으로',
         description: '가장 편안한 사람, 가장 소중한 사람이 되었습니다.',
-        image: '/images/story/timeline-2.jpg'
+        image: '/images/gallery/2.png'
       },
       {
         date: '2026.10.10',
         title: '우리의 다음 장',
         description: '포항에서 부부라는 이름으로 새로운 이야기를 시작합니다.',
-        image: '/images/story/timeline-3.jpg'
+        image: '/images/gallery/3.png'
       }
     ] as StoryItem[]
   },
@@ -246,16 +246,16 @@ export const weddingData = {
         name: '김동균',
         parents: '김영국, 이남숙의 아들',
         birth: '1997년 2월 출생',
-        note: '묵묵하고 다정한 사람',
+        note: 'ESTJ 가끔은 F주장러',
         image: '/images/people/donggyun.png',
         imageAlt: '신랑 동균 사진'
       },
       {
         role: '신부',
         name: '김은진',
-        parents: '김창성, 이춘자의 딸',
+        parents: '김창성, 이춘희의 딸',
         birth: '1998년 9월 출생',
-        note: '밝고 섬세한 사람',
+        note: 'ENFP 가끔은 T주장러',
         image: '/images/people/eunjin.png',
         imageAlt: '신부 은진 사진'
       }
