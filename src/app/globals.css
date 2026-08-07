@@ -293,7 +293,6 @@ button {
 .invitation-card::before,
 .schedule-card::before,
 .about-profile-card::before,
-.guide-card::before,
 .account-card::before {
   content: "";
   position: absolute;
@@ -388,7 +387,6 @@ button {
 .invitation-image,
 .about-photo,
 .closing-photo,
-.guide-image,
 .map-image {
   display: block;
   width: 100%;
@@ -411,7 +409,6 @@ button {
 
 .schedule-time,
 .schedule-note,
-.guide-intro,
 .about-subtitle,
 .account-message {
   color: var(--ink-soft);
@@ -516,30 +513,6 @@ button {
   font-size: 12px;
   line-height: 1.6;
   text-align: center;
-}
-
-.guide-feed-wrap {
-  position: relative;
-  margin-top: 24px;
-}
-
-.guide-feed {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 78%;
-  gap: 14px;
-  overflow-x: auto;
-  padding: 10px 8px 22px;
-  scroll-snap-type: x mandatory;
-}
-
-.guide-card {
-  position: relative;
-  scroll-snap-align: center;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: #fffef9;
-  box-shadow: 0 14px 34px rgba(47, 42, 37, 0.12);
 }
 
 .gallery-collage-wrap {
@@ -750,40 +723,6 @@ button {
   right: 2px;
 }
 
-.guide-card {
-  padding: 12px;
-  font-family: var(--sans);
-}
-
-.guide-image {
-  aspect-ratio: 5 / 4;
-  border-radius: 6px;
-}
-
-.guide-label,
-.guide-card strong {
-  color: var(--sage);
-  font-size: 12px;
-}
-
-.guide-card h3 {
-  margin-top: 8px;
-  font-size: 18px;
-}
-
-.guide-card p {
-  color: var(--ink-soft);
-  font-size: 13px;
-}
-
-.guide-feed-controls {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.guide-feed-controls button,
-.guide-expand-btn,
 .gallery-close,
 .gallery-modal-arrow {
   display: grid;
@@ -794,14 +733,6 @@ button {
   border-radius: 999px;
   background: #fffdf8;
   box-shadow: 0 10px 24px rgba(47, 42, 37, 0.12);
-}
-
-.guide-expand-btn {
-  width: 100%;
-  margin-top: 10px;
-  display: flex;
-  gap: 8px;
-  border-radius: 8px;
 }
 
 .account-card {
@@ -913,7 +844,6 @@ button {
 }
 
 .gallery-modal,
-.guide-modal,
 .account-copy-modal {
   position: fixed;
   inset: 0;
@@ -929,7 +859,6 @@ button {
 }
 
 .gallery-modal,
-.guide-modal,
 .account-copy-modal {
   display: grid;
   place-items: center;
@@ -958,8 +887,7 @@ button {
 }
 
 .gallery-modal-content,
-.account-copy-dialog,
-.guide-modal-panel {
+.account-copy-dialog {
   position: relative;
   width: min(100%, 390px);
   max-height: 88vh;
@@ -1164,41 +1092,6 @@ button {
     opacity: 1;
     transform: scale(1);
   }
-}
-
-.guide-modal-panel {
-  width: min(100%, 420px);
-}
-
-.guide-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.guide-modal-grid {
-  margin-top: 18px;
-  display: grid;
-  gap: 16px;
-}
-
-.guide-modal-item {
-  display: grid;
-  gap: 12px;
-  font-family: var(--sans);
-}
-
-.guide-modal-image {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
-
-.guide-modal-text p {
-  color: var(--ink-soft);
-  font-family: var(--sans);
-  font-size: 14px;
 }
 
 @media (min-width: 760px) {
