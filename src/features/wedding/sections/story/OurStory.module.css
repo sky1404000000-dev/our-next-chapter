@@ -3,7 +3,7 @@
 }
 
 .storySection::before {
-  display: none;
+  display: block;
 }
 
 .storyCard {

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Bus, Car, Copy, MapPin, X } from 'lucide-react';
+import { Copy, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { weddingData } from '@/data/weddingData';
@@ -75,7 +75,7 @@ export default function Location() {
       <div className={styles.guide}>
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <Bus aria-hidden />
+            <span aria-hidden>🚌</span>
             시내버스로 오시는 경우
           </h3>
 
@@ -95,7 +95,7 @@ export default function Location() {
 
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <Car aria-hidden />
+            <span aria-hidden>🚗</span>
             자가용으로 오시는 경우
           </h3>
 
@@ -132,7 +132,7 @@ export default function Location() {
 
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <MapPin aria-hidden />
+            <span aria-hidden>🅿️</span>
             주차 안내
           </h3>
 

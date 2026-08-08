@@ -41,7 +41,7 @@ export default function EnvelopeIntro() {
   }, [hero.video]);
 
   return (
-    <section className="envelope-intro section" id="invitation">
+    <section className="envelope-intro section" id="intro">
       <div className="cover-intro-copy">
         <h1>{displayDate}</h1>
         <time>{dayPart}</time>

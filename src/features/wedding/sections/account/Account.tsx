@@ -1,8 +1,7 @@
 'use client';
 
 import { ChevronDown, Copy } from 'lucide-react';
-import { useState } from 'react';
-import { createPortal } from 'react-dom';
+import { useEffect, useRef, useState } from 'react';
 import { weddingData, type AccountGroup, type AccountPerson } from '@/data/weddingData';
 
 function AccountPersonRow({ person, onCopied }: { person: AccountPerson; onCopied: () => void }) {
@@ -39,7 +38,7 @@ function AccountGroupPanel({ group, onCopied }: { group: AccountGroup; onCopied:
         aria-controls={panelId}
         onClick={() => setIsOpen((current) => !current)}
       >
-        <span className="account-side">{group.side}</span>
+        <span className="account-side">{group.side} 계좌번호</span>
         <ChevronDown className="account-chevron" aria-hidden />
       </button>
       <div className="account-panel-body" id={panelId} aria-hidden={!isOpen}>
@@ -55,7 +54,26 @@ function AccountGroupPanel({ group, onCopied }: { group: AccountGroup; onCopied:
 
 export default function Account() {
   const { account } = weddingData;
-  const [copyModalOpen, setCopyModalOpen] = useState(false);
+  const [copyToastOpen, setCopyToastOpen] = useState(false);
+  const toastTimerRef = useRef<number | null>(null);
+
+  const showCopyToast = () => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+
+    setCopyToastOpen(true);
+    toastTimerRef.current = window.setTimeout(() => {
+      setCopyToastOpen(false);
+      toastTimerRef.current = null;
+    }, 1500);
+  };
+
+  useEffect(() => () => {
+    if (toastTimerRef.current) {
+      window.clearTimeout(toastTimerRef.current);
+    }
+  }, []);
 
   return (
     <section className="section account-section" id="account">
@@ -63,20 +81,12 @@ export default function Account() {
       <h2>{account.title}</h2>
       <div className="account-card">
         <p className="account-message">{account.message}</p>
-        <AccountGroupPanel group={account.groom} onCopied={() => setCopyModalOpen(true)} />
-        <AccountGroupPanel group={account.bride} onCopied={() => setCopyModalOpen(true)} />
+        <AccountGroupPanel group={account.groom} onCopied={showCopyToast} />
+        <AccountGroupPanel group={account.bride} onCopied={showCopyToast} />
       </div>
-      {copyModalOpen && createPortal(
-        <div className="account-copy-modal" role="dialog" aria-modal="true" aria-label="계좌번호 복사 완료">
-          <div className="account-copy-dialog">
-            <p>계좌번호가 복사되었습니다.</p>
-            <button type="button" onClick={() => setCopyModalOpen(false)}>
-              확인
-            </button>
-          </div>
-        </div>,
-        document.body
-      )}
+      <p className={`account-copy-toast ${copyToastOpen ? 'is-visible' : ''}`} role="status" aria-live="polite">
+        복사되었습니다
+      </p>
     </section>
   );
 }

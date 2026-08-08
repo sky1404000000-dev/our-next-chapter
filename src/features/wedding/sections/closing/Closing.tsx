@@ -3,31 +3,69 @@ import { weddingData } from '@/data/weddingData';
 import ShareActions from '../../components/ShareActions';
 
 export default function Closing() {
-  const { closing } = weddingData;
+  const { closing, hero, weddingInfo } = weddingData;
+  const closingPhotos = [
+    { src: '/images/gallery/1.png', alt: '은진과 동균의 마지막 인사 사진 1' },
+    { src: '/images/gallery/3.png', alt: '은진과 동균의 마지막 인사 사진 2' },
+    { src: '/images/gallery/4.png', alt: '은진과 동균의 마지막 인사 사진 3' }
+  ];
+  const closingTime = hero.timeLabel.endsWith('PM') ? `PM ${hero.timeLabel.replace(' PM', '')}` : hero.timeLabel;
 
   return (
     <section className="section closing" id="closing">
       <div className="closing-card">
-        <figure className="closing-photo-wrap">
+        <div className="closing-photo-stack" aria-label="은진과 동균의 사진">
+          {closingPhotos.map((photo) => (
+            <figure className="closing-mini-photo" key={photo.src}>
+              <Image src={photo.src} alt={photo.alt} width={520} height={360} />
+              <figcaption>
+                love story is
+                <br />
+                beautiful, you are
+                <br />
+                my favorite
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <div className="closing-date-panel">
+          <p className="closing-save-date">
+            Save
+            <br />
+            the Date
+          </p>
+          <dl className="closing-date-table">
+            <div className="closing-date-heading">
+              <dt>DATE</dt>
+              <dt>TIME</dt>
+            </div>
+            <div className="closing-date-values">
+              <dd>{hero.dateLabel}</dd>
+              <dd>{closingTime}</dd>
+            </div>
+            <div className="closing-date-address">
+              <dd>{weddingInfo.address}</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure className="closing-hero-photo-wrap">
           <Image
             src={closing.image}
             alt={closing.imageAlt}
             width={900}
-            height={480}
-            className="closing-photo"
+            height={1320}
+            className="closing-hero-photo"
           />
-          <figcaption className="multiline">{closing.message}</figcaption>
+          <figcaption>
+            <p className="multiline">{closing.message}</p>
+          </figcaption>
         </figure>
-        <ShareActions />
+        <div className="closing-kakao-share">
+          <ShareActions kakaoOnly />
+        </div>
         <p className="closing-copyright">{closing.copyright}</p>
-        <Image
-          src="/images/closing/envelope.webp"
-          alt=""
-          width={390}
-          height={267}
-          className="closing-envelope"
-          aria-hidden
-        />
       </div>
     </section>
   );

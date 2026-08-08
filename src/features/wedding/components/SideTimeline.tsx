@@ -6,15 +6,16 @@ import ShareActions from './ShareActions';
 import styles from './SideTimeline.module.css';
 
 const timelineItems = [
-  { label: '초대장', href: '#invitation' },
-  { label: '예식일', href: '#schedule' },
+  { label: '첫 장', href: '#intro' },
+  { label: '초대의 글', href: '#invitation' },
+  { label: '예식 안내', href: '#schedule' },
   { label: '오시는 길', href: '#location' },
-  { label: '두 사람', href: '#about-us' },
+  { label: '두 사람 소개', href: '#about-us' },
   { label: '우리 이야기', href: '#our-story' },
-  { label: '갤러리', href: '#gallery' },
-  { label: '포항 가이드', href: '#pohang-guide' },
+  { label: '사진첩', href: '#gallery' },
+  { label: '포항 안내', href: '#pohang-guide' },
   { label: '마음 전하기', href: '#account' },
-  { label: '인사', href: '#closing' }
+  { label: '감사의 인사', href: '#closing' }
 ];
 
 type SideTimelineProps = {

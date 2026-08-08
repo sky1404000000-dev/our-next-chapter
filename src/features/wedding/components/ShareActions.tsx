@@ -68,11 +68,13 @@ function loadKakaoSdk() {
 
 type ShareActionsProps = {
   compact?: boolean;
+  kakaoOnly?: boolean;
 };
 
-export default function ShareActions({ compact = false }: ShareActionsProps) {
+export default function ShareActions({ compact = false, kakaoOnly = false }: ShareActionsProps) {
   const [copied, setCopied] = useState(false);
   const [kakaoFallback, setKakaoFallback] = useState(false);
+  const [needsKakaoKey, setNeedsKakaoKey] = useState(false);
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(getPageUrl());
@@ -82,9 +84,14 @@ export default function ShareActions({ compact = false }: ShareActionsProps) {
 
   const shareToKakao = async () => {
     if (!hasKakaoKey) {
-      await copyLink();
-      setKakaoFallback(true);
-      window.setTimeout(() => setKakaoFallback(false), 1800);
+      if (kakaoOnly) {
+        setNeedsKakaoKey(true);
+        window.setTimeout(() => setNeedsKakaoKey(false), 2200);
+      } else {
+        await copyLink();
+        setKakaoFallback(true);
+        window.setTimeout(() => setKakaoFallback(false), 1800);
+      }
       return;
     }
 
@@ -126,14 +133,22 @@ export default function ShareActions({ compact = false }: ShareActionsProps) {
   };
 
   return (
-    <div className={`share-actions ${compact ? 'share-actions-compact' : ''}`} aria-label="청첩장 공유">
+    <div className={`share-actions ${compact ? 'share-actions-compact' : ''} ${kakaoOnly ? 'share-actions-kakao-only' : ''}`} aria-label="청첩장 공유">
+      {!kakaoOnly && (
+        <button type="button" className="share-btn" onClick={copyLink}>
+          <Link aria-hidden />
+          <span className="share-btn-label">
+            <span>{copied ? '복사 완료' : '청첩장'}</span>
+            {!copied && <span>링크복사</span>}
+          </span>
+        </button>
+      )}
       <button type="button" className="share-btn" onClick={shareToKakao}>
         <MessageCircle aria-hidden />
-        {kakaoFallback ? '링크 복사 완료' : '카카오톡 공유하기'}
-      </button>
-      <button type="button" className="share-btn" onClick={copyLink}>
-        <Link aria-hidden />
-        {copied ? '복사 완료' : '링크주소 복사하기'}
+        <span className="share-btn-label">
+          <span>{needsKakaoKey ? '카카오 키를 설정해 주세요' : kakaoFallback ? '링크 복사 완료' : kakaoOnly ? '카카오톡으로 초대장 보내기' : '카카오톡'}</span>
+          {!kakaoFallback && !kakaoOnly && <span>공유하기</span>}
+        </span>
       </button>
     </div>
   );
