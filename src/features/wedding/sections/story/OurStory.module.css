@@ -95,7 +95,7 @@
   place-items: center;
   padding: 10px 12px 12px;
   color: var(--ink);
-  font-family: "Times New Roman", var(--serif);
+  font-family: var(--sans);
   font-size: 42px;
   font-style: italic;
   line-height: 1.6;
@@ -476,7 +476,7 @@
   }
 
   .timelineIntro p {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .timeline {

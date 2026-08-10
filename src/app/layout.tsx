@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import '@fontsource/great-vibes/400.css';
 import '@fontsource/special-elite/400.css';
 import './globals.css';
 import { weddingData } from '@/data/weddingData';
