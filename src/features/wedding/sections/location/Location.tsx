@@ -2,26 +2,64 @@
 
 import Image from 'next/image';
 import { Copy, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { weddingData } from '@/data/weddingData';
 import NaverMap from './NaverMap';
 import styles from './Location.module.css';
 
+const closeAnimationDuration = 360;
+
 export default function Location() {
   const { location, weddingInfo } = weddingData;
   const [isMapImageOpen, setIsMapImageOpen] = useState(false);
+  const [isMapImageClosing, setIsMapImageClosing] = useState(false);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openMapImage = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setIsMapImageClosing(false);
+    setIsMapImageOpen(true);
+  };
+
+  const closeMapImage = useCallback(() => {
+    if (isMapImageClosing) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setIsMapImageOpen(false);
+      return;
+    }
+
+    setIsMapImageClosing(true);
+    closeTimerRef.current = setTimeout(() => {
+      setIsMapImageOpen(false);
+      setIsMapImageClosing(false);
+      closeTimerRef.current = null;
+    }, closeAnimationDuration);
+  }, [isMapImageClosing]);
+
+  useEffect(() => {
+    return () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (!isMapImageOpen) return;
 
     const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMapImage();
+    };
+
     document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
     };
-  }, [isMapImageOpen]);
+  }, [closeMapImage, isMapImageOpen]);
 
   const copyAddress = async () => {
     await navigator.clipboard.writeText(weddingInfo.address);
@@ -67,7 +105,7 @@ export default function Location() {
           </a>
         </div>
 
-        <button type="button" className={styles.mapImageButton} onClick={() => setIsMapImageOpen(true)}>
+        <button type="button" className={styles.mapImageButton} onClick={openMapImage}>
           약도 이미지 보기
         </button>
       </div>
@@ -152,10 +190,15 @@ export default function Location() {
       </div>
 
       {isMapImageOpen && typeof document !== 'undefined' && createPortal(
-        <div className={styles.mapImageModal} role="dialog" aria-modal="true" aria-label="약도 이미지">
-          <button type="button" className={styles.modalBackdrop} onClick={() => setIsMapImageOpen(false)} aria-label="닫기" />
+        <div
+          className={`${styles.mapImageModal} ${isMapImageClosing ? styles.mapImageModalClosing : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="약도 이미지"
+        >
+          <button type="button" className={styles.modalBackdrop} onClick={closeMapImage} aria-label="닫기" />
           <div className={styles.modalCard}>
-            <button type="button" className={styles.modalClose} onClick={() => setIsMapImageOpen(false)} aria-label="약도 이미지 닫기">
+            <button type="button" className={styles.modalClose} onClick={closeMapImage} aria-label="약도 이미지 닫기">
               <X aria-hidden />
             </button>
             <Image src={location.mapImage} alt={location.mapAlt} width={900} height={620} className={styles.modalImage} />

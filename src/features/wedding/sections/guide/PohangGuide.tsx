@@ -211,7 +211,7 @@ export default function PohangGuide() {
     <section className="section" id="pohang-guide">
       <span className="section-kicker">GUIDE</span>
       <h2>{pohangGuide.title}</h2>
-      <p className={styles.intro}>포항에서 잠깐 열어보면 좋을 추천 폴더를 모아두었습니다.</p>
+      <p className="section-description">포항에서 잠깐 열어보면 좋을 추천 폴더를 모아두었습니다.</p>
 
       <div className={styles.folderCard}>
         <div className={styles.folderGrid} aria-label="포항 추천 폴더">

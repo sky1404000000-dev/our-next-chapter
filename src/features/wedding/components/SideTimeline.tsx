@@ -1,7 +1,7 @@
 'use client';
 
 import { Menu, X } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ShareActions from './ShareActions';
 import styles from './SideTimeline.module.css';
 
@@ -24,7 +24,8 @@ type SideTimelineProps = {
 
 export default function SideTimeline({ showAccount }: SideTimelineProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeId, setActiveId] = useState('invitation');
+  const [activeId, setActiveId] = useState('intro');
+  const animationFrameRef = useRef<number | null>(null);
   const visibleItems = useMemo(
     () => timelineItems.filter((item) => showAccount || item.href !== '#account'),
     [showAccount]
@@ -35,25 +36,46 @@ export default function SideTimeline({ showAccount }: SideTimelineProps) {
       .map((item) => document.querySelector<HTMLElement>(item.href))
       .filter(Boolean) as HTMLElement[];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntry = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    const updateActiveItem = () => {
+      animationFrameRef.current = null;
 
-        if (visibleEntry?.target.id) {
-          setActiveId(visibleEntry.target.id);
+      if (targets.length === 0) return;
+
+      const pageBottom = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const isAtPageBottom = pageBottom >= documentHeight - 2;
+      let activeTarget = targets[0];
+
+      if (isAtPageBottom) {
+        activeTarget = targets[targets.length - 1];
+      } else {
+        const viewportAnchor = window.scrollY + window.innerHeight * 0.34;
+
+        for (const target of targets) {
+          if (target.offsetTop > viewportAnchor) break;
+          activeTarget = target;
         }
-      },
-      {
-        threshold: [0.22, 0.45],
-        rootMargin: '-18% 0px -46% 0px'
       }
-    );
 
-    targets.forEach((target) => observer.observe(target));
+      setActiveId(activeTarget.id);
+    };
 
-    return () => observer.disconnect();
+    const scheduleUpdate = () => {
+      if (animationFrameRef.current !== null) return;
+      animationFrameRef.current = window.requestAnimationFrame(updateActiveItem);
+    };
+
+    updateActiveItem();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (animationFrameRef.current !== null) {
+        window.cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
   }, [visibleItems]);
 
   return (
@@ -76,7 +98,10 @@ export default function SideTimeline({ showAccount }: SideTimelineProps) {
                 key={`${item.label}-${item.href}`}
                 href={item.href}
                 className={activeId === id ? styles.active : undefined}
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  setActiveId(id);
+                  setIsOpen(false);
+                }}
               >
                 {item.label}
               </a>

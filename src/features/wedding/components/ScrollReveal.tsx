@@ -13,15 +13,15 @@ export default function ScrollReveal() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.intersectionRatio >= 0.16) {
             entry.target.classList.add('is-visible');
-          } else {
+          } else if (!entry.isIntersecting) {
             entry.target.classList.remove('is-visible');
           }
         });
       },
       {
-        threshold: 0.16,
+        threshold: [0, 0.16],
         rootMargin: '0px 0px -8% 0px'
       }
     );

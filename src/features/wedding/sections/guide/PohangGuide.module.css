@@ -1,10 +1,3 @@
-.intro {
-  color: var(--ink-soft);
-  font-family: var(--sans);
-  font-size: 14px;
-  text-align: center;
-}
-
 .folderCard {
   position: relative;
   margin-top: 24px;
@@ -121,7 +114,7 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 800;
-  line-height: 1;
+  line-height: 1.6;
   text-align: center;
   box-shadow: 0 7px 14px rgba(47, 42, 37, 0.08);
 }
@@ -142,7 +135,7 @@
   max-width: 100%;
   font-size: 12px;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.6;
   word-break: keep-all;
 }
 
@@ -237,7 +230,7 @@
   max-width: 270px;
   margin-top: 5px;
   font-size: 24px;
-  line-height: 1.22;
+  line-height: 1.6;
 }
 
 .panelHeader p {
@@ -339,14 +332,14 @@
 
 .placeText h4 {
   font-size: 19px;
-  line-height: 1.35;
+  line-height: 1.6;
 }
 
 .placeText strong {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 14px;
-  line-height: 1.58;
+  line-height: 1.6;
 }
 
 .placeText p {
@@ -362,7 +355,7 @@
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .placeText dt {

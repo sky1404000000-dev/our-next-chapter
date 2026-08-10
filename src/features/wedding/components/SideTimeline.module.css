@@ -80,7 +80,7 @@
   border-radius: 0;
   color: var(--ink-soft);
   font-size: 15px;
-  line-height: 1.45;
+  line-height: 1.6;
   transition:
     background 180ms ease,
     border-color 180ms ease,
@@ -120,7 +120,7 @@
   color: var(--ink);
   font-size: 12px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 1.6;
   text-align: center;
 }
 

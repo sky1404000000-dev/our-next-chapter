@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+
 :root {
   --paper: #fffef9;
   --paper-deep: #fbf4e6;
@@ -19,7 +21,7 @@
   --shadow-soft: 0 8px 22px rgba(73, 62, 51, 0.06);
   --shell-width: 430px;
   --serif: Georgia, "Times New Roman", "Noto Serif KR", serif;
-  --sans: "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --sans: var(--font-kopub-batang), "KoPubWorldBatang", serif;
 }
 
 * {
@@ -40,7 +42,7 @@ body {
   background-size: 10px 10px, 15px 15px, auto;
   color: var(--ink);
   font-family: var(--serif);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 h1,
@@ -146,22 +148,35 @@ button {
   transform: translateX(-50%);
 }
 
-.section h2 {
+.section > h2 {
   margin-top: 8px;
   font-size: 28px;
   font-weight: 500;
+  line-height: 1.6;
   letter-spacing: 0;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.section > .section-kicker {
+  display: block;
+  color: var(--sage);
+  font-family: "Special Elite", monospace;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.18em;
   text-align: center;
 }
 
-.section-kicker {
-  display: block;
-  color: var(--sage);
+.section > .section-description {
+  margin-top: 4px;
+  color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: 14px;
+  line-height: 1.6;
   text-align: center;
+  word-break: keep-all;
 }
 
 .card {
@@ -224,7 +239,7 @@ button {
 .cover-intro-copy h1 {
   font-size: 28px;
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.6;
 }
 
 .cover-stage {
@@ -286,7 +301,7 @@ button {
 .cover-polaroid figcaption small {
   color: var(--ink-soft);
   font-size: 14px;
-  line-height: 1.75;
+  line-height: 1.6;
 }
 
 .cover-polaroid::before,
@@ -312,7 +327,7 @@ button {
   transform: translateX(-50%) rotate(1deg);
 }
 
-.section-kicker {
+.section > .section-kicker {
   text-transform: uppercase;
 }
 
@@ -393,8 +408,8 @@ button {
   margin: 0;
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 16px;
-  line-height: 2;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .invitation-card .invitation-signature {
@@ -441,12 +456,16 @@ button {
 
 .schedule-time,
 .schedule-note,
-.about-subtitle,
 .account-message {
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 14px;
   text-align: center;
+}
+
+.schedule-note strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .calendar-grid {
@@ -535,14 +554,14 @@ button {
 .about-profile-text {
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .gallery-helper {
   margin-top: 10px;
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   text-align: center;
 }
@@ -602,7 +621,7 @@ button {
   font-size: 28px;
   font-style: italic;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.6;
   text-align: center;
   transform: rotate(-25deg);
   box-shadow: 0 10px 18px rgba(47, 42, 37, 0.12);
@@ -654,7 +673,7 @@ button {
   color: var(--ink);
   font-family: var(--sans);
   font-size: 12px;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
 .gallery-polaroid-1 {
@@ -783,8 +802,8 @@ button {
   max-width: 290px;
   white-space: pre-line;
   color: rgba(75, 68, 63, 0.78);
-  font-size: 15px;
-  line-height: 2;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .account-panel {
@@ -897,7 +916,7 @@ button {
   display: block;
   color: var(--ink-soft);
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .account-copy {
@@ -1012,13 +1031,13 @@ button {
 .closing-mini-photo figcaption {
   position: absolute;
   left: -28px;
-  bottom: -12px;
+  bottom: -31px;
   z-index: 3;
   color: rgba(60, 54, 49, 0.72);
-  font-family: var(--serif);
-  font-size: 20px;
-  font-style: italic;
-  line-height: 1.02;
+  font-family: "Great Vibes", "Brush Script MT", cursive;
+  font-size: 30px;
+  font-style: normal;
+  line-height: 1;
   text-align: left;
   transform: rotate(-6deg);
 }
@@ -1035,7 +1054,7 @@ button {
   font-family: "Times New Roman", var(--serif);
   font-size: 42px;
   font-style: italic;
-  line-height: 0.86;
+  line-height: 1.2;
 }
 
 .closing-date-table {
@@ -1074,7 +1093,7 @@ button {
 .closing-date-table dd {
   color: var(--ink);
   font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
 .closing-date-table .closing-date-address {
@@ -1158,7 +1177,7 @@ button {
   font-family: var(--sans);
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.85;
+  line-height: 1.6;
   text-shadow: 0 2px 10px rgba(47, 42, 37, 0.38);
 }
 
@@ -1350,7 +1369,7 @@ button {
   color: var(--ink);
   font-size: 20px;
   font-weight: 500;
-  line-height: 1.45;
+  line-height: 1.6;
 }
 
 .gallery-modal-text p {
@@ -1358,7 +1377,7 @@ button {
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 13px;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .gallery-close {

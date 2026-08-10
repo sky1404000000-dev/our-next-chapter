@@ -8,7 +8,7 @@ export default function AboutUs() {
     <section className="section about-section" id="about-us">
       <span className="section-kicker">{aboutUs.kicker}</span>
       <h2>{aboutUs.title}</h2>
-      <p className="about-subtitle">{aboutUs.subtitle}</p>
+      <p className="section-description">{aboutUs.subtitle}</p>
 
       <div className="about-profile-card">
         {aboutUs.people.map((person) => (
