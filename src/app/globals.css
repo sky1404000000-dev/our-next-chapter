@@ -1,7 +1,7 @@
 :root {
-  --paper: #fffdf8;
-  --paper-deep: #f8f3e9;
-  --paper-soft: #fff8ed;
+  --paper: #fffef9;
+  --paper-deep: #fbf4e6;
+  --paper-soft: #fff8eb;
   --paper-card: #fffffc;
   --ink: #3c3631;
   --ink-soft: #746d66;
@@ -36,10 +36,10 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at 24% 18%, rgba(60, 54, 49, 0.006) 0 1px, transparent 1px 100%),
-    radial-gradient(circle at 76% 52%, rgba(60, 54, 49, 0.005) 0 1px, transparent 1px 100%),
+    radial-gradient(circle at 24% 18%, rgba(60, 54, 49, 0.012) 0 1px, transparent 1px 100%),
+    radial-gradient(circle at 76% 52%, rgba(60, 54, 49, 0.01) 0 1px, transparent 1px 100%),
     #fbfaf7;
-  background-size: 16px 16px, 22px 22px, auto;
+  background-size: 10px 10px, 15px 15px, auto;
   color: var(--ink);
   font-family: var(--serif);
   line-height: 1.6;
@@ -76,11 +76,12 @@ button {
   padding-bottom: 56px;
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 18%, rgba(60, 54, 49, 0.01) 0 1px, transparent 1px 100%),
-    radial-gradient(circle at 74% 48%, rgba(60, 54, 49, 0.008) 0 1px, transparent 1px 100%),
+    radial-gradient(circle at 24% 18%, rgba(60, 54, 49, 0.028) 0 1px, transparent 1px 100%),
+    radial-gradient(circle at 74% 48%, rgba(60, 54, 49, 0.022) 0 1px, transparent 1px 100%),
+    linear-gradient(90deg, rgba(233, 224, 212, 0.14) 0 1px, transparent 1px 100%),
     var(--paper);
-  background-size: 18px 18px, 26px 26px, auto;
-  box-shadow: 0 0 0 1px rgba(233, 224, 212, 0.56), 0 24px 70px rgba(73, 62, 51, 0.1);
+  background-size: 9px 9px, 13px 13px, 24px 24px, auto;
+  box-shadow: 0 0 0 1px rgba(233, 224, 212, 0.72), 0 24px 70px rgba(73, 62, 51, 0.12);
 }
 
 .section {
@@ -1030,7 +1031,7 @@ button {
 }
 
 .closing-save-date {
-  color: #df5548;
+  color: #e5484d;
   font-family: var(--script);
   font-size: 50px;
   font-style: normal;
