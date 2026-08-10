@@ -25,7 +25,7 @@
 }
 
 .venueHeading p {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .venueHeading span,
@@ -202,13 +202,13 @@
 
 .guideMain strong {
   color: #5f7f54;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .guideMain span {
   color: var(--ink-soft);
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.6;
   word-break: keep-all;
 }
@@ -216,7 +216,7 @@
 .guideDescription {
   margin: 0;
   color: var(--ink-soft);
-  font-size: 14.5px;
+  font-size: 14px;
   line-height: 1.6;
   word-break: keep-all;
 }
@@ -228,7 +228,7 @@
 
 .routeItem strong {
   color: #5f7f54;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
 }
 
