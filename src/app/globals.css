@@ -1014,7 +1014,7 @@ button {
   left: -28px;
   bottom: -31px;
   z-index: 3;
-  color: rgba(60, 54, 49, 0.72);
+  color: #2f2a25;
   font-family: var(--script);
   font-size: 30px;
   font-style: normal;
@@ -1066,7 +1066,7 @@ button {
 
 .closing-date-table dt {
   color: var(--ink);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.02em;
 }

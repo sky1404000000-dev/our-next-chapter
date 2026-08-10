@@ -10,16 +10,20 @@ type RemainingTime = {
   hours: number;
   minutes: number;
   seconds: number;
+  isPast: boolean;
 };
 
 function getRemainingTime(targetDate: string): RemainingTime {
-  const diff = Math.max(0, new Date(targetDate).getTime() - Date.now());
+  const diffFromTarget = new Date(targetDate).getTime() - Date.now();
+  const isPast = diffFromTarget < 0;
+  const diff = Math.abs(diffFromTarget);
 
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
     hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
     minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60)
+    seconds: Math.floor((diff / 1000) % 60),
+    isPast
   };
 }
 
@@ -33,7 +37,8 @@ export default function CalendarSchedule() {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
+    isPast: false
   });
 
   useEffect(() => {
@@ -79,7 +84,7 @@ export default function CalendarSchedule() {
           })}
         </div>
 
-        <div className="countdown" aria-label="예식까지 남은 시간">
+        <div className="countdown" aria-label={remaining.isPast ? '예식 이후 지난 시간' : '예식까지 남은 시간'}>
           <span>
             <strong>{remaining.days}</strong>
             <small>DAYS</small>
@@ -102,7 +107,19 @@ export default function CalendarSchedule() {
         </div>
 
         <p className="schedule-note">
-          {calendar.coupleLabel}의 결혼식이 <strong>{remaining.days}일</strong> 남았습니다.
+          {remaining.isPast ? (
+            remaining.days > 0 ? (
+              <>
+                {calendar.coupleLabel}의 결혼식이 <strong>{remaining.days}일</strong> 지났습니다.
+              </>
+            ) : (
+              <>{calendar.coupleLabel}의 결혼식이 오늘입니다.</>
+            )
+          ) : (
+            <>
+              {calendar.coupleLabel}의 결혼식이 <strong>{remaining.days}일</strong> 남았습니다.
+            </>
+          )}
         </p>
       </div>
     </section>

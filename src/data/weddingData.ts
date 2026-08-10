@@ -246,7 +246,7 @@ export const weddingData = {
       {
         role: '신랑',
         name: '김동균',
-        parents: '김응국, 이남순의 아들',
+        parents: '김응국 · 이남순의 아들',
         birth: '1997년 2월 출생',
         note: 'ESTJ 가끔은 F주장러',
         image: '/images/people/donggyun.png',
@@ -255,7 +255,7 @@ export const weddingData = {
       {
         role: '신부',
         name: '김은진',
-        parents: '김창성, 이춘희의 딸',
+        parents: '김창성 · 이춘희의 딸',
         birth: '1998년 9월 출생',
         note: 'ENFP 가끔은 T주장러',
         image: '/images/people/eunjin.png',
@@ -327,7 +327,7 @@ export const weddingData = {
     imageAlt: '감사의 마음을 전하는 은진과 동균의 사진',
     dateLabel: '2026.10.10 SAT',
     message: '소중한 걸음으로 함께해 주시는 마음\n오래도록 감사히 간직하겠습니다.',
-    copyright: 'Copyright 2026. Our Next Chapter. All rights reserved.'
+    copyright: 'copyright: Made with love & care by the Bride ♡'
   },
   share: {
     title: '은진 & 동균 결혼식에 초대합니다',
