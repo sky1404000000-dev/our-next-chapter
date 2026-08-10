@@ -330,8 +330,8 @@ export const weddingData = {
     copyright: 'copyright: Made with love & care by the Bride ♡'
   },
   share: {
-    title: '은진 & 동균 결혼식에 초대합니다',
-    description: '2026년 10월 10일 토요일 오후 12시 30분, 포항 더퀸',
+    title: '김동균 ♡ 김은진 결혼식에 초대합니다',
+    description: '10월 10일 토요일 오후 12시 30분, 포항 더퀸 5층',
     image: '/images/hero/main.png'
   }
 };
