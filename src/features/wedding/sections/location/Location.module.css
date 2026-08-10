@@ -122,6 +122,7 @@
 }
 
 .linkBar a,
+.linkBar button,
 .mapImageButton {
   display: inline-flex;
   align-items: center;
@@ -138,7 +139,8 @@
   box-shadow: var(--shadow-soft);
 }
 
-.linkBar a:active {
+.linkBar a:active,
+.linkBar button:active {
   transform: translateY(1px);
 }
 

@@ -65,6 +65,39 @@ export default function Location() {
     await navigator.clipboard.writeText(weddingInfo.address);
   };
 
+  const openTmap = () => {
+    const { lat, lng } = location.coordinates;
+    const destination = encodeURIComponent(`${weddingInfo.venue} ${weddingInfo.venueSub}`);
+    const userAgent = navigator.userAgent;
+
+    if (/Android/i.test(userAgent)) {
+      const fallbackUrl = encodeURIComponent('https://play.google.com/store/apps/details?id=com.skt.tmap.ku');
+      window.location.href = `intent://route?goalname=${destination}&goalx=${lng}&goaly=${lat}#Intent;scheme=tmap;package=com.skt.tmap.ku;S.browser_fallback_url=${fallbackUrl};end`;
+      return;
+    }
+
+    if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      const appStoreUrl = 'https://apps.apple.com/kr/app/id431589174';
+      const fallbackTimer = window.setTimeout(() => {
+        if (document.visibilityState === 'visible') window.location.href = appStoreUrl;
+      }, 2200);
+
+      document.addEventListener(
+        'visibilitychange',
+        () => {
+          if (document.visibilityState === 'hidden') window.clearTimeout(fallbackTimer);
+        },
+        { once: true }
+      );
+
+      window.location.href = `tmap://route?rGoName=${destination}&rGoX=${lng}&rGoY=${lat}`;
+      return;
+    }
+
+    void navigator.clipboard.writeText(weddingInfo.address);
+    window.alert('티맵 길안내는 휴대폰에서 이용해 주세요. 예식장 주소를 복사했습니다.');
+  };
+
   return (
     <section className="section" id="location">
       <span className="section-kicker">LOCATION</span>
@@ -97,12 +130,12 @@ export default function Location() {
           <a href={location.links.naver} target="_blank" rel="noreferrer">
             네이버 지도
           </a>
-          <a href={location.links.tmap} target="_blank" rel="noreferrer">
-            티맵
-          </a>
           <a href={location.links.kakao} target="_blank" rel="noreferrer">
             카카오맵
           </a>
+          <button type="button" onClick={openTmap}>
+            티맵
+          </button>
         </div>
 
         <button type="button" className={styles.mapImageButton} onClick={openMapImage}>
