@@ -203,7 +203,7 @@ button {
 .envelope-intro {
   position: relative;
   min-height: 100svh;
-  padding: 10px 0 4px;
+  padding: 70px 0 40px;
   display: grid;
   gap: 26px;
   align-content: center;
