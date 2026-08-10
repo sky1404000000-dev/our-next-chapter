@@ -345,6 +345,31 @@
   border-radius: 6px;
 }
 
+.addressCopyToast {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 120;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: rgba(95, 127, 84, 0.94);
+  color: #fffef9;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, calc(-50% + 10px));
+  transition:
+    opacity 180ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.addressCopyToastVisible {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes mapModalBackdropReveal {
   from {
     background: rgba(47, 42, 37, 0);

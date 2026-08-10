@@ -14,7 +14,9 @@ export default function Location() {
   const { location, weddingInfo } = weddingData;
   const [isMapImageOpen, setIsMapImageOpen] = useState(false);
   const [isMapImageClosing, setIsMapImageClosing] = useState(false);
+  const [isAddressToastOpen, setIsAddressToastOpen] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const addressToastTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const openMapImage = () => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
@@ -41,6 +43,7 @@ export default function Location() {
   useEffect(() => {
     return () => {
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+      if (addressToastTimerRef.current) clearTimeout(addressToastTimerRef.current);
     };
   }, []);
 
@@ -63,6 +66,13 @@ export default function Location() {
 
   const copyAddress = async () => {
     await navigator.clipboard.writeText(weddingInfo.address);
+    if (addressToastTimerRef.current) clearTimeout(addressToastTimerRef.current);
+
+    setIsAddressToastOpen(true);
+    addressToastTimerRef.current = setTimeout(() => {
+      setIsAddressToastOpen(false);
+      addressToastTimerRef.current = null;
+    }, 1500);
   };
 
   const openTmap = () => {
@@ -261,6 +271,10 @@ export default function Location() {
         </div>,
         document.body
       )}
+
+      <p className={`${styles.addressCopyToast} ${isAddressToastOpen ? styles.addressCopyToastVisible : ''}`} role="status" aria-live="polite">
+        주소가 복사되었습니다
+      </p>
     </section>
   );
 }

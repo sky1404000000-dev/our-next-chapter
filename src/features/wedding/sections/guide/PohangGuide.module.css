@@ -222,7 +222,7 @@
 .panelHeader span {
   display: block;
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -238,7 +238,7 @@
   margin-top: 8px;
   color: color-mix(in srgb, var(--folder-accent), #3c3631 48%);
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 1.6;
 }

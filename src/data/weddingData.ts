@@ -86,7 +86,7 @@ export const weddingData = {
     date: '2026-10-10T12:30:00+09:00',
     displayDate: '2026. 10. 10',
     displayTime: '토요일 오후 12시 30분',
-    coupleLabel: '은진과 동균',
+    coupleLabel: '동균, 은진',
     days: [
       { date: 27, currentMonth: false },
       { date: 28, currentMonth: false },
