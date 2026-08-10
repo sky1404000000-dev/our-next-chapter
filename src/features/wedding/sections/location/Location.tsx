@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { Copy, X } from 'lucide-react';
+import { Bus, Car, CircleParking, Copy, Map, X } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { weddingData } from '@/data/weddingData';
@@ -102,7 +102,7 @@ export default function Location() {
     <section className="section" id="location">
       <span className="section-kicker">LOCATION</span>
       <h2>{location.title}</h2>
-      <div className={`${styles.mapCard} card`}>
+      <div className={styles.mapCard}>
         <div className={styles.venueHeading}>
           <p>
             {weddingInfo.venue} {weddingInfo.venueSub}
@@ -126,37 +126,49 @@ export default function Location() {
           />
         </div>
 
-        <div className={styles.linkBar} aria-label="지도 앱으로 길찾기">
-          <a href={location.links.naver} target="_blank" rel="noreferrer">
-            네이버 지도
-          </a>
-          <a href={location.links.kakao} target="_blank" rel="noreferrer">
-            카카오맵
-          </a>
-          <button type="button" onClick={openTmap}>
-            티맵
-          </button>
-        </div>
-
-        <button type="button" className={styles.mapImageButton} onClick={openMapImage}>
+        <button type="button" className={`${styles.mapActionButton} ${styles.mapImageButton}`} onClick={openMapImage}>
+          <Map aria-hidden className={styles.mapImageIcon} />
           약도 이미지 보기
         </button>
+
+        <div className={styles.navigationPanel}>
+          <h3>네비게이션</h3>
+          <p className={styles.mapAppGuide}>원하시는 앱을 선택하시면 길안내가 시작됩니다.</p>
+          <div className={styles.linkBar} aria-label="지도 앱으로 길찾기">
+            <a href={location.links.naver} target="_blank" rel="noreferrer" className={styles.mapActionButton}>
+              <Image src="/images/map/naver.webp" alt="" width={20} height={20} className={styles.mapAppIcon} />
+              네이버 지도
+            </a>
+            <button type="button" onClick={openTmap} className={styles.mapActionButton}>
+              <Image src="/images/map/tmap.webp" alt="" width={20} height={20} className={`${styles.mapAppIcon} ${styles.tmapIcon}`} />
+              티맵
+            </button>
+            <a href={location.links.kakao} target="_blank" rel="noreferrer" className={styles.mapActionButton}>
+              <Image src="/images/map/kakao.webp" alt="" width={20} height={20} className={styles.mapAppIcon} />
+              카카오내비
+            </a>
+          </div>
+        </div>
       </div>
 
       <div className={styles.guide}>
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <span aria-hidden>🚌</span>
+            <span className={styles.guideIcon} aria-hidden>
+              <Bus />
+            </span>
             시내버스로 오시는 경우
           </h3>
 
           <div className={styles.guideContent}>
-            <p className={styles.guideMain}>
-              <strong>이용 가능 버스</strong>
-              <span>700, 306, 216, 110(111)번</span>
-            </p>
+            <div className={styles.guidePoint}>
+              <p className={styles.guidePointTitle}>
+                <strong>이용 가능 버스</strong>
+              </p>
+              <p className={styles.guidePointBody}>700, 306, 216, 110(111)번</p>
+            </div>
 
-            <p className={styles.guideDescription}>
+            <p className={styles.guideNote}>
               포항시청 정류장에서 하차 후,
               <br />
               더퀸호텔 앞 횡단보도를 이용해 주세요.
@@ -166,14 +178,18 @@ export default function Location() {
 
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <span aria-hidden>🚗</span>
+            <span className={styles.guideIcon} aria-hidden>
+              <Car />
+            </span>
             자가용으로 오시는 경우
           </h3>
 
           <div className={styles.guideContent}>
             <div className={styles.routeItem}>
-              <strong>대구·포항고속도로 이용 시</strong>
-              <p>
+              <p className={styles.guidePointTitle}>
+                <strong>대구·포항고속도로 이용 시</strong>
+              </p>
+              <p className={styles.guidePointBody}>
                 포항 요금소 직진 → 시청 방향 직진 →
                 <br />
                 SK·GS 이동주유소 사거리 직진 →
@@ -187,8 +203,10 @@ export default function Location() {
             <div className={styles.routeDivider} />
 
             <div className={styles.routeItem}>
-              <strong>경주 → 포항 도로 이용 시</strong>
-              <p>
+              <p className={styles.guidePointTitle}>
+                <strong>경주 → 포항 도로 이용 시</strong>
+              </p>
+              <p className={styles.guidePointBody}>
                 경주IC 직진 → 7번 국도 사거리에서 포항 방면 우회전 →
                 <br />
                 포항 방면 직진 → 대잠사거리 좌회전 후 직진 →
@@ -203,17 +221,21 @@ export default function Location() {
 
         <article className={styles.guideItem}>
           <h3 className={styles.guideTitle}>
-            <span aria-hidden>🅿️</span>
+            <span className={styles.guideIcon} aria-hidden>
+              <CircleParking />
+            </span>
             주차 안내
           </h3>
 
           <div className={styles.guideContent}>
-            <p className={styles.guideMain}>
-              <strong>포항시청 주차장 이용 가능</strong>
-              <span>지하주차장 및 노면주차장을 이용해 주세요.</span>
-            </p>
+            <div className={styles.guidePoint}>
+              <p className={styles.guidePointTitle}>
+                <strong>포항시청 주차장 이용 가능</strong>
+              </p>
+              <p className={styles.guidePointBody}>지하주차장 및 노면주차장을 이용해 주세요.</p>
+            </div>
 
-            <p className={styles.guideDescription}>
+            <p className={styles.guideNote}>
               더퀸 전용 주차장은 혼주 및 행사 관계자 우선으로 운영됩니다.
               <br />
               주말에는 주차장이 혼잡할 수 있으니 여유 있게 도착해 주세요.

@@ -20,6 +20,8 @@
   --shell-width: 430px;
   --serif: var(--font-kopub-batang), "KoPubWorldBatang", serif;
   --sans: var(--font-kopub-batang), "KoPubWorldBatang", serif;
+  --script: var(--font-great-vibes), "Brush Script MT", cursive;
+  --typewriter: var(--font-special-elite), monospace;
 }
 
 * {
@@ -135,34 +137,34 @@ button {
   }
 }
 
-.section::before {
-  content: "";
-  position: absolute;
-  top: 28px;
-  left: 50%;
-  width: 38px;
-  height: 1px;
-  background: var(--sage);
-  transform: translateX(-50%);
-}
-
 .section > h2 {
   margin-top: 8px;
   font-size: 28px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 2;
   letter-spacing: 0;
   text-align: center;
   word-break: keep-all;
 }
 
 .section > .section-kicker {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  min-width: 92px;
+  min-height: 30px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 18px;
+  border: 1px solid rgba(143, 168, 132, 0.58);
+  border-radius: 50%;
+  background: rgba(255, 254, 249, 0.66);
   color: var(--sage);
-  font-family: "Special Elite", monospace;
-  font-size: 11px;
+  font-family: var(--typewriter);
+  font-size: 10px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1;
   letter-spacing: 0.18em;
   text-align: center;
 }
@@ -449,7 +451,7 @@ button {
 
 .schedule-date {
   text-align: center;
-  font-size: 28px;
+  font-size: 20px;
 }
 
 .schedule-time,
@@ -516,13 +518,13 @@ button {
 }
 
 .countdown strong {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .countdown small {
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .about-profile-card {
@@ -896,25 +898,27 @@ button {
 }
 
 .account-copy {
-  min-width: 72px;
-  min-height: 32px;
-  padding: 0 10px;
+  min-width: 64px;
+  min-height: 30px;
+  padding: 0 11px;
   display: inline-flex;
   justify-content: center;
-  gap: 5px;
+  gap: 4px;
   align-items: center;
-  border: 0;
-  border-radius: 999px;
-  background: rgba(232, 240, 223, 0.92);
-  color: #5f7f54;
+  border: 1px solid rgba(116, 109, 102, 0.18);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   box-shadow: none;
 }
 
 .account-copy svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
+  color: var(--ink-soft);
+  stroke-width: 1.8;
 }
 
 .account-copy-toast {
@@ -949,13 +953,14 @@ button {
 
 .closing-card {
   display: grid;
-  gap: 50px;
+  gap: 80px;
+  margin-top: 52px;
   text-align: center;
 }
 
 .closing-photo-stack {
   display: grid;
-  gap: 142px;
+  gap: 150px;
   padding: 0 24px;
 }
 
@@ -1010,7 +1015,7 @@ button {
   bottom: -31px;
   z-index: 3;
   color: rgba(60, 54, 49, 0.72);
-  font-family: "Great Vibes", "Brush Script MT", cursive;
+  font-family: var(--script);
   font-size: 30px;
   font-style: normal;
   line-height: 1;
@@ -1027,9 +1032,9 @@ button {
 
 .closing-save-date {
   color: #df5548;
-  font-family: var(--sans);
-  font-size: 42px;
-  font-style: italic;
+  font-family: var(--script);
+  font-size: 50px;
+  font-style: normal;
   line-height: 1.2;
 }
 

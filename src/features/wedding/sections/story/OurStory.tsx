@@ -144,7 +144,7 @@ export default function OurStory() {
 
       <article className={styles.storyCard}>
         <div className={styles.storyHeader}>
-          <p>함께 보낸 소중한 날</p>
+          <p>우리가 함께 보낸 소중한 날들</p>
           <strong className={styles.daysCount} suppressHydrationWarning>
             + {daysTogether.toLocaleString('ko-KR')}<small>일</small>
           </strong>

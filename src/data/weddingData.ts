@@ -57,7 +57,7 @@ export type AboutPerson = {
 
 export const weddingData = {
   metadata: {
-    title: '은진 & 동균 결혼식에 초대합니다',
+    title: '동균이와 은진이의 결혼식에 초대합니다',
     description: '2026년 10월 10일, 포항 더퀸에서 은진과 동균이 결혼합니다.',
     ogImage: '/images/hero/main.png'
   },
@@ -68,8 +68,8 @@ export const weddingData = {
   hero: {
     image: '/images/hero/main.png',
     video: '/video/hero.mp4',
-    names: '은진 & 동균',
-    dateLabel: '2026.10.10 SAT',
+    names: '김동균 · 김은진',
+    dateLabel: '2026.10.10 SATURDAY',
     timeLabel: '12:30 PM',
     message: '친구에서 연인으로,\n연인에서 부부로\n우리의 다음 장이 시작됩니다.'
   },
@@ -217,7 +217,8 @@ export const weddingData = {
     date: '2026년 10월 10일 토요일',
     time: '오후 12시 30분',
     venue: '포항 더퀸',
-    venueSub: '구 UA컨벤션',
+    venueSub: '(구 UA컨벤션)',
+    introVenue: '포항 더퀸 크라운홀, 5층',
     address: '경북 포항시 남구 대이로 18'
   },
   location: {
@@ -245,7 +246,7 @@ export const weddingData = {
       {
         role: '신랑',
         name: '김동균',
-        parents: '김영국, 이남숙의 아들',
+        parents: '김응국, 이남순의 아들',
         birth: '1997년 2월 출생',
         note: 'ESTJ 가끔은 F주장러',
         image: '/images/people/donggyun.png',
@@ -324,6 +325,7 @@ export const weddingData = {
   closing: {
     image: '/images/gallery/5.png',
     imageAlt: '감사의 마음을 전하는 은진과 동균의 사진',
+    dateLabel: '2026.10.10 SAT',
     message: '소중한 걸음으로 함께해 주시는 마음\n오래도록 감사히 간직하겠습니다.',
     copyright: 'Copyright 2026. Our Next Chapter. All rights reserved.'
   },

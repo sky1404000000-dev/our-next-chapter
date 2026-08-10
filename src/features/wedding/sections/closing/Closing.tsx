@@ -13,6 +13,7 @@ export default function Closing() {
 
   return (
     <section className="section closing" id="closing">
+      <span className="section-kicker">THANK YOU</span>
       <div className="closing-card">
         <div className="closing-photo-stack" aria-label="은진과 동균의 사진">
           {closingPhotos.map((photo) => (
@@ -41,7 +42,7 @@ export default function Closing() {
               <dt>TIME</dt>
             </div>
             <div className="closing-date-values">
-              <dd>{hero.dateLabel}</dd>
+              <dd>{closing.dateLabel}</dd>
               <dd>{closingTime}</dd>
             </div>
             <div className="closing-date-address">

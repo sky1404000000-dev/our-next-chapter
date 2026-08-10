@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import '@fontsource/great-vibes/400.css';
-import '@fontsource/special-elite/400.css';
 import './globals.css';
 import { weddingData } from '@/data/weddingData';
 
@@ -25,6 +23,22 @@ const koPubBatang = localFont({
   ],
   display: 'swap',
   variable: '--font-kopub-batang'
+});
+
+const greatVibes = localFont({
+  src: '../../node_modules/@fontsource/great-vibes/files/great-vibes-latin-400-normal.woff2',
+  weight: '400',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-great-vibes'
+});
+
+const specialElite = localFont({
+  src: '../../node_modules/@fontsource/special-elite/files/special-elite-latin-400-normal.woff2',
+  weight: '400',
+  style: 'normal',
+  display: 'swap',
+  variable: '--font-special-elite'
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
@@ -58,7 +72,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" className={koPubBatang.variable}>
+    <html lang="ko" className={`${koPubBatang.variable} ${greatVibes.variable} ${specialElite.variable}`}>
       <body>{children}</body>
     </html>
   );

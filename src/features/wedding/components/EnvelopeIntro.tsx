@@ -70,7 +70,7 @@ export default function EnvelopeIntro() {
               <small>
                 {weddingInfo.date} {weddingInfo.time}
                 <br />
-                {weddingInfo.venue}
+                {weddingInfo.introVenue}
               </small>
             </figcaption>
           </figure>

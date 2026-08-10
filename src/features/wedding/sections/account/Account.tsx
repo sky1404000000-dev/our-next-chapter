@@ -19,7 +19,7 @@ function AccountPersonRow({ person, onCopied }: { person: AccountPerson; onCopie
       </div>
       <button type="button" className="account-copy" onClick={copyAccount} aria-label={`${person.holder} 계좌 복사`}>
         <Copy aria-hidden />
-        <span>복사하기</span>
+        <span>복사</span>
       </button>
     </div>
   );
