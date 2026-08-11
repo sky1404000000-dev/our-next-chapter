@@ -272,9 +272,12 @@ export default function Location() {
         document.body
       )}
 
-      <p className={`${styles.addressCopyToast} ${isAddressToastOpen ? styles.addressCopyToastVisible : ''}`} role="status" aria-live="polite">
-        주소가 복사되었습니다
-      </p>
+      {typeof document !== 'undefined' && createPortal(
+        <p className={`${styles.addressCopyToast} ${isAddressToastOpen ? styles.addressCopyToastVisible : ''}`} role="status" aria-live="polite">
+          주소가 복사되었습니다
+        </p>,
+        document.body
+      )}
     </section>
   );
 }
