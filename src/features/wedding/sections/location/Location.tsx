@@ -179,9 +179,9 @@ export default function Location() {
             </div>
 
             <p className={styles.guideNote}>
-              포항시청 정류장에서 하차 후,
+              포항시청 좌측편,
               <br />
-              더퀸호텔 앞 횡단보도를 이용해 주세요.
+              대이동 주민센터 맞은편
             </p>
           </div>
         </article>
@@ -272,8 +272,8 @@ export default function Location() {
         document.body
       )}
 
-      {typeof document !== 'undefined' && createPortal(
-        <p className={`${styles.addressCopyToast} ${isAddressToastOpen ? styles.addressCopyToastVisible : ''}`} role="status" aria-live="polite">
+      {isAddressToastOpen && typeof document !== 'undefined' && createPortal(
+        <p className={`${styles.addressCopyToast} ${styles.addressCopyToastVisible}`} role="status" aria-live="polite">
           주소가 복사되었습니다
         </p>,
         document.body
