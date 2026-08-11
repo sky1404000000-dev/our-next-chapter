@@ -61,10 +61,6 @@ export const weddingData = {
     description: '2026년 10월 10일, 포항 더퀸에서 은진과 동균이 결혼합니다.',
     ogImage: '/images/hero/main.png'
   },
-  music: {
-    src: '/audio/wedding.mp3',
-    title: 'Wedding music'
-  },
   hero: {
     image: '/images/hero/main.png',
     video: '/video/hero.mp4',
