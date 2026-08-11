@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { type GalleryItem, weddingData } from '@/data/weddingData';
 
@@ -17,6 +17,7 @@ const demoGalleryItems: GalleryItem[] = [
 
 export default function Gallery() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [detailDirection, setDetailDirection] = useState<'prev' | 'next'>('next');
@@ -35,18 +36,43 @@ export default function Gallery() {
     return result;
   }, [galleryItems]);
 
+  const displayPages = useMemo(() => {
+    const originals = pages.map((items, logicalPage) => ({ items, logicalPage }));
+    if (pages.length <= 1) return originals;
+
+    return [
+      { items: pages[pages.length - 1], logicalPage: pages.length - 1 },
+      ...originals,
+      { items: pages[0], logicalPage: 0 }
+    ];
+  }, [pages]);
+
+  const jumpToPhysicalPage = useCallback((physicalPage: number) => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const previousScrollBehavior = carousel.style.scrollBehavior;
+    carousel.style.scrollBehavior = 'auto';
+    carousel.scrollLeft = carousel.clientWidth * physicalPage;
+
+    requestAnimationFrame(() => {
+      carousel.style.scrollBehavior = previousScrollBehavior;
+    });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (pages.length > 1) jumpToPhysicalPage(1);
+  }, [jumpToPhysicalPage, pages.length]);
+
   const scrollCarousel = (direction: 'prev' | 'next') => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    const nextPage =
-      direction === 'next'
-        ? Math.min(currentPage + 1, pages.length - 1)
-        : Math.max(currentPage - 1, 0);
+    const physicalPage = Math.round(carousel.scrollLeft / carousel.clientWidth);
+    const nextPhysicalPage = direction === 'next' ? physicalPage + 1 : physicalPage - 1;
 
-    setCurrentPage(nextPage);
     carousel.scrollTo({
-      left: carousel.clientWidth * nextPage,
+      left: carousel.clientWidth * nextPhysicalPage,
       behavior: 'smooth'
     });
   };
@@ -55,7 +81,22 @@ export default function Gallery() {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    setCurrentPage(Math.round(carousel.scrollLeft / carousel.clientWidth));
+    const physicalPage = Math.round(carousel.scrollLeft / carousel.clientWidth);
+    const logicalPage =
+      physicalPage === 0
+        ? pages.length - 1
+        : physicalPage === pages.length + 1
+          ? 0
+          : physicalPage - 1;
+
+    setCurrentPage(logicalPage);
+
+    if (carouselSettleTimerRef.current) clearTimeout(carouselSettleTimerRef.current);
+    carouselSettleTimerRef.current = setTimeout(() => {
+      if (physicalPage === 0) jumpToPhysicalPage(pages.length);
+      if (physicalPage === pages.length + 1) jumpToPhysicalPage(1);
+      carouselSettleTimerRef.current = null;
+    }, 100);
   };
 
   const moveDetail = useCallback((direction: 'prev' | 'next') => {
@@ -90,6 +131,7 @@ export default function Gallery() {
 
   useEffect(() => {
     return () => {
+      if (carouselSettleTimerRef.current) clearTimeout(carouselSettleTimerRef.current);
       if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
@@ -140,13 +182,13 @@ export default function Gallery() {
 
       <div className="gallery-collage-wrap">
         <div className="gallery-collage-carousel" aria-label="사진 갤러리" ref={carouselRef} onScroll={updateCurrentPage}>
-          {pages.map((page, pageIndex) => (
+          {displayPages.map(({ items, logicalPage }, physicalPageIndex) => (
             <div
-              className={`gallery-collage-page ${pageIndex === currentPage ? 'gallery-collage-page-active' : ''}`}
-              key={`gallery-page-${pageIndex}`}
+              className={`gallery-collage-page ${logicalPage === currentPage ? 'gallery-collage-page-active' : ''}`}
+              key={`gallery-page-${physicalPageIndex}-${logicalPage}`}
             >
-              {page.map((item, itemIndex) => {
-                const index = pageIndex * pageSize + itemIndex;
+              {items.map((item, itemIndex) => {
+                const index = logicalPage * pageSize + itemIndex;
 
                 return (
                   <button

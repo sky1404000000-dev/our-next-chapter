@@ -7,7 +7,9 @@ export default function ScrollReveal() {
     const root = document.querySelector('.mobile-shell');
     if (!root) return;
 
-    const targets = Array.from(root.querySelectorAll<HTMLElement>('.top-ornament, .section'));
+    const targets = Array.from(
+      root.querySelectorAll<HTMLElement>('.top-ornament, .section, .closing-mini-photo, .closing-hero-photo-wrap')
+    );
     document.documentElement.classList.add('reveal-ready');
 
     const observer = new IntersectionObserver(
