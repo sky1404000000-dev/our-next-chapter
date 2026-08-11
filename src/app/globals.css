@@ -134,20 +134,14 @@ button {
 
 .reveal-ready .closing-mini-photo figcaption {
   opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  filter: blur(2px);
   transform: translateY(12px) rotate(-6deg);
   transition:
     opacity 520ms ease 220ms,
-    clip-path 760ms cubic-bezier(0.22, 1, 0.36, 1) 220ms,
-    filter 520ms ease 220ms,
     transform 680ms cubic-bezier(0.22, 1, 0.36, 1) 220ms;
 }
 
 .reveal-ready .closing-mini-photo.is-visible figcaption {
   opacity: 1;
-  clip-path: inset(0 0 0 0);
-  filter: blur(0);
   transform: translateY(0) rotate(-6deg);
 }
 
