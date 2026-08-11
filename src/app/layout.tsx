@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { weddingData } from '@/data/weddingData';
@@ -47,6 +47,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: weddingData.metadata.title,
   description: weddingData.metadata.description,
+  formatDetection: {
+    telephone: false
+  },
   openGraph: {
     title: weddingData.metadata.title,
     description: weddingData.metadata.description,
@@ -68,6 +71,13 @@ export const metadata: Metadata = {
     description: weddingData.metadata.description,
     images: [weddingData.metadata.ogImage]
   }
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

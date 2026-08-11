@@ -212,8 +212,9 @@ export default function Gallery() {
           <button type="button" onClick={() => scrollCarousel('prev')} aria-label="이전 사진 묶음">
             <ChevronLeft aria-hidden />
           </button>
-          <span>
-            {currentPage + 1} / {pages.length}
+          <span className="gallery-page-count" aria-live="polite" aria-label={`${currentPage + 1} / ${pages.length}`}>
+            <strong aria-hidden="true">{currentPage + 1}</strong>
+            <span aria-hidden="true">/ {pages.length}</span>
           </span>
           <button type="button" onClick={() => scrollCarousel('next')} aria-label="다음 사진 묶음">
             <ChevronRight aria-hidden />

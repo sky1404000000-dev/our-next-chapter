@@ -790,19 +790,13 @@ button {
 }
 
 .gallery-page-controls {
-  width: 198px;
-  min-height: 46px;
+  width: 208px;
+  min-height: 42px;
   display: grid;
-  grid-template-columns: 48px 1fr 48px;
+  grid-template-columns: 40px 108px 40px;
+  gap: 10px;
   align-items: center;
   margin: 10px auto 0;
-  padding: 4px 6px;
-  border: 1px solid rgba(91, 119, 85, 0.14);
-  border-radius: 19px;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow:
-    0 7px 18px rgba(54, 68, 51, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   color: var(--ink);
   font-family: var(--sans);
 }
@@ -810,23 +804,21 @@ button {
 .gallery-page-controls button {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 36px;
-  border-radius: 14px;
-  background: transparent;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(91, 119, 85, 0.14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
   color: #657d5c;
+  box-shadow:
+    0 6px 16px rgba(54, 68, 51, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
   cursor: pointer;
-  transition:
-    transform 180ms ease,
-    background-color 180ms ease;
-}
-
-.gallery-page-controls button:hover {
-  background: var(--sage-soft);
+  transition: transform 160ms ease;
 }
 
 .gallery-page-controls button:active {
-  transform: scale(0.94);
+  transform: scale(0.92);
 }
 
 .gallery-page-controls svg {
@@ -835,9 +827,19 @@ button {
   stroke-width: 2;
 }
 
-.gallery-page-controls span {
-  justify-self: center;
-  min-width: 52px;
+.gallery-page-count {
+  width: 108px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid rgba(91, 119, 85, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 6px 16px rgba(54, 68, 51, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
   text-align: center;
   font-size: 14px;
   font-weight: 500;
@@ -845,6 +847,16 @@ button {
   font-feature-settings: "tnum" 1;
   line-height: 1;
   letter-spacing: 0.04em;
+}
+
+.gallery-page-count strong {
+  min-width: 22px;
+  color: #4f6847;
+  font-weight: 700;
+}
+
+.gallery-page-count span {
+  color: var(--ink-faint);
 }
 
 .gallery-nav {
@@ -1011,6 +1023,13 @@ button {
   color: var(--ink-soft);
   font-size: 13px;
   line-height: 1.6;
+}
+
+.account-person-info a[href^="tel:"],
+.account-person-info a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  pointer-events: none;
 }
 
 .account-copy {
