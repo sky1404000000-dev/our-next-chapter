@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: weddingData.metadata.ogImage,
-        width: 1200,
-        height: 630,
+        width: 1600,
+        height: 2400,
         alt: weddingData.metadata.title
       }
     ]

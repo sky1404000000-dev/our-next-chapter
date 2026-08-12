@@ -59,10 +59,10 @@ export const weddingData = {
   metadata: {
     title: '동균이와 은진이의 결혼식에 초대합니다',
     description: '2026년 10월 10일, 포항 더퀸에서 은진과 동균이 결혼합니다.',
-    ogImage: '/images/hero/main.png'
+    ogImage: '/images/hero/cover.jpg'
   },
   hero: {
-    image: '/images/hero/main.png',
+    image: '/images/hero/cover.jpg',
     video: '/video/hero.mp4',
     names: '김동균 · 김은진',
     dateLabel: '2026.10.10 SATURDAY',
@@ -328,6 +328,6 @@ export const weddingData = {
   share: {
     title: '김동균 ♡ 김은진 결혼식에 초대합니다',
     description: '10월 10일 토요일 오후 12시 30분, 포항 더퀸 5층',
-    image: '/images/hero/main.png'
+    image: '/images/hero/cover.jpg'
   }
 };
