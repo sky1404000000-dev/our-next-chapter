@@ -9,12 +9,22 @@ export default function Hero() {
   const [bride, groom] = hero.names.split('&').map((name) => name.trim());
   const heroRef = useRef<HTMLElement>(null);
   const hasEnteredRef = useRef(false);
-  const [showVideo, setShowVideo] = useState(Boolean(hero.video));
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState(true);
+
+  useEffect(() => {
+    const selectTimer = window.setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * hero.videos.length);
+      setSelectedVideo(hero.videos[randomIndex]);
+    }, 0);
+
+    return () => window.clearTimeout(selectTimer);
+  }, [hero.videos]);
 
   useEffect(() => {
     const heroElement = heroRef.current;
 
-    if (!hero.video || !heroElement) return;
+    if (!selectedVideo || !heroElement) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -37,15 +47,15 @@ export default function Hero() {
     observer.observe(heroElement);
 
     return () => observer.disconnect();
-  }, [hero.video]);
+  }, [selectedVideo]);
 
   return (
     <section className="section hero" id="hero" ref={heroRef}>
       <div className="hero-photo-frame">
-        {hero.video && showVideo ? (
+        {selectedVideo && showVideo ? (
           <video
             className="hero-image"
-            src={hero.video}
+            src={selectedVideo}
             poster={hero.image}
             autoPlay
             muted

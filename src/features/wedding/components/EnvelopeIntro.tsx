@@ -8,14 +8,24 @@ export default function EnvelopeIntro() {
   const { hero, invitation, weddingInfo } = weddingData;
   const stageRef = useRef<HTMLDivElement>(null);
   const hasEnteredRef = useRef(false);
-  const [showVideo, setShowVideo] = useState(Boolean(hero.video));
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState(true);
   const [datePart, dayPart = 'SAT'] = hero.dateLabel.split(' ');
   const displayDate = datePart.replaceAll('.', ' / ');
 
   useEffect(() => {
+    const selectTimer = window.setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * hero.videos.length);
+      setSelectedVideo(hero.videos[randomIndex]);
+    }, 0);
+
+    return () => window.clearTimeout(selectTimer);
+  }, [hero.videos]);
+
+  useEffect(() => {
     const stageElement = stageRef.current;
 
-    if (!hero.video || !stageElement) return;
+    if (!selectedVideo || !stageElement) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -38,7 +48,7 @@ export default function EnvelopeIntro() {
     observer.observe(stageElement);
 
     return () => observer.disconnect();
-  }, [hero.video]);
+  }, [selectedVideo]);
 
   return (
     <section className="envelope-intro section" id="intro">
@@ -51,10 +61,10 @@ export default function EnvelopeIntro() {
         <article className="cover-inner-card">
           <figure className="cover-polaroid">
             <div className="cover-media-frame">
-              {hero.video && showVideo ? (
+              {selectedVideo && showVideo ? (
                 <video
                   className="cover-photo"
-                  src={hero.video}
+                  src={selectedVideo}
                   poster={hero.image}
                   autoPlay
                   muted

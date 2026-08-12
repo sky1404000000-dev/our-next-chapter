@@ -63,7 +63,11 @@ export const weddingData = {
   },
   hero: {
     image: '/images/hero/cover.jpg',
-    video: '/video/cover.mp4',
+    videos: [
+      '/video/covers/cover1.mp4',
+      '/video/covers/cover2.mp4',
+      '/video/covers/cover3.mp4'
+    ],
     names: '김동균 · 김은진',
     dateLabel: '2026.10.10 SATURDAY',
     timeLabel: '12:30 PM',
