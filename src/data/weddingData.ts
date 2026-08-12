@@ -125,7 +125,7 @@ export const weddingData = {
     title: '우리의 이야기',
     kicker: 'OUR STORY',
     intro: '결혼을 앞두고 서로에게 남기고 싶은 마음을 짧은 편지처럼 담았습니다.',
-    coverImage: '/images/gallery/1.png',
+    coverImage: '/images/story/story_cover.jpg',
     coverAlt: '은진과 동균의 추억 사진',
     buttonLabel: '우리 이야기 읽어보기',
     questions: [
@@ -319,7 +319,7 @@ export const weddingData = {
     ] as PohangTip[]
   },
   closing: {
-    image: '/images/gallery/5.png',
+    image: '/images/closing/final/4.png',
     imageAlt: '감사의 마음을 전하는 은진과 동균의 사진',
     dateLabel: '2026.10.10 SAT',
     message: '소중한 걸음으로 함께해 주시는 마음\n오래도록 감사히 간직하겠습니다.',

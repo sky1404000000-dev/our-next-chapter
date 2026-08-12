@@ -4,6 +4,7 @@ import EnvelopeIntro from './components/EnvelopeIntro';
 import MusicToggle from './components/MusicToggle';
 import ScrollReveal from './components/ScrollReveal';
 import SideTimeline from './components/SideTimeline';
+import WeddingOpening from './components/WeddingOpening';
 import Account from './sections/account/Account';
 import Closing from './sections/closing/Closing';
 import Gallery from './sections/gallery/Gallery';
@@ -32,6 +33,7 @@ export default function WeddingPage({ showAccount }: WeddingPageProps) {
 
   return (
     <main className="mobile-shell">
+      <WeddingOpening />
       <ScrollReveal />
       <SideTimeline showAccount={showAccount} />
       <MusicToggle tracks={musicTracks} />

@@ -5,9 +5,9 @@ import ShareActions from '../../components/ShareActions';
 export default function Closing() {
   const { closing, hero, weddingInfo } = weddingData;
   const closingPhotos = [
-    { src: '/images/gallery/1.png', alt: '은진과 동균의 마지막 인사 사진 1' },
-    { src: '/images/gallery/3.png', alt: '은진과 동균의 마지막 인사 사진 2' },
-    { src: '/images/gallery/4.png', alt: '은진과 동균의 마지막 인사 사진 3' }
+    { src: '/images/closing/final/1.jpg', alt: '은진과 동균의 마지막 인사 사진 1' },
+    { src: '/images/closing/final/2.jpg', alt: '은진과 동균의 마지막 인사 사진 2' },
+    { src: '/images/closing/final/3.jpg', alt: '은진과 동균의 마지막 인사 사진 3' }
   ];
   const closingTime = hero.timeLabel.endsWith('PM') ? `PM ${hero.timeLabel.replace(' PM', '')}` : hero.timeLabel;
 

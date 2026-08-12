@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-label="함께 웃는 순간">
-  <rect width="720" height="520" fill="#f6efe6"/>
-  <circle cx="360" cy="224" r="150" fill="#e8b79a" opacity=".45"/>
-  <path d="M230 222c0-52 42-94 94-94s94 42 94 94M302 222c0-52 42-94 94-94s94 42 94 94" fill="none" stroke="#332d27" stroke-width="10" stroke-linecap="round"/>
-  <path d="M262 306c58 54 138 54 196 0" fill="none" stroke="#9caf88" stroke-width="16" stroke-linecap="round"/>
-  <text x="360" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#8a7e73">Laugh Together</text>
-</svg>

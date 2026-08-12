@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-label="내일을 약속하는 순간">
-  <rect width="720" height="520" fill="#fffdf8"/>
-  <circle cx="360" cy="210" r="142" fill="#9bb7c9" opacity=".55"/>
-  <path d="M252 250l88 88 142-170" fill="none" stroke="#9caf88" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M156 392h408" stroke="#e7ddd1" stroke-width="18" stroke-linecap="round"/>
-  <text x="360" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#8a7e73">Promise</text>
-</svg>

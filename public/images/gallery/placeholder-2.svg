@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-label="편안하고 다정한 순간">
-  <rect width="720" height="520" fill="#f2eee7"/>
-  <path d="M110 340c70-98 148-147 235-147s165 49 235 147" fill="none" stroke="#9caf88" stroke-width="28" stroke-linecap="round"/>
-  <circle cx="270" cy="222" r="74" fill="#fffaf2"/>
-  <circle cx="450" cy="222" r="74" fill="#fffaf2"/>
-  <path d="M300 270c40 45 80 45 120 0" fill="none" stroke="#e8b79a" stroke-width="12" stroke-linecap="round"/>
-  <text x="360" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#8a7e73">Warm Days</text>
-</svg>

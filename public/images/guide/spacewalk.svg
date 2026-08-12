@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="260" viewBox="0 0 320 260" role="img" aria-label="스페이스워크">
-  <rect width="320" height="260" fill="#dce6e9"/>
-  <path d="M0 178c72-36 132-36 206-4 44 19 78 20 114 6v80H0z" fill="#b4c1c2"/>
-  <path d="M45 150c30-82 85-88 134-14 35 52 80 52 96 0" fill="none" stroke="#fffdf8" stroke-width="12" stroke-linecap="round"/>
-  <path d="M45 150c30-82 85-88 134-14 35 52 80 52 96 0" fill="none" stroke="#85886f" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="252" cy="62" r="32" fill="#e8c7a8"/>
-</svg>

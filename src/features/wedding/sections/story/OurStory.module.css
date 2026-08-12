@@ -33,7 +33,7 @@
 .storyHeader {
   display: grid;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 25px;
   text-align: center;
 }
 
@@ -48,7 +48,7 @@
 .daysCount {
   color: var(--ink);
   font-family: var(--serif);
-  font-size: 19px;
+  font-size: 20px;
   letter-spacing: 0;
 }
 
@@ -56,12 +56,12 @@
   margin-left: 3px;
   color: var(--ink-soft);
   font-family: var(--sans);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .storyCover {
   display: block;
-  width: min(100%, 292px);
+  width: min(100%, 300px);
   height: auto;
   aspect-ratio: 1 / 1.14;
   margin: 0 auto 20px;

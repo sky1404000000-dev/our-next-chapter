@@ -84,6 +84,242 @@ button {
   box-shadow: 0 0 0 1px rgba(233, 224, 212, 0.72), 0 24px 70px rgba(73, 62, 51, 0.12);
 }
 
+.wedding-opening {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: min(100%, var(--shell-width));
+  height: 100dvh;
+  margin: 0 auto;
+  overflow: hidden;
+  isolation: isolate;
+  background: #f4f5f1;
+  cursor: pointer;
+  will-change: opacity, transform, filter;
+}
+
+.wedding-opening::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 22%, transparent 74%, rgba(37, 49, 33, 0.14)),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025), transparent 24%, transparent 76%, rgba(255, 255, 255, 0.025));
+}
+
+.wedding-opening-images,
+.wedding-opening-slide {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.wedding-opening-slide {
+  overflow: hidden;
+}
+
+.wedding-opening-slide img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.wedding-opening-slide-1 {
+  z-index: 0;
+  animation: weddingOpeningFirstPhoto 4.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.wedding-opening-slide-1 img {
+  transform: scale(1.025);
+  animation: weddingOpeningPhotoZoom 4.7s ease-out both;
+}
+
+.wedding-opening-slide-2 {
+  z-index: 1;
+  clip-path: inset(0 100% 0 0);
+  transform: translateX(12%);
+  animation: weddingOpeningSecondPhoto 1.35s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
+}
+
+.wedding-opening-slide-2 img {
+  transform: scale(1.025);
+  animation: weddingOpeningPhotoZoom 3.35s ease-out 1.05s both;
+}
+
+.wedding-opening-title {
+  position: absolute;
+  top: 34%;
+  left: 50%;
+  z-index: 4;
+  width: max-content;
+  max-width: none;
+  color: #405638;
+  font-family: var(--script);
+  font-size: clamp(42px, 12.5vw, 58px);
+  font-weight: 400;
+  line-height: 1.08;
+  text-align: center;
+  text-shadow:
+    0 4px 14px rgba(37, 53, 32, 0.28),
+    0 1px 2px rgba(37, 53, 32, 0.2);
+  transform: translate(-50%, -50%) rotate(-4deg);
+  transform-origin: center;
+}
+
+.wedding-opening-title span {
+  display: block;
+  padding: 10px 28px 16px;
+  margin: -10px -28px -16px;
+  white-space: nowrap;
+  -webkit-mask-image: linear-gradient(to right, #000, #000);
+  -webkit-mask-position: left center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 0% 100%;
+  mask-image: linear-gradient(to right, #000, #000);
+  mask-position: left center;
+  mask-repeat: no-repeat;
+  mask-size: 0% 100%;
+  animation: weddingOpeningTitleWrite 1.35s steps(15, end) 2.45s both;
+}
+
+.wedding-opening-hint {
+  position: absolute;
+  right: 0;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: 0;
+  z-index: 4;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-shadow: 0 1px 8px rgba(34, 43, 31, 0.55);
+  animation: weddingOpeningHint 800ms ease 2.45s both;
+}
+
+.wedding-opening-skip {
+  position: absolute;
+  top: max(18px, env(safe-area-inset-top));
+  right: 18px;
+  z-index: 5;
+  min-width: 72px;
+  min-height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 7px 20px rgba(40, 52, 36, 0.18);
+  color: #34482e;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+
+.wedding-opening.is-leaving {
+  pointer-events: none;
+  animation: weddingOpeningExit 900ms cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes weddingOpeningFirstPhoto {
+  0%, 27% {
+    transform: translateX(0);
+  }
+  76%, 100% {
+    transform: translateX(-8%);
+  }
+}
+
+@keyframes weddingOpeningSecondPhoto {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(12%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes weddingOpeningPhotoZoom {
+  from {
+    transform: scale(1.025);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes weddingOpeningTitleWrite {
+  from {
+    -webkit-mask-size: 0% 100%;
+    mask-size: 0% 100%;
+  }
+  to {
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+}
+
+@keyframes weddingOpeningHint {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes weddingOpeningExit {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-105%) scale(0.99);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wedding-opening-slide-1,
+  .wedding-opening-slide-1 img,
+  .wedding-opening-slide-2,
+  .wedding-opening-slide-2 img,
+  .wedding-opening-title span,
+  .wedding-opening-hint {
+    animation: none;
+  }
+
+  .wedding-opening-slide-2 {
+    clip-path: none;
+    transform: none;
+  }
+
+  .wedding-opening-slide img {
+    transform: none;
+  }
+
+  .wedding-opening-title span,
+  .wedding-opening-hint {
+    opacity: 1;
+    -webkit-mask-image: none;
+    mask-image: none;
+    filter: none;
+    transform: none;
+  }
+
+  .wedding-opening.is-leaving {
+    animation: weddingOpeningExit 450ms ease forwards;
+  }
+}
+
 .section {
   position: relative;
   padding: 76px 22px;
@@ -1082,7 +1318,7 @@ button {
 
 .closing-card {
   display: grid;
-  gap: 80px;
+  gap: 90px;
   margin-top: 52px;
   text-align: center;
 }

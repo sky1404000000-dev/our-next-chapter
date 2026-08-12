@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="260" viewBox="0 0 320 260" role="img" aria-label="영일대 바다">
-  <rect width="320" height="260" fill="#d9e3df"/>
-  <circle cx="248" cy="72" r="38" fill="#e8c7a8"/>
-  <path d="M0 148c68-22 110-17 160 8s96 28 160-2v106H0z" fill="#9bb7c9"/>
-  <path d="M42 164c64-40 122-58 178-54" fill="none" stroke="#fffdf8" stroke-width="8" stroke-linecap="round"/>
-  <path d="M68 172c30-60 72-60 102 0M170 172c30-60 72-60 102 0" fill="none" stroke="#85886f" stroke-width="7"/>
-</svg>
