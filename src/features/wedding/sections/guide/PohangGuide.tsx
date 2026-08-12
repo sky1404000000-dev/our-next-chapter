@@ -35,7 +35,7 @@ const guideFolders: PohangFolder[] = [
   {
     title: '우리가 아껴둔 포항 맛집',
     subtitle: '저희가 좋아하는 곳부터 맛잘알 가족들의 추천까지 야무지게 담았습니다 :)',
-    color: '#f9f2b2',
+    color: '#CFEFD6',
     accent: '#8c5f55',
     recommendedBy: '우리의 추천',
     items: [
@@ -88,7 +88,7 @@ const guideFolders: PohangFolder[] = [
   {
     title: '배고프면 펼쳐보기',
     subtitle: '포항 지인이 알려준 실패 확률 낮은 밥집',
-    color: '#CFECF3',
+    color: '#FDF6C9',
     accent: '#8a6b37',
     recommendedBy: '지인 추천',
     items: [
@@ -108,7 +108,7 @@ const guideFolders: PohangFolder[] = [
   {
     title: '달달한 후식 후보',
     subtitle: '식 전후로 잠깐 쉬어가기 좋은 카페 메모',
-    color: '#bce4bc',
+    color: '#FFD9B5',
     accent: '#607f77',
     recommendedBy: '지인 추천',
     items: [
@@ -139,7 +139,7 @@ const guideFolders: PohangFolder[] = [
   {
     title: '포항 바람 쐬기',
     subtitle: '밥 먹고 바로 가기 아쉬운 분들을 위한 짧은 코스',
-    color: '#98b14f',
+    color: '#DEE3FD',
     accent: '#7b6a82',
     recommendedBy: '둘이 함께 추천',
     items: [
