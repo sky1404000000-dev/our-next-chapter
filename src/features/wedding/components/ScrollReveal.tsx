@@ -8,7 +8,9 @@ export default function ScrollReveal() {
     if (!root) return;
 
     const targets = Array.from(
-      root.querySelectorAll<HTMLElement>('.top-ornament, .section, .closing-mini-photo, .closing-hero-photo-wrap')
+      root.querySelectorAll<HTMLElement>(
+        '.top-ornament, .section, .about-photo, .closing-mini-photo, .closing-hero-photo-wrap'
+      )
     );
     document.documentElement.classList.add('reveal-ready');
 
