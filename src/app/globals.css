@@ -348,35 +348,30 @@ button {
   transition-delay: 80ms;
 }
 
-.reveal-ready .about-person:first-child .about-photo,
-.reveal-ready .about-person:nth-child(even) .about-photo {
+.reveal-ready .about-person:first-child .about-person-details,
+.reveal-ready .about-person:nth-child(even) .about-person-details {
   opacity: 0;
-  filter: blur(5px);
+  filter: blur(4px);
   transition:
-    opacity 720ms ease,
-    filter 720ms ease,
-    transform 980ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 680ms ease,
+    filter 680ms ease,
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, filter, transform;
 }
 
-.reveal-ready .about-person:first-child .about-photo {
-  transform: translate3d(-58px, 18px, 0) rotate(-5deg) scale(0.95);
+.reveal-ready .about-person:first-child .about-person-details {
+  transform: translate3d(52px, 12px, 0) scale(0.98);
 }
 
-.reveal-ready .about-person:nth-child(even) .about-photo {
-  transform: translate3d(58px, 18px, 0) rotate(5deg) scale(0.95);
+.reveal-ready .about-person:nth-child(even) .about-person-details {
+  transform: translate3d(-52px, 12px, 0) scale(0.98);
 }
 
-.reveal-ready .about-person:first-child .about-photo.is-visible {
+.reveal-ready .about-person:first-child .about-person-details.is-visible,
+.reveal-ready .about-person:nth-child(even) .about-person-details.is-visible {
   opacity: 1;
   filter: blur(0);
-  transform: translate3d(0, 0, 0) rotate(-2deg) scale(1);
-}
-
-.reveal-ready .about-person:nth-child(even) .about-photo.is-visible {
-  opacity: 1;
-  filter: blur(0);
-  transform: translate3d(0, 0, 0) rotate(2deg) scale(1);
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 .reveal-ready .closing-mini-photo {
@@ -460,7 +455,7 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .reveal-ready .top-ornament,
   .reveal-ready .section,
-  .reveal-ready .about-photo,
+  .reveal-ready .about-person-details,
   .reveal-ready .closing-mini-photo,
   .reveal-ready .closing-hero-photo-wrap,
   .reveal-ready .closing-mini-photo figcaption,
