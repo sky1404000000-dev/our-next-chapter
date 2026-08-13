@@ -80,7 +80,7 @@ export const weddingData = {
     groomMessage:
       '같은 계절을 지나며 서로에게 \n가장 편안한 사람이 되었습니다.\n이제 부부라는 이름으로 새로운 페이지를 시작하려 합니다.\n소중한 분들을 모시고 그 첫날을 함께 나누고 싶습니다.',
     brideMessage:
-      '닮고 싶은 차분함과 든든함을 가진 사람을 만나\n즐겁고 편안한 추억들을 함께 쌓아왔습니다.\n이제는 많은 사람들 앞에서\n평생 서로의 편이 되기로 약속하려 합니다.\n저희의 새로운 시작에 따뜻한 축하를 보내주세요.'
+      '차분하고 든든한 사람을 만나\n소중한 추억들을 함께 쌓아왔습니다.\n이제는 많은 사람들 앞에서\n평생 서로의 편이 되기로 약속하려 합니다.\n저희의 새로운 시작에 따뜻한 축하를 보내주세요.'
   },
   calendar: {
     date: '2026-10-10T12:30:00+09:00',
@@ -249,7 +249,7 @@ export const weddingData = {
         parents: '김응국 · 이남순의 아들',
         birth: '1997년 2월 출생',
         note: 'ESTJ 가끔은 F주장러',
-        image: '/images/people/donggyun.png',
+        image: '/images/people/our1.jpg',
         imageAlt: '신랑 동균 사진'
       },
       {
@@ -258,7 +258,7 @@ export const weddingData = {
         parents: '김창성 · 이춘희의 딸',
         birth: '1998년 9월 출생',
         note: 'ENFP 가끔은 T주장러',
-        image: '/images/people/eunjin.png',
+        image: '/images/people/our2.jpg',
         imageAlt: '신부 은진 사진'
       }
     ] as AboutPerson[]

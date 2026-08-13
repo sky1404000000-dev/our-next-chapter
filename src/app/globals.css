@@ -849,24 +849,91 @@ button {
 
 .about-profile-card {
   display: grid;
-  gap: 18px;
+  gap: 70px;
+  padding: 30px 14px 34px;
   border-style: dashed;
 }
 
+.about-section {
+  padding-top: 96px;
+  padding-bottom: 108px;
+}
+
 .about-person {
-  text-align: center;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
+  gap: 14px;
+  align-items: center;
+  text-align: left;
+}
+
+.about-person:first-child::after {
+  content: "♡";
+  position: absolute;
+  top: calc(100% + 35px);
+  left: 50%;
+  z-index: 2;
+  color: #d96663;
+  font-family: var(--script);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  text-shadow: 0 4px 9px rgba(196, 76, 72, 0.14);
 }
 
 .about-photo {
-  aspect-ratio: 1 / 1;
+  position: relative;
+  left: 8px;
+  aspect-ratio: 2 / 3;
   border-radius: 8px;
-  border: 8px solid #fffef9;
+  border: 6px solid #fffef9;
   box-shadow: var(--shadow-soft);
+  transform: rotate(-2deg);
+  transform-origin: center;
+}
+
+.about-person:nth-child(even) .about-photo {
+  right: 8px;
+  left: auto;
+  grid-column: 2;
+  grid-row: 1;
+  transform: rotate(2deg);
+}
+
+.about-person:nth-child(even) .about-person-details {
+  right: 8px;
+  left: auto;
+  grid-column: 1;
+  grid-row: 1;
+  text-align: right;
+}
+
+.about-person:nth-child(even) {
+  grid-template-columns: minmax(0, 9fr) minmax(0, 11fr);
 }
 
 .about-person h3 {
-  margin-top: 14px;
-  font-size: 22px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.about-person-details {
+  position: relative;
+  left: 8px;
+  min-width: 0;
+}
+
+.about-profile-meta {
+  margin: 9px 0 0;
+  line-height: 1.6;
+}
+
+.about-profile-text {
+  margin: 11px 0 0;
+  line-height: 1.6;
 }
 
 .about-person h3 span,

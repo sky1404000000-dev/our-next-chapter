@@ -16,19 +16,22 @@ export default function AboutUs() {
             <Image
               src={person.image}
               alt={person.imageAlt}
-              width={520}
+              width={390}
               height={520}
+              sizes="(max-width: 520px) 50vw, 240px"
               className="about-photo"
             />
-            <h3>
-              <span>{person.role}</span> {person.name}
-            </h3>
-            <p className="about-profile-meta">{person.parents}</p>
-            <p className="about-profile-text">
-              {person.birth}
-              <br />
-              {person.note}
-            </p>
+            <div className="about-person-details">
+              <h3>
+                <span>{person.role}</span> {person.name}
+              </h3>
+              <p className="about-profile-meta">{person.parents}</p>
+              <p className="about-profile-text">
+                {person.birth}
+                <br />
+                {person.note}
+              </p>
+            </div>
           </article>
         ))}
       </div>
