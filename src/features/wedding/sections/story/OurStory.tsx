@@ -168,7 +168,7 @@ export default function OurStory() {
         <p className={styles.archiveCaption}>Milestone Documentation. These moments, carefully documented and lovingly preserved.</p>
 
         <button type="button" className={styles.openButton} onClick={openStory}>
-          이야기 시작하기
+          이야기 보러가기
           <span aria-hidden>
             <ArrowRight />
           </span>

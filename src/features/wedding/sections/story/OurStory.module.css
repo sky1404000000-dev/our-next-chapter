@@ -111,18 +111,28 @@
 }
 
 .openButton {
-  width: auto;
+  width: max-content;
   min-height: 42px;
-  margin: 26px 0 0 auto;
+  margin: 26px 0 0;
   padding: 0;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
+  border: 0;
   background: transparent;
   color: var(--ink);
   font-family: var(--sans);
   font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  animation: storyButtonNudge 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.openButton:hover,
+.openButton:focus-visible {
+  animation-play-state: paused;
+  transform: translateX(4px);
 }
 
 .openButton span {
@@ -139,6 +149,17 @@
 .openButton svg {
   width: 15px;
   height: 15px;
+}
+
+@keyframes storyButtonNudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
 }
 
 .modal {
@@ -646,5 +667,9 @@
     transform: none;
     filter: none;
     transition: none;
+  }
+
+  .openButton {
+    animation: none;
   }
 }
