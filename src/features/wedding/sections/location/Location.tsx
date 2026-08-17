@@ -246,7 +246,7 @@ export default function Location() {
             </div>
 
             <p className={styles.guideNote}>
-              더퀸 전용 주차장은 혼주 및 행사 관계자 우선으로 운영됩니다.
+              더 퀸 전용 주차장은 혼주 및 행사 관계자 우선으로 운영됩니다.
               <br />
               주말에는 주차장이 혼잡할 수 있으니 여유 있게 도착해 주세요.
             </p>

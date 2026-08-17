@@ -58,7 +58,7 @@ export type AboutPerson = {
 export const weddingData = {
   metadata: {
     title: '동균이와 은진이의 결혼식에 초대합니다',
-    description: '2026년 10월 10일, 포항 더퀸에서 은진과 동균이 결혼합니다.',
+    description: '2026년 10월 10일, 포항 더 퀸에서 은진과 동균이 결혼합니다.',
     ogImage: '/images/hero/cover.jpg'
   },
   hero: {
@@ -216,16 +216,16 @@ export const weddingData = {
     title: '예식 안내',
     date: '2026년 10월 10일 토요일',
     time: '오후 12시 30분',
-    venue: '포항 더퀸',
+    venue: '포항 더 퀸',
     venueSub: '(구 UA컨벤션)',
-    introVenue: '포항 더퀸 크라운홀, 5층',
+    introVenue: '포항 더 퀸 크라운홀, 5층',
     address: '경북 포항시 남구 대이로 18'
   },
   location: {
     title: '오시는 길',
     mapImage: '/images/location/pohang.png',
-    mapAlt: '포항 더퀸 주변 지도',
-    mapDescription: '포항 더퀸',
+    mapAlt: '포항 더 퀸 주변 지도',
+    mapDescription: '포항 더 퀸',
     phone: 'Tel. 054-283-1111',
     coordinates: {
       lat: 36.0174244,
@@ -331,7 +331,7 @@ export const weddingData = {
   },
   share: {
     title: '김동균 ♡ 김은진 결혼식에 초대합니다',
-    description: '10월 10일 토요일 오후 12시 30분, 포항 더퀸 5층',
+    description: '10월 10일 토요일 오후 12시 30분, 포항 더 퀸 5층',
     image: '/images/hero/cover.jpg'
   }
 };
