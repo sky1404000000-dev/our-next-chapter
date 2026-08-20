@@ -280,7 +280,7 @@ export const weddingData = {
       people: [
         { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '김은진' },
         { relation: '아버지', bank: '하나은행', number: '456-910123-45607', holder: '김창성' },
-        { relation: '어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '이춘자' }
+        { relation: '어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '이춘희' }
       ]
     } as AccountGroup
   },

@@ -20,6 +20,12 @@ export default function WeddingOpening() {
   const [isLeaving, setIsLeaving] = useState(false);
 
   useEffect(() => {
+    if (isVisible) return;
+
+    window.dispatchEvent(new Event('wedding-opening-complete'));
+  }, [isVisible]);
+
+  useEffect(() => {
     if (!isVisible) return;
 
     const previousOverflow = document.body.style.overflow;

@@ -21,3 +21,111 @@
   width: 15px;
   height: 15px;
 }
+
+.musicPrompt {
+  position: fixed;
+  z-index: 42;
+  top: 70px;
+  left: 50%;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  align-items: center;
+  width: min(386px, calc(100vw - 36px));
+  min-height: 66px;
+  padding: 10px 13px 10px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  background: rgba(249, 250, 245, 0.83);
+  color: #4d584a;
+  text-align: left;
+  box-shadow: 0 12px 30px rgba(60, 70, 55, 0.14);
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+  animation: musicPromptIn 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.musicPromptLeaving {
+  pointer-events: none;
+  animation: musicPromptOut 420ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+.promptIcon {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(112, 133, 103, 0.13);
+  color: #728369;
+}
+
+.promptIcon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.promptCopy {
+  display: grid;
+  min-width: 0;
+  gap: 2px;
+  padding-right: 8px;
+}
+
+.promptCopy strong {
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.promptCopy > span {
+  overflow: hidden;
+  color: #7a8177;
+  font-size: 11px;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.promptAction {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: #718269;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+@keyframes musicPromptIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -16px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+@keyframes musicPromptOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate(-50%, -10px) scale(0.985);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .musicPrompt,
+  .musicPromptLeaving {
+    animation-duration: 1ms;
+  }
+}
