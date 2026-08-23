@@ -3,12 +3,13 @@ import { weddingData } from '@/data/weddingData';
 
 export default function AboutUs() {
   const { aboutUs } = weddingData;
+  const subtitle = 'subtitle' in aboutUs && typeof aboutUs.subtitle === 'string' ? aboutUs.subtitle : undefined;
 
   return (
     <section className="section about-section" id="about-us">
       <span className="section-kicker">{aboutUs.kicker}</span>
       <h2>{aboutUs.title}</h2>
-      <p className="section-description">{aboutUs.subtitle}</p>
+      {subtitle && <p className="section-description">{subtitle}</p>}
 
       <div className="about-profile-card">
         {aboutUs.people.map((person) => (
