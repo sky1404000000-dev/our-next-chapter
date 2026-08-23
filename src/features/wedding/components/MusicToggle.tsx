@@ -38,7 +38,7 @@ export default function MusicToggle({ tracks }: MusicToggleProps) {
       promptTimerRef.current = window.setTimeout(() => {
         setPromptPhase('leaving');
         promptExitTimerRef.current = window.setTimeout(() => setPromptPhase('hidden'), 420);
-      }, 5600);
+      }, 3600);
     };
 
     window.addEventListener('wedding-opening-complete', showMusicPrompt);
