@@ -18,6 +18,27 @@
   height: 21px;
 }
 
+.scrollTop {
+  position: fixed;
+  z-index: 40;
+  right: max(calc(23px + 100% - 100vw), calc((100vw - var(--shell-width)) / 2 + 23px + 100% - 100vw));
+  bottom: 88px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(143, 143, 143, 0.86);
+  color: #fffef9;
+  box-shadow: 0 8px 18px rgba(47, 42, 37, 0.12);
+}
+
+.scrollTop svg {
+  width: 16px;
+  height: 16px;
+}
+
 .panel {
   position: fixed;
   top: 0;

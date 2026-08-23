@@ -29,7 +29,8 @@ export default function AboutUs() {
               <p className="about-profile-text">
                 {person.birth}
                 <br />
-                {person.note}
+                <span>{person.note}</span>
+                {person.note2 && <span className="about-profile-note2">{person.note2}</span>}
               </p>
             </div>
           </article>

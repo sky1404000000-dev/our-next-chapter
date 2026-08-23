@@ -7,9 +7,9 @@ export type StoryItem = {
 
 export type GalleryItem = {
   image: string;
-  caption: string;
-  description: string;
-  alt: string;
+  caption?: string;
+  description?: string;
+  alt?: string;
 };
 
 export type AccountPerson = {
@@ -22,15 +22,6 @@ export type AccountPerson = {
 export type AccountGroup = {
   side: string;
   people: AccountPerson[];
-};
-
-export type PohangTip = {
-  label: string;
-  title: string;
-  description: string;
-  image?: string;
-  link?: string;
-  feature?: string;
 };
 
 export type CalendarDay = {
@@ -51,6 +42,7 @@ export type AboutPerson = {
   parents: string;
   birth: string;
   note: string;
+  note2?: string;
   image: string;
   imageAlt: string;
 };
@@ -78,9 +70,9 @@ export const weddingData = {
     image: '/images/invitation/invite.png',
     imageAlt: '은진과 동균의 초대 사진',
     groomMessage:
-      '같은 계절을 지나며 서로에게 \n가장 편안한 사람이 되었습니다.\n이제 부부라는 이름으로 새로운 페이지를 시작하려 합니다.\n소중한 분들을 모시고 그 첫날을 함께 나누고 싶습니다.',
+      '나의 절반을 주어도\n 아깝지 않을 사람을 만났습니다.\n이제 부부라는 이름으로 새로운 페이지를 시작하려 합니다.\n소중한 분들을 모시고 그 첫날을 함께 나누고 싶습니다.',
     brideMessage:
-      '차분하고 든든한 사람을 만나\n소중한 추억들을 함께 쌓아왔습니다.\n이제는 많은 사람들 앞에서\n평생 서로의 편이 되기로 약속하려 합니다.\n저희의 새로운 시작에 따뜻한 축하를 보내주세요.'
+      '절반이 아니라 전부를 주어도\n아깝지 않을 사람을 만났습니다.\n이제 그 사람과 평생 서로의 편이 되려 합니다.\n저희의 첫걸음을 함께 축복해 주세요.'
   },
   calendar: {
     date: '2026-10-10T12:30:00+09:00',
@@ -128,7 +120,7 @@ export const weddingData = {
   story: {
     title: '우리의 이야기',
     kicker: 'OUR STORY',
-    intro: '결혼을 앞두고 서로에게 남기고 싶은 마음을 짧은 편지처럼 담았습니다.',
+    intro: '결혼까지의 여정을 짧게 담아보았습니다.',
     coverImage: '/images/story/story_cover.jpg',
     coverAlt: '은진과 동균의 추억 사진',
     buttonLabel: '우리 이야기 읽어보기',
@@ -158,57 +150,94 @@ export const weddingData = {
     items: [
       {
         date: '2019.11.03',
-        title: '처음 만난 날',
-        description: '작은 인연이 천천히 자라 서로의 계절이 되었습니다.',
-        image: '/images/gallery/1.png'
+        title: '우리의 시작',
+        description: '같은 학교, 같은 과 CC로 만나 여정을 시작하였습니다.',
+        image: '/images/story/1.jpg'
       },
       {
-        date: '함께한 시간',
-        title: '친구에서 연인으로',
-        description: '가장 편안한 사람, 가장 소중한 사람이 되었습니다.',
-        image: '/images/gallery/2.png'
+        date: '2020',
+        title: '졸업은 해야지',
+        description: '졸업을 위해 학업에 집중하는 시간을 가졌습니다.',
+        image: '/images/story/2.jpg'
+      },
+      {
+        date: '2021',
+        title: '함께하는 인턴생활',
+        description: '취업에 필요한 자격증 취득 및 공부를 함께 하였습니다.',
+        image: '/images/story/3.jpg'
+      },
+      {
+        date: '2022',
+        title: '우리는 직장인',
+        description: '같은 시기에 취업하여 함께 사회초년생이 되었습니다.',
+        image: '/images/story/4.jpg'
+      },
+      {
+        date: '2023',
+        title: '일본 달라달라병의 시작',
+        description: '사귀고 가본 첫 해외여행 오사카! 일본 맥주 달라달라!',
+        image: '/images/story/5.jpg'
+      },
+      {
+        date: '2024',
+        title: '둘만의 여행 전성기',
+        description: '여행을 많이 다니며 잊지못할 추억들을 쌓았습니다.',
+        image: '/images/story/6.jpg'
+      },
+      {
+        date: '2025',
+        title: '등가교환 성공',
+        description: '서로 프로포즈를 하며 남은 인생을 함께하기로 하였습니다.',
+        image: '/images/story/7.jpg'
       },
       {
         date: '2026.10.10',
         title: '우리의 다음 장',
-        description: '포항에서 부부라는 이름으로 새로운 이야기를 시작합니다.',
-        image: '/images/gallery/3.png'
+        description: '이제 여러분들 앞에서 \n부부라는 이름으로 새로운 이야기를 시작합니다.',
+        image: '/images/story/8.jpg'
       }
     ] as StoryItem[]
   },
   gallery: {
-    title: '우리의 순간들',
-    initialCount: 4,
+    title: '웨딩 갤러리',
+    initialCount: 5,
     items: [
+      // 제목/설명을 보여주고 싶은 사진만 아래처럼 선택으로 추가하면 됩니다.
+      // {
+      //   image: '/images/gallery/1.png',
+      //   caption: '처음처럼 다정하게',
+      //   description: '처음 마음을 오래 간직하고 싶은 두 사람의 사진입니다.',
+      //   alt: '은진과 동균의 추억 사진 1'
+      // },
       {
-        image: '/images/gallery/1.png',
-        caption: '처음처럼 다정하게',
-        description: '처음 마음을 오래 간직하고 싶은 두 사람의 사진입니다.',
-        alt: '은진과 동균의 추억 사진 1'
+        image: '/images/gallery/1.png'
       },
       {
-        image: '/images/gallery/2.png',
-        caption: '편안한 하루',
-        description: '함께라서 더 오래 기억하고 싶은 평범한 하루입니다.',
-        alt: '은진과 동균의 추억 사진 2'
+        image: '/images/gallery/2.png'
       },
       {
-        image: '/images/gallery/3.png',
-        caption: '같은 방향',
-        description: '서로의 속도를 맞추며 같은 내일을 약속합니다.',
-        alt: '은진과 동균의 추억 사진 3'
+        image: '/images/gallery/3.png'
       },
       {
-        image: '/images/gallery/4.png',
-        caption: '웃음이 닮아가는 우리',
-        description: '함께 웃는 시간이 많아질수록 마음도 더 가까워졌습니다.',
-        alt: '은진과 동균의 추억 사진 4'
+        image: '/images/gallery/4.png'
       },
       {
-        image: '/images/gallery/5.png',
-        caption: '계절을 건너',
-        description: '여러 계절을 지나 이제 새로운 계절을 시작합니다.',
-        alt: '은진과 동균의 추억 사진 5'
+        image: '/images/gallery/5.png'
+      },
+      {
+        image: '/images/gallery/1.png'
+      },
+      {
+        image: '/images/gallery/2.png'
+      },
+      {
+        image: '/images/gallery/3.png'
+      },
+      {
+        image: '/images/gallery/4.png'
+      },
+      {
+        image: '/images/gallery/5.png'
       }
     ] as GalleryItem[]
   },
@@ -239,16 +268,17 @@ export const weddingData = {
       '건물 내 주차장을 이용하실 수 있습니다.\n주말 교통 상황에 따라 여유 있게 도착해 주세요.'
   },
   aboutUs: {
-    kicker: 'ABOUT US',
+    kicker: 'PROFILE',
     title: '두 사람을 소개합니다',
-    subtitle: '하나의 마음으로 이어지는 작은 기록',
+    // subtitle: '하나의 마음으로 이어지는 작은 기록',
     people: [
       {
         role: '신랑',
         name: '김동균',
         parents: '김응국 · 이남순의 아들',
         birth: '1997년 2월 출생',
-        note: 'ESTJ 가끔은 F주장러',
+        note: '#ESTJ #광양남자',
+        note2: '다정한 남편이 되겠습니다.',
         image: '/images/people/our1.jpg',
         imageAlt: '신랑 동균 사진'
       },
@@ -257,7 +287,8 @@ export const weddingData = {
         name: '김은진',
         parents: '김창성 · 이춘희의 딸',
         birth: '1998년 9월 출생',
-        note: 'ENFP 가끔은 T주장러',
+        note: '#ENFP #포항여자',
+        note2: '현명한 아내가 되겠습니다.',
         image: '/images/people/our2.jpg',
         imageAlt: '신부 은진 사진'
       }
@@ -286,41 +317,7 @@ export const weddingData = {
   },
   pohangGuide: {
     title: '포항 가이드',
-    intro: '멀리서 와주시는 분들을 위해 예식 전후 들르기 좋은 곳을 모았습니다.',
-    items: [
-      {
-        label: '바다',
-        title: '영일대 해수욕장',
-        description: '포항 바다를 가장 편하게 만날 수 있는 대표 명소입니다.',
-        feature: '바다, 산책, 사진',
-        image: '/images/guide/yeongildae.svg',
-        link: 'https://map.naver.com/'
-      },
-      {
-        label: '시장',
-        title: '죽도시장',
-        description: '포항의 활기와 해산물을 함께 느낄 수 있는 전통 시장입니다.',
-        feature: '해산물, 로컬 맛집',
-        image: '/images/guide/market.svg',
-        link: 'https://map.naver.com/'
-      },
-      {
-        label: '풍경',
-        title: '스페이스워크',
-        description: '하늘을 걷는 듯한 독특한 풍경을 남길 수 있는 공간입니다.',
-        feature: '전망, 산책, 사진',
-        image: '/images/guide/spacewalk.svg',
-        link: 'https://map.naver.com/'
-      },
-      {
-        label: '마을',
-        title: '구룡포',
-        description: '시간이 천천히 흐르는 듯한 해안 마을입니다.',
-        feature: '드라이브, 바다',
-        image: '/images/guide/guryongpo.svg',
-        link: 'https://map.naver.com/'
-      }
-    ] as PohangTip[]
+    intro: '연휴기간 포항에서 가볼만한 핫플레이스들을 담았습니다.'
   },
   closing: {
     image: '/images/closing/final/4.png',

@@ -201,7 +201,7 @@ export default function OurStory() {
               <div className={styles.timeline}>
                 {story.items.map((item, index) => (
                   <TimelineItem
-                    key={`${item.date}-${item.title}`}
+                    key={`${item.date}-${item.title}-${index}`}
                     item={item}
                     reverse={index % 2 === 1}
                   />

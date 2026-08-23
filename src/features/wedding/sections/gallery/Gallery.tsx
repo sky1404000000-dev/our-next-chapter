@@ -6,14 +6,8 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { createPortal } from 'react-dom';
 import { type GalleryItem, weddingData } from '@/data/weddingData';
 
-const pageSize = 5;
+const pageSize = weddingData.gallery.initialCount;
 const closeAnimationDuration = 280;
-const demoGalleryItems: GalleryItem[] = [
-  ...weddingData.gallery.items,
-  ...weddingData.gallery.items.map((item) => ({ ...item, caption: `${item.caption} · 두번째` })),
-  ...weddingData.gallery.items.map((item) => ({ ...item, caption: `${item.caption} · 세번째` })),
-  ...weddingData.gallery.items.slice(0, 4).map((item) => ({ ...item, caption: `${item.caption} · 네번째` }))
-];
 
 export default function Gallery() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -24,7 +18,7 @@ export default function Gallery() {
   const [isClosing, setIsClosing] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { gallery } = weddingData;
-  const galleryItems = demoGalleryItems;
+  const galleryItems = gallery.items;
   const selectedItem = selectedIndex === null ? null : galleryItems[selectedIndex];
   const pages = useMemo(() => {
     const result: GalleryItem[][] = [];
@@ -193,12 +187,18 @@ export default function Gallery() {
                 return (
                   <button
                     type="button"
-                    className={`gallery-polaroid gallery-polaroid-${itemIndex + 1}`}
-                    key={`${item.image}-${item.caption}-${index}`}
+                    className={`gallery-polaroid gallery-polaroid-${itemIndex + 1} ${item.caption ? 'gallery-polaroid-captioned' : ''}`}
+                    key={`${item.image}-${item.caption ?? 'photo'}-${index}`}
                     onClick={() => openDetail(index)}
                   >
-                    <Image src={item.image} alt={item.alt} width={360} height={360} className="gallery-polaroid-image" />
-                    <span className="gallery-polaroid-caption">{item.caption}</span>
+                    <Image
+                      src={item.image}
+                      alt={item.alt ?? `웨딩 갤러리 사진 ${index + 1}`}
+                      width={360}
+                      height={360}
+                      className="gallery-polaroid-image"
+                    />
+                    {item.caption && <span className="gallery-polaroid-caption">{item.caption}</span>}
                   </button>
                 );
               })}
@@ -228,7 +228,7 @@ export default function Gallery() {
             className={`gallery-modal ${isClosing ? 'gallery-modal-closing' : ''}`}
             role="dialog"
             aria-modal="true"
-            aria-label={selectedItem.caption}
+            aria-label={selectedItem.caption ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
           >
             <button type="button" className="gallery-modal-backdrop" onClick={closeDetail}>
               <span className="sr-only">닫기</span>
@@ -251,15 +251,17 @@ export default function Gallery() {
               <div className={`gallery-modal-card gallery-modal-card-${detailDirection}`} key={selectedIndex}>
                 <Image
                   src={selectedItem.image}
-                  alt={selectedItem.alt}
+                  alt={selectedItem.alt ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
                   width={760}
                   height={900}
                   className="gallery-modal-image"
                 />
-                <div className="gallery-modal-text">
-                  <h3>{selectedItem.caption}</h3>
-                  <p>{selectedItem.description}</p>
-                </div>
+                {(selectedItem.caption || selectedItem.description) && (
+                  <div className="gallery-modal-text">
+                    {selectedItem.caption && <h3>{selectedItem.caption}</h3>}
+                    {selectedItem.description && <p>{selectedItem.description}</p>}
+                  </div>
+                )}
               </div>
 
               <button

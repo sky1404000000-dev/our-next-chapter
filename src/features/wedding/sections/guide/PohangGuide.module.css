@@ -377,20 +377,6 @@ a.placeImageWrap:active .placeImage {
   padding: 14px 14px 15px;
 }
 
-.placeMeta {
-  display: inline-flex;
-  width: fit-content;
-  padding: 4px 9px 3px;
-  border: 1px solid rgba(237, 200, 79, 0.5);
-  border-radius: 999px;
-  background: rgba(255, 226, 122, 0.42);
-  color: #5f4d12;
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.6;
-}
-
 .placeTags {
   display: flex;
   flex-wrap: wrap;
@@ -422,6 +408,7 @@ a.placeImageWrap:active .placeImage {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
 .placeTip {
@@ -435,6 +422,7 @@ a.placeImageWrap:active .placeImage {
   font-family: var(--sans);
   font-size: 12px;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
 .placeTip strong {

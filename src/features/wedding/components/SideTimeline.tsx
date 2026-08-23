@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
+import { ChevronUp, Menu, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import ShareActions from './ShareActions';
 import styles from './SideTimeline.module.css';
@@ -78,8 +78,16 @@ export default function SideTimeline({ showAccount }: SideTimelineProps) {
     };
   }, [visibleItems]);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
+      <button type="button" className={styles.scrollTop} onClick={scrollToTop} aria-label="맨 위로 이동">
+        <ChevronUp aria-hidden />
+      </button>
+
       <button type="button" className={styles.toggle} onClick={() => setIsOpen(true)} aria-label="메뉴 열기">
         <Menu aria-hidden />
       </button>
