@@ -41,7 +41,14 @@ const specialElite = localFont({
   variable: '--font-special-elite'
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000');
+const ogImageUrl = `${weddingData.metadata.ogImage}?v=20260824`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -58,7 +65,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: weddingData.metadata.ogImage,
+        url: ogImageUrl,
         width: 1123,
         height: 1587,
         alt: weddingData.metadata.title
@@ -69,7 +76,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: weddingData.metadata.title,
     description: weddingData.metadata.description,
-    images: [weddingData.metadata.ogImage]
+    images: [ogImageUrl]
   }
 };
 
