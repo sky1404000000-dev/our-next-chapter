@@ -31,7 +31,7 @@ export function createWeddingMetadata(pathname: '/' | '/with-love'): Metadata {
         {
           url: imageUrl,
           width: 1080,
-          height: 1080,
+          height: 540,
           alt: weddingData.share.title
         }
       ]

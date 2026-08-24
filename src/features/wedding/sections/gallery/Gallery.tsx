@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { galleryItems, type GalleryItem } from '@/data/editableContent';
@@ -14,6 +15,7 @@ export default function Gallery() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const carouselSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const detailDragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [detailDirection, setDetailDirection] = useState<'prev' | 'next'>('next');
   const [isClosing, setIsClosing] = useState(false);
@@ -123,6 +125,37 @@ export default function Gallery() {
     }, closeAnimationDuration);
   }, [isClosing]);
 
+  const handleDetailPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!event.isPrimary || event.button !== 0) return;
+
+    detailDragStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      pointerId: event.pointerId
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleDetailPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const start = detailDragStartRef.current;
+    if (!start || start.pointerId !== event.pointerId) return;
+
+    detailDragStartRef.current = null;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
+
+    if (!isHorizontalSwipe) return;
+    moveDetail(deltaX < 0 ? 'next' : 'prev');
+  };
+
+  const handleDetailPointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (detailDragStartRef.current?.pointerId !== event.pointerId) return;
+    detailDragStartRef.current = null;
+  };
+
   useEffect(() => {
     return () => {
       if (carouselSettleTimerRef.current) clearTimeout(carouselSettleTimerRef.current);
@@ -230,52 +263,53 @@ export default function Gallery() {
             aria-modal="true"
             aria-label={selectedItem.caption ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
           >
-            <button type="button" className="gallery-modal-backdrop" onClick={closeDetail}>
-              <span className="sr-only">닫기</span>
-            </button>
+            <button type="button" className="gallery-modal-backdrop" onClick={closeDetail} aria-label="닫기" />
 
             <div className="gallery-modal-content">
               <button type="button" className="gallery-close" onClick={closeDetail} aria-label="닫기">
                 <X aria-hidden />
               </button>
 
-              <button
-                type="button"
-                className="gallery-modal-arrow gallery-modal-prev"
-                onClick={() => moveDetail('prev')}
-                aria-label="이전 사진"
+              <div
+                className={`gallery-modal-card gallery-modal-card-${detailDirection}`}
+                key={selectedIndex}
+                onPointerDown={handleDetailPointerDown}
+                onPointerUp={handleDetailPointerUp}
+                onPointerCancel={handleDetailPointerCancel}
               >
-                <ChevronLeft aria-hidden />
-              </button>
-
-              <div className={`gallery-modal-card gallery-modal-card-${detailDirection}`} key={selectedIndex}>
                 <Image
                   src={selectedItem.image}
                   alt={selectedItem.alt ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
                   width={760}
                   height={900}
                   className="gallery-modal-image"
+                  draggable={false}
                 />
-                {(selectedItem.caption || selectedItem.description) && (
-                  <div className="gallery-modal-text">
-                    {selectedItem.caption && <h3>{selectedItem.caption}</h3>}
-                    {selectedItem.description && <p>{selectedItem.description}</p>}
-                  </div>
-                )}
               </div>
 
-              <button
-                type="button"
-                className="gallery-modal-arrow gallery-modal-next"
-                onClick={() => moveDetail('next')}
-                aria-label="다음 사진"
-              >
-                <ChevronRight aria-hidden />
-              </button>
+              <div className="gallery-modal-controls" aria-label="사진 이동">
+                <button
+                  type="button"
+                  className="gallery-modal-arrow gallery-modal-prev"
+                  onClick={() => moveDetail('prev')}
+                  aria-label="이전 사진"
+                >
+                  <ChevronLeft aria-hidden />
+                </button>
 
-              <span className="gallery-modal-count">
-                {String((selectedIndex ?? 0) + 1).padStart(2, '0')} / {String(galleryItems.length).padStart(2, '0')}
-              </span>
+                <span className="gallery-modal-count">
+                  {String((selectedIndex ?? 0) + 1).padStart(2, '0')} / {String(galleryItems.length).padStart(2, '0')}
+                </span>
+
+                <button
+                  type="button"
+                  className="gallery-modal-arrow gallery-modal-next"
+                  onClick={() => moveDetail('next')}
+                  aria-label="다음 사진"
+                >
+                  <ChevronRight aria-hidden />
+                </button>
+              </div>
             </div>
           </div>,
           document.body

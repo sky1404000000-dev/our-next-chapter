@@ -45,7 +45,7 @@ export const weddingData = {
   metadata: {
     title: '동균이와 은진이의 결혼식에 초대합니다',
     description: '2026년 10월 10일, 포항 더 퀸에서 은진과 동균이 결혼합니다.',
-    ogImage: '/images/share/share.png'
+    ogImage: '/images/share/share_2.png'
   },
   hero: {
     image: '/images/hero/wedding-photo.jpg',
