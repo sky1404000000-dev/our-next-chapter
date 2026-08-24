@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { type GalleryItem, weddingData } from '@/data/weddingData';
+import { galleryItems, type GalleryItem } from '@/data/editableContent';
+import { weddingData } from '@/data/weddingData';
 
 const pageSize = weddingData.gallery.initialCount;
 const closeAnimationDuration = 280;
@@ -18,7 +19,6 @@ export default function Gallery() {
   const [isClosing, setIsClosing] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { gallery } = weddingData;
-  const galleryItems = gallery.items;
   const selectedItem = selectedIndex === null ? null : galleryItems[selectedIndex];
   const pages = useMemo(() => {
     const result: GalleryItem[][] = [];
@@ -28,7 +28,7 @@ export default function Gallery() {
     }
 
     return result;
-  }, [galleryItems]);
+  }, []);
 
   const displayPages = useMemo(() => {
     const originals = pages.map((items, logicalPage) => ({ items, logicalPage }));
@@ -103,7 +103,7 @@ export default function Gallery() {
       if (direction === 'next') return current === lastIndex ? 0 : current + 1;
       return current === 0 ? lastIndex : current - 1;
     });
-  }, [galleryItems.length, isClosing]);
+  }, [isClosing]);
 
   const openDetail = (index: number) => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);

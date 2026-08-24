@@ -1,0 +1,424 @@
+.adminPage {
+  min-height: 100vh;
+  padding: 36px clamp(18px, 4vw, 56px) 80px;
+  background: #f4f5f1;
+  color: #2d332d;
+  font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  max-width: 1180px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.header span {
+  color: #66805f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.header h1 {
+  margin: 7px 0 5px;
+  font-size: clamp(30px, 4vw, 44px);
+  letter-spacing: -0.04em;
+}
+
+.header p,
+.sectionHeading p {
+  margin: 0;
+  color: #747b73;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.saveButton,
+.uploadButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 12px;
+  background: #5f7758;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.saveButton:hover,
+.uploadButton:hover {
+  transform: translateY(-1px);
+}
+
+.saveButton:disabled {
+  background: #a9afa6;
+  cursor: default;
+  transform: none;
+}
+
+.saveButton svg,
+.uploadButton svg {
+  width: 17px;
+  height: 17px;
+}
+
+.uploadButton input,
+.placeImage label input {
+  display: none;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  max-width: 1180px;
+  min-height: 42px;
+  margin: 24px auto 14px;
+  padding: 10px 14px;
+  gap: 9px;
+  border: 1px solid #dde1da;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #626960;
+  font-size: 13px;
+}
+
+.dirtyDot,
+.savedDot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+}
+
+.dirtyDot { background: #e59a47; }
+.savedDot { background: #70a568; }
+
+.tabs {
+  display: flex;
+  max-width: 1180px;
+  margin: 0 auto 18px;
+  padding: 5px;
+  gap: 5px;
+  border-radius: 13px;
+  background: #e4e7e0;
+}
+
+.tabs button {
+  min-height: 42px;
+  flex: 1;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #687067;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tabs button span,
+.folderTabs button span {
+  display: inline-grid;
+  min-width: 22px;
+  height: 22px;
+  margin-left: 7px;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(68, 82, 64, 0.1);
+  font-size: 11px;
+}
+
+.tabs .activeTab {
+  background: #fff;
+  color: #354332;
+  box-shadow: 0 3px 12px rgba(51, 61, 49, 0.08);
+}
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 30px);
+  border: 1px solid #e0e3dc;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(55, 64, 52, 0.07);
+}
+
+.sectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.sectionHeading h2 {
+  margin: 0 0 5px;
+  font-size: 23px;
+  letter-spacing: -0.035em;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.galleryCard,
+.placeEditor {
+  border: 1px solid #e6e8e3;
+  border-radius: 14px;
+  background: #fbfcfa;
+}
+
+.galleryCard {
+  padding: 12px;
+}
+
+.imagePreview {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 10px;
+  background: #edf0ea;
+}
+
+.imagePreview img,
+.placeImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imagePreview > span {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(30, 36, 29, 0.72);
+  color: #fff;
+  font-size: 12px;
+}
+
+.inlineActions {
+  display: flex;
+  margin: 10px 0;
+  gap: 6px;
+}
+
+.inlineActions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 10px;
+  gap: 5px;
+  border: 1px solid #dfe3dc;
+  border-radius: 8px;
+  background: #fff;
+  color: #566052;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.inlineActions button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.inlineActions button svg {
+  width: 15px;
+  height: 15px;
+}
+
+.inlineActions .deleteButton {
+  margin-left: auto;
+  border-color: #efd6d2;
+  color: #b0554c;
+}
+
+.galleryCard label,
+.placeEditor label {
+  display: grid;
+  margin-top: 10px;
+  gap: 6px;
+  color: #50584e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.galleryCard label small,
+.placeEditor label small {
+  color: #959b93;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.galleryCard input,
+.galleryCard textarea,
+.placeEditor input,
+.placeEditor textarea {
+  width: 100%;
+  border: 1px solid #dde1da;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+  color: #333a31;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.galleryCard input,
+.placeEditor input {
+  min-height: 40px;
+  padding: 0 11px;
+}
+
+.galleryCard textarea,
+.placeEditor textarea {
+  resize: vertical;
+  padding: 10px 11px;
+  line-height: 1.55;
+}
+
+.galleryCard input:focus,
+.galleryCard textarea:focus,
+.placeEditor input:focus,
+.placeEditor textarea:focus {
+  border-color: #8ba184;
+  box-shadow: 0 0 0 3px rgba(107, 132, 99, 0.11);
+}
+
+.folderTabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 24px;
+  gap: 8px;
+}
+
+.folderTabs button {
+  min-height: 54px;
+  padding: 8px 10px;
+  border: 2px solid transparent;
+  border-radius: 11px;
+  background: var(--admin-folder-color);
+  color: #465044;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.folderTabs .activeFolder {
+  border-color: #53664e;
+  box-shadow: 0 5px 14px rgba(48, 59, 45, 0.12);
+}
+
+.placeList {
+  display: grid;
+  gap: 16px;
+}
+
+.placeEditor {
+  padding: 16px;
+}
+
+.placeTopRow {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 18px;
+}
+
+.placeImage {
+  position: relative;
+  overflow: hidden;
+  min-height: 150px;
+  border-radius: 10px;
+  background: #e9ede6;
+}
+
+.placeImage > span {
+  display: grid;
+  height: 100%;
+  min-height: 150px;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  color: #81897e;
+  font-size: 12px;
+}
+
+.placeImage > span svg {
+  width: 25px;
+  height: 25px;
+}
+
+.placeImage label {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: block;
+  margin: 0;
+  padding: 8px 11px;
+  border-radius: 8px;
+  background: rgba(36, 44, 34, 0.84);
+  color: #fff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.placeMainFields,
+.placeTextFields {
+  display: grid;
+  align-content: start;
+  gap: 4px 12px;
+}
+
+.placeMainFields label {
+  margin-top: 0;
+}
+
+.placeTextFields {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 8px;
+}
+
+.placeTextFields label:last-child {
+  grid-column: 1 / -1;
+}
+
+.spinner {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 760px) {
+  .adminPage { padding: 22px 12px 60px; }
+  .header { align-items: stretch; flex-direction: column; }
+  .saveButton { position: sticky; top: 10px; z-index: 5; }
+  .sectionHeading { align-items: stretch; flex-direction: column; }
+  .folderTabs { grid-template-columns: 1fr 1fr; }
+  .placeTopRow { grid-template-columns: 1fr; }
+  .placeImage { aspect-ratio: 16 / 10; }
+  .placeTextFields { grid-template-columns: 1fr; }
+  .placeTextFields label:last-child { grid-column: auto; }
+}

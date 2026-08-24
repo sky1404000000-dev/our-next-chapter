@@ -5,12 +5,6 @@ export type StoryItem = {
   image?: string;
 };
 
-export type GalleryItem = {
-  image: string;
-  caption?: string;
-  description?: string;
-  alt?: string;
-};
 
 export type AccountPerson = {
   relation: string;
@@ -201,45 +195,6 @@ export const weddingData = {
   gallery: {
     title: '웨딩 갤러리',
     initialCount: 5,
-    items: [
-      // 제목/설명을 보여주고 싶은 사진만 아래처럼 선택으로 추가하면 됩니다.
-      // {
-      //   image: '/images/gallery/1.png',
-      //   caption: '처음처럼 다정하게',
-      //   description: '처음 마음을 오래 간직하고 싶은 두 사람의 사진입니다.',
-      //   alt: '은진과 동균의 추억 사진 1'
-      // },
-      {
-        image: '/images/gallery/1.png'
-      },
-      {
-        image: '/images/gallery/2.png'
-      },
-      {
-        image: '/images/gallery/3.png'
-      },
-      {
-        image: '/images/gallery/4.png'
-      },
-      {
-        image: '/images/gallery/5.png'
-      },
-      {
-        image: '/images/gallery/1.png'
-      },
-      {
-        image: '/images/gallery/2.png'
-      },
-      {
-        image: '/images/gallery/3.png'
-      },
-      {
-        image: '/images/gallery/4.png'
-      },
-      {
-        image: '/images/gallery/5.png'
-      }
-    ] as GalleryItem[]
   },
   weddingInfo: {
     title: '예식 안내',
