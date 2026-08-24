@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import type { PointerEvent as ReactPointerEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { weddingData } from '@/data/weddingData';
 
@@ -9,6 +10,7 @@ export default function EnvelopeIntro() {
   const { hero, invitation, weddingInfo } = weddingData;
   const stageRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const videoDragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const hasPositionedSliderRef = useRef(false);
   const hasEnteredRef = useRef(false);
@@ -109,6 +111,37 @@ export default function EnvelopeIntro() {
     }
   };
 
+  const handleVideoPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!event.isPrimary || event.button !== 0) return;
+
+    videoDragStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      pointerId: event.pointerId
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handleVideoPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const start = videoDragStartRef.current;
+    if (!start || start.pointerId !== event.pointerId || activeVideoIndex === undefined) return;
+
+    videoDragStartRef.current = null;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+
+    const deltaX = event.clientX - start.x;
+    const deltaY = event.clientY - start.y;
+    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
+
+    if (!isHorizontalSwipe) return;
+    moveToVideo(deltaX < 0 ? activeVideoIndex + 1 : activeVideoIndex - 1);
+  };
+
+  const handleVideoPointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (videoDragStartRef.current?.pointerId !== event.pointerId) return;
+    videoDragStartRef.current = null;
+  };
+
   const handleVideoReady = (index: number) => {
     setReadyVideos((currentReadyVideos) => {
       if (currentReadyVideos[index]) return currentReadyVideos;
@@ -137,6 +170,9 @@ export default function EnvelopeIntro() {
                     className="cover-video-slider"
                     ref={sliderRef}
                     onScroll={handleVideoScroll}
+                    onPointerDown={handleVideoPointerDown}
+                    onPointerUp={handleVideoPointerUp}
+                    onPointerCancel={handleVideoPointerCancel}
                     aria-label={`커버 영상 ${hero.videos.length}개`}
                   >
                     {hero.videos.map((video, index) => (
