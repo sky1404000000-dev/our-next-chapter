@@ -18,28 +18,28 @@ export function createWeddingMetadata(pathname: '/' | '/with-love'): Metadata {
 
   return {
     metadataBase: new URL(siteUrl),
-    title: weddingData.metadata.title,
-    description: weddingData.metadata.description,
+    title: weddingData.share.title,
+    description: weddingData.share.description,
     alternates: { canonical: pageUrl },
     openGraph: {
-      title: weddingData.metadata.title,
-      description: weddingData.metadata.description,
+      title: weddingData.share.title,
+      description: weddingData.share.description,
       url: pageUrl,
-      siteName: weddingData.metadata.title,
+      siteName: weddingData.share.title,
       type: 'website',
       images: [
         {
           url: imageUrl,
           width: 1080,
           height: 1080,
-          alt: weddingData.metadata.title
+          alt: weddingData.share.title
         }
       ]
     },
     twitter: {
       card: 'summary_large_image',
-      title: weddingData.metadata.title,
-      description: weddingData.metadata.description,
+      title: weddingData.share.title,
+      description: weddingData.share.description,
       images: [imageUrl]
     }
   };
