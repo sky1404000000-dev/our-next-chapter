@@ -41,7 +41,10 @@ const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
 const hasKakaoKey = Boolean(kakaoKey && kakaoKey !== 'your-kakao-javascript-key');
 
 function getPageUrl() {
-  return window.location.href;
+  const pageUrl = new URL(window.location.href);
+  pageUrl.hash = '';
+  pageUrl.search = '';
+  return pageUrl.toString();
 }
 
 function loadKakaoSdk() {

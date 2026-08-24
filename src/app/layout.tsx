@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { weddingData } from '@/data/weddingData';
+import { createWeddingMetadata } from '@/lib/weddingMetadata';
 
 const koPubBatang = localFont({
   src: [
@@ -41,42 +41,10 @@ const specialElite = localFont({
   variable: '--font-special-elite'
 });
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_PROJECT_PRODUCTION_URL
-    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-    : process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'http://localhost:3000');
-const ogImageUrl = `${weddingData.metadata.ogImage}?v=20260824-share`;
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: weddingData.metadata.title,
-  description: weddingData.metadata.description,
+  ...createWeddingMetadata('/'),
   formatDetection: {
     telephone: false
-  },
-  openGraph: {
-    title: weddingData.metadata.title,
-    description: weddingData.metadata.description,
-    url: siteUrl,
-    siteName: weddingData.metadata.title,
-    type: 'website',
-    images: [
-      {
-        url: ogImageUrl,
-        width: 1080,
-        height: 1080,
-        alt: weddingData.metadata.title
-      }
-    ]
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: weddingData.metadata.title,
-    description: weddingData.metadata.description,
-    images: [ogImageUrl]
   }
 };
 
