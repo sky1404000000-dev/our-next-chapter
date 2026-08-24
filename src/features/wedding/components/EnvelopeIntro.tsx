@@ -2,7 +2,6 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { weddingData } from '@/data/weddingData';
 
@@ -10,8 +9,6 @@ export default function EnvelopeIntro() {
   const { hero, invitation, weddingInfo } = weddingData;
   const stageRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const videoDragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
-  const videoTouchStartRef = useRef<{ x: number; y: number } | null>(null);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const hasPositionedSliderRef = useRef(false);
   const hasEnteredRef = useRef(false);
@@ -112,80 +109,6 @@ export default function EnvelopeIntro() {
     }
   };
 
-  const wrapEdgeSwipe = (deltaX: number, deltaY: number) => {
-    if (activeVideoIndex === undefined) return;
-
-    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
-    if (!isHorizontalSwipe) return;
-
-    const lastVideoIndex = hero.videos.length - 1;
-    const isSwipingToNext = deltaX < 0;
-    const isSwipingToPrev = deltaX > 0;
-
-    if (isSwipingToNext && activeVideoIndex === lastVideoIndex) {
-      moveToVideo(0);
-      return;
-    }
-
-    if (isSwipingToPrev && activeVideoIndex === 0) {
-      moveToVideo(lastVideoIndex);
-    }
-  };
-
-  const handleVideoPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === 'touch') return;
-    if (!event.isPrimary || event.button !== 0) return;
-
-    videoDragStartRef.current = {
-      x: event.clientX,
-      y: event.clientY,
-      pointerId: event.pointerId
-    };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const handleVideoPointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType === 'touch') return;
-
-    const start = videoDragStartRef.current;
-    if (!start || start.pointerId !== event.pointerId || activeVideoIndex === undefined) return;
-
-    videoDragStartRef.current = null;
-    event.currentTarget.releasePointerCapture(event.pointerId);
-
-    const deltaX = event.clientX - start.x;
-    const deltaY = event.clientY - start.y;
-    wrapEdgeSwipe(deltaX, deltaY);
-  };
-
-  const handleVideoPointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (videoDragStartRef.current?.pointerId !== event.pointerId) return;
-    videoDragStartRef.current = null;
-  };
-
-  const handleVideoTouchStart = (event: ReactTouchEvent<HTMLDivElement>) => {
-    const touch = event.changedTouches[0];
-    if (!touch) return;
-
-    videoTouchStartRef.current = {
-      x: touch.clientX,
-      y: touch.clientY
-    };
-  };
-
-  const handleVideoTouchEnd = (event: ReactTouchEvent<HTMLDivElement>) => {
-    const start = videoTouchStartRef.current;
-    const touch = event.changedTouches[0];
-
-    if (!start || !touch || activeVideoIndex === undefined) return;
-
-    videoTouchStartRef.current = null;
-
-    const deltaX = touch.clientX - start.x;
-    const deltaY = touch.clientY - start.y;
-    wrapEdgeSwipe(deltaX, deltaY);
-  };
-
   const handleVideoReady = (index: number) => {
     setReadyVideos((currentReadyVideos) => {
       if (currentReadyVideos[index]) return currentReadyVideos;
@@ -214,11 +137,6 @@ export default function EnvelopeIntro() {
                     className="cover-video-slider"
                     ref={sliderRef}
                     onScroll={handleVideoScroll}
-                    onPointerDown={handleVideoPointerDown}
-                    onPointerUp={handleVideoPointerUp}
-                    onPointerCancel={handleVideoPointerCancel}
-                    onTouchStart={handleVideoTouchStart}
-                    onTouchEnd={handleVideoTouchEnd}
                     aria-label={`커버 영상 ${hero.videos.length}개`}
                   >
                     {hero.videos.map((video, index) => (
