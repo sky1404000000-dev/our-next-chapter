@@ -110,6 +110,7 @@ export default function Gallery() {
 
   const openDetail = (index: number) => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = null;
     setIsClosing(false);
     setDetailDirection('next');
     setSelectedIndex(index);
@@ -119,6 +120,8 @@ export default function Gallery() {
     if (isClosing) return;
 
     setIsClosing(true);
+    detailDragStartRef.current = null;
+
     closeTimerRef.current = setTimeout(() => {
       setSelectedIndex(null);
       setIsClosing(false);
@@ -167,26 +170,18 @@ export default function Gallery() {
   useEffect(() => {
     if (!isDetailOpen) return;
 
-    const scrollY = window.scrollY;
+    const originalHtmlOverflow = document.documentElement.style.overflow;
     const originalOverflow = document.body.style.overflow;
-    const originalPosition = document.body.style.position;
-    const originalTop = document.body.style.top;
-    const originalWidth = document.body.style.width;
     const originalOverscrollBehavior = document.documentElement.style.overscrollBehavior;
 
+    document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${scrollY}px`;
-    document.body.style.width = '100%';
     document.documentElement.style.overscrollBehavior = 'none';
 
     return () => {
+      document.documentElement.style.overflow = originalHtmlOverflow;
       document.body.style.overflow = originalOverflow;
-      document.body.style.position = originalPosition;
-      document.body.style.top = originalTop;
-      document.body.style.width = originalWidth;
       document.documentElement.style.overscrollBehavior = originalOverscrollBehavior;
-      window.scrollTo(0, scrollY);
     };
   }, [isDetailOpen]);
 
@@ -296,8 +291,8 @@ export default function Gallery() {
                 <Image
                   src={selectedItem.image}
                   alt={selectedItem.alt ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
-                  width={760}
-                  height={900}
+                  width={selectedItem.width ?? 760}
+                  height={selectedItem.height ?? 900}
                   className="gallery-modal-image"
                   draggable={false}
                 />

@@ -1257,17 +1257,17 @@ button {
 }
 
 .gallery-polaroid-3 {
-  top: 290px;
-  left: 20px;
+  top: 294px;
+  left: 25px;
   z-index: 4;
   width: 176px;
   --tape-tilt: 1deg;
-  transform: rotate(7deg);
+  transform: rotate(4deg);
 }
 
 .gallery-polaroid-4 {
   top: 270px;
-  right: 10px;
+  right: 15px;
   z-index: 5;
   width: 178px;
   --tape-tilt: 4deg;
@@ -1275,7 +1275,7 @@ button {
 }
 
 .gallery-polaroid-5 {
-  top: 522px;
+  top: 537px;
   right: 60px;
   z-index: 6;
   width: 188px;
@@ -1866,6 +1866,11 @@ button {
   position: absolute;
   inset: 0;
   z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
   touch-action: none;
   background: #fff;
   animation: galleryBackdropReveal 260ms ease-out both;
@@ -1895,6 +1900,11 @@ button {
   animation: galleryContentHide 280ms ease-in both;
 }
 
+.gallery-modal-closing .gallery-modal-card,
+.gallery-modal-closing .gallery-modal-image {
+  animation: none;
+}
+
 .gallery-modal-content {
   position: relative;
   z-index: 2;
@@ -1903,7 +1913,7 @@ button {
   min-height: 100svh;
   max-height: none;
   display: grid;
-  grid-template-rows: minmax(68px, 8%) minmax(0, 1fr) minmax(74px, 10%);
+  grid-template-rows: minmax(112px, 12%) minmax(0, 1fr) minmax(86px, 10%);
   align-items: center;
   overflow: hidden;
   overscroll-behavior: none;
@@ -1946,11 +1956,9 @@ button {
 }
 
 .gallery-modal-image {
-  position: absolute;
-  inset: 0;
   display: block;
-  width: 100% !important;
-  height: 100% !important;
+  width: auto !important;
+  height: auto !important;
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: auto;
@@ -1986,9 +1994,14 @@ button {
 
 .gallery-close {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 14px);
-  right: 14px;
+  top: calc(env(safe-area-inset-top) + 22px);
+  right: 18px;
   z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -2041,12 +2054,13 @@ button {
   .gallery-modal-card {
     grid-row: 1;
     width: min(100vw, 708px);
+    height: 100dvh;
     justify-self: center;
   }
 
   .gallery-modal-image {
-    width: 100% !important;
-    height: 100% !important;
+    width: auto !important;
+    height: auto !important;
     max-width: 708px;
     max-height: 100dvh;
   }
@@ -2118,7 +2132,7 @@ button {
 @keyframes galleryContentHide {
   to {
     opacity: 0;
-    transform: translateY(12px) scale(0.98);
+    transform: scale(0.992);
   }
 }
 
