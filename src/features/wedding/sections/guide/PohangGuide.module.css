@@ -408,7 +408,7 @@ a.placeImageWrap:active .placeImage {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.6;
-  white-space: pre-line;
+  white-space: pre-wrap;
 }
 
 .placeTip {

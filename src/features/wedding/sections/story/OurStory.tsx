@@ -150,13 +150,20 @@ export default function OurStory() {
           </strong>
         </div>
 
-        <Image
-          src={story.coverImage}
-          alt={story.coverAlt}
-          width={720}
-          height={720}
-          className={styles.storyCover}
-        />
+        <button
+          type="button"
+          className={styles.storyCoverButton}
+          onClick={openStory}
+          aria-label="우리의 이야기 펼쳐보기"
+        >
+          <Image
+            src={story.coverImage}
+            alt={story.coverAlt}
+            width={720}
+            height={720}
+            className={styles.storyCover}
+          />
+        </button>
 
         <div className={styles.storyArchive}>
           <p className={styles.archiveMeta}>
@@ -168,7 +175,7 @@ export default function OurStory() {
         <p className={styles.archiveCaption}>Milestone Documentation. These moments, carefully documented and lovingly preserved.</p>
 
         <button type="button" className={styles.openButton} onClick={openStory}>
-          이야기 보러가기
+          우리의 이야기 펼쳐보기
           <span aria-hidden>
             <ArrowRight />
           </span>

@@ -59,15 +59,38 @@
   font-size: 14px;
 }
 
-.storyCover {
+.storyCoverButton {
   display: block;
   width: min(100%, 300px);
+  margin: 0 auto 20px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: 0 14px 30px rgba(73, 62, 51, 0.1);
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.storyCoverButton:hover,
+.storyCoverButton:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(73, 62, 51, 0.15);
+}
+
+.storyCoverButton:active {
+  transform: scale(0.985);
+}
+
+.storyCover {
+  display: block;
+  width: 100%;
   height: auto;
   aspect-ratio: 1 / 1.14;
-  margin: 0 auto 20px;
   border-radius: 8px;
   object-fit: cover;
-  box-shadow: 0 14px 30px rgba(73, 62, 51, 0.1);
 }
 
 .storyArchive {
@@ -128,8 +151,8 @@
   font-weight: 600;
   box-shadow: 0 10px 24px rgba(73, 62, 51, 0.1);
   cursor: pointer;
-  animation: storyButtonNudge 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   transition:
+    transform 180ms ease,
     background 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease;
@@ -137,11 +160,13 @@
 
 .openButton:hover,
 .openButton:focus-visible {
-  animation-play-state: paused;
   border-color: rgba(112, 132, 105, 0.48);
   background: rgba(245, 248, 241, 0.98);
   box-shadow: 0 13px 28px rgba(73, 62, 51, 0.15);
-  transform: translateX(4px);
+}
+
+.openButton:active {
+  transform: scale(0.97);
 }
 
 .openButton span {
@@ -158,15 +183,17 @@
 .openButton svg {
   width: 15px;
   height: 15px;
+  animation: storyArrowNudge 2.4s ease-in-out infinite;
 }
 
-@keyframes storyButtonNudge {
+@keyframes storyArrowNudge {
   0%,
+  68%,
   100% {
     transform: translateX(0);
   }
 
-  50% {
+  82% {
     transform: translateX(4px);
   }
 }
@@ -679,7 +706,7 @@
     transition: none;
   }
 
-  .openButton {
+  .openButton svg {
     animation: none;
   }
 }

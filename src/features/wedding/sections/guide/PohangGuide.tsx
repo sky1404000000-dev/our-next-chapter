@@ -78,6 +78,14 @@ const guideFolders: PohangFolder[] = [
         // tip: '매콤한 끝맛과 진하고 꾸덕한 크림이 잘 어우러진 관자 수제비가 핵심이에요. 분위기 좋은 실내에서 술과 안주를 천천히 즐겨보세요.',
         tags: ['신부동생픽', '사슴', '매콤크림관자수제비', '영일대술집'],
         link: 'https://naver.me/5VmtfVi5'
+      },
+      {
+        title: '알카노',
+        image: '/images/guide/places/alcano.jpg',
+        description: '영일대 해수욕장 근처의 양식 맛집',
+        tip: '알카노에 간다면 오징어먹물 리소토는 꼭 주문해보세요!\n자신있게 추천하는 메뉴예요.웃을 때 먹물 주의^_^',
+        tags: ['신부가족픽', '알카노', '오징어먹물리소토', '포항양식'],
+        link: 'https://naver.me/5GpY7aBH'
       }
     ]
   },
@@ -173,6 +181,14 @@ const guideFolders: PohangFolder[] = [
         tip: '환호공원과 스페이스 워크를 둘러본 뒤 연결하기 좋은 코스예요. 넓은 창가와 테라스에서 계절의 풍경을 보며 커피 한잔을 즐겨보세요.',
         tags: ['신부친구픽', '하이퍼리얼', '환호공원카페', '통유리카페'],
         link: 'https://naver.me/5jJrr7tJ'
+      },
+      {
+        title: '아우로라',
+        image: '/images/guide/places/aurora-cafe.jpg',
+        description: '탁 트인 규모와 곡선형 통유리 외관이 인상적인 비교적 신상 대형 카페.',
+        tip: '넓은 공간과 다양한 좌석이 준비되어 있어 여러 명이 함께 방문하거나 여유롭게 쉬어가기 좋아요.',
+        tags: ['대형카페', '신상카페', '넓은공간', '포항카페'],
+        link: 'https://naver.me/FGEOAYn7'
       }
     ]
   },
@@ -194,7 +210,7 @@ const guideFolders: PohangFolder[] = [
         title: '송도해수욕장 치킨거리',
         image: '/images/guide/places/songdo-chicken-street.png',
         description: '송도 바다와 포항의 밤풍경을 안주 삼아 치맥하기 좋은 야장 거리.',
-        tip: '해 질 무렵 송도 해안길을 따라 늘어선 치킨집 중 마음에 드는 곳을 골라보세요. 바닷바람 맞으며 밖에서 마시는 첫 생맥주가 이 코스의 핵심이에요.',
+        tip: '해 질 무렵 송도 해안길을 따라 늘어선 치킨집 중 마음에 드는 곳을 골라보세요. 바닷바람 맞으며 밖에서 마시는 생맥주가 이 코스의 핵심이에요.',
         tags: ['송도해수욕장', '포항야장', '바다보며치맥', '포항핫플'],
         link: 'https://naver.me/5ssJdGQI'
       },
@@ -202,9 +218,25 @@ const guideFolders: PohangFolder[] = [
         title: '영일대 해상누각',
         image: '/images/guide/places/yeongildae-pavilion.jpg',
         description: '식사 전후 바닷바람을 쐬며 포항다운 풍경을 편안하게 즐기기 좋은 곳.',
-        tip: '영일대 해변을 따라 가볍게 걷고, 해상누각에 올라 탁 트인 바다를 바라보세요. 낮에는 청량한 바다를, 해가 진 뒤에는 누각과 포항의 밤풍경을 즐길 수 있어요.',
+        tip: '영일대 해변을 따라 가볍게 걷고,\n 해상누각에 올라 탁 트인 바다를 바라보세요.',
         tags: ['영일대해상누각', '포항바다산책', '바람쐬기', '포항야경'],
         link: 'https://naver.me/G2E78HNw'
+      },
+      {
+        title: '구룡포 일본인 가옥거리',
+        image: '/images/guide/places/guryongpo-japanese-house-street.jpg',
+        description: '개항 이후 일본인 어민들이 구룡포에 정착하며 지은 일본식 목조 가옥들이 남아 이름 붙은 근대역사거리.',
+        tip: '아픈 근대사의 흔적을 돌아보고, 드라마 <동백꽃 필 무렵> 촬영지 골목과 계단을 따라 가볍게 산책해보세요.',
+        tags: ['구룡포', '근대역사거리', '동백꽃필무렵', '포항산책'],
+        link: 'https://naver.me/xP8mElxX'
+      },
+      {
+        title: '이가리 닻 전망대',
+        image: '/images/guide/places/igari-anchor-observatory.jpg',
+        description: '푸른 바다 위로 길게 뻗은 닻 모양 전망대에서 \n시원한 바닷바람을 맞기 좋은 곳.',
+        tip: '나무 데크를 따라 걸으며 탁 트인 해안 풍경을 즐겨보세요. 짧게 산책하고 사진을 남기기에도 좋아요.',
+        tags: ['이가리닻전망대', '바다산책','사진남기기'],
+        link: 'https://naver.me/5iTdSica'
       }
     ]
   }
