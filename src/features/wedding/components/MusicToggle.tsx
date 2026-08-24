@@ -1,6 +1,6 @@
 'use client';
 
-import { Music2, Volume2, VolumeX } from 'lucide-react';
+import { Music2, SkipForward, Volume2, VolumeX } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import styles from './MusicToggle.module.css';
 
@@ -13,21 +13,30 @@ export default function MusicToggle({ tracks }: MusicToggleProps) {
   const promptTimerRef = useRef<number | undefined>(undefined);
   const promptExitTimerRef = useRef<number | undefined>(undefined);
   const hasPromptShownRef = useRef(false);
-  const [trackSrc, setTrackSrc] = useState<string>();
+  const playAfterTrackChangeRef = useRef(false);
+  const [trackIndex, setTrackIndex] = useState<number>();
   const [isPlaying, setIsPlaying] = useState(false);
   const [promptPhase, setPromptPhase] = useState<'hidden' | 'visible' | 'leaving'>('hidden');
+  const trackSrc = trackIndex === undefined ? undefined : tracks[trackIndex];
 
   useEffect(() => {
     if (tracks.length === 0) return;
 
     const selectionTimer = window.setTimeout(() => {
-      const nextTrack = tracks[Math.floor(Math.random() * tracks.length)];
-
-      setTrackSrc(nextTrack);
+      setTrackIndex(Math.floor(Math.random() * tracks.length));
     }, 0);
 
     return () => window.clearTimeout(selectionTimer);
   }, [tracks]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || !trackSrc || !playAfterTrackChangeRef.current) return;
+
+    playAfterTrackChangeRef.current = false;
+    audio.load();
+    void audio.play().catch(() => setIsPlaying(false));
+  }, [trackSrc]);
 
   useEffect(() => {
     const showMusicPrompt = () => {
@@ -75,16 +84,34 @@ export default function MusicToggle({ tracks }: MusicToggleProps) {
     }
   };
 
+  const playNextTrack = () => {
+    if (tracks.length === 0) return;
+
+    if (promptPhase !== 'hidden') dismissPrompt();
+
+    if (tracks.length === 1) {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      audio.currentTime = 0;
+      void audio.play().catch(() => setIsPlaying(false));
+      return;
+    }
+
+    playAfterTrackChangeRef.current = true;
+    setTrackIndex((currentIndex) => currentIndex === undefined ? 0 : (currentIndex + 1) % tracks.length);
+  };
+
   return (
     <>
       {trackSrc && (
         <audio
           ref={audioRef}
           src={trackSrc}
-          loop
           preload="none"
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
+          onEnded={playNextTrack}
         />
       )}
       {promptPhase !== 'hidden' && (
@@ -98,13 +125,22 @@ export default function MusicToggle({ tracks }: MusicToggleProps) {
             <Music2 />
           </span>
           <span className={styles.promptCopy}>
-            <strong>신랑 신부가 고른 배경음악이 있어요</strong>
-            <span>음악과 함께 저희의 추억을 감상해 주세요</span>
+            <strong>신랑 신부가 고른 {tracks.length}곡이 준비되어 있어요</strong>
+            <span>음악과 함께 저희의 추억을 천천히 감상해 주세요</span>
           </span>
           <span className={styles.promptAction} aria-hidden="true">재생</span>
         </button>
       )}
       <div className={styles.control}>
+        <button
+          type="button"
+          className={`${styles.button} ${styles.nextButton}`}
+          data-music-toggle
+          onClick={playNextTrack}
+          aria-label={`다음 배경음악 재생하기, 총 ${tracks.length}곡`}
+        >
+          <SkipForward aria-hidden />
+        </button>
         <button
           type="button"
           className={styles.button}

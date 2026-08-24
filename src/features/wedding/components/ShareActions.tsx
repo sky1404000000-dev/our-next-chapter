@@ -16,6 +16,8 @@ declare global {
             title: string;
             description: string;
             imageUrl: string;
+            imageWidth: number;
+            imageHeight: number;
             link: {
               mobileWebUrl: string;
               webUrl: string;
@@ -115,6 +117,8 @@ export default function ShareActions({ compact = false, kakaoOnly = false }: Sha
         title: weddingData.share.title,
         description: weddingData.share.description,
         imageUrl,
+        imageWidth: 1080,
+        imageHeight: 1080,
         link: {
           mobileWebUrl: pageUrl,
           webUrl: pageUrl

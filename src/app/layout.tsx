@@ -48,7 +48,7 @@ const siteUrl =
     : process.env.VERCEL_URL
       ? `https://${process.env.VERCEL_URL}`
       : 'http://localhost:3000');
-const ogImageUrl = `${weddingData.metadata.ogImage}?v=20260824`;
+const ogImageUrl = `${weddingData.metadata.ogImage}?v=20260824-share`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -66,8 +66,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: ogImageUrl,
-        width: 1123,
-        height: 1587,
+        width: 1080,
+        height: 1080,
         alt: weddingData.metadata.title
       }
     ]
