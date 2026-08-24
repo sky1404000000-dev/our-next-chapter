@@ -112,6 +112,26 @@ export default function EnvelopeIntro() {
     }
   };
 
+  const wrapEdgeSwipe = (deltaX: number, deltaY: number) => {
+    if (activeVideoIndex === undefined) return;
+
+    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
+    if (!isHorizontalSwipe) return;
+
+    const lastVideoIndex = hero.videos.length - 1;
+    const isSwipingToNext = deltaX < 0;
+    const isSwipingToPrev = deltaX > 0;
+
+    if (isSwipingToNext && activeVideoIndex === lastVideoIndex) {
+      moveToVideo(0);
+      return;
+    }
+
+    if (isSwipingToPrev && activeVideoIndex === 0) {
+      moveToVideo(lastVideoIndex);
+    }
+  };
+
   const handleVideoPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'touch') return;
     if (!event.isPrimary || event.button !== 0) return;
@@ -135,10 +155,7 @@ export default function EnvelopeIntro() {
 
     const deltaX = event.clientX - start.x;
     const deltaY = event.clientY - start.y;
-    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
-
-    if (!isHorizontalSwipe) return;
-    moveToVideo(deltaX < 0 ? activeVideoIndex + 1 : activeVideoIndex - 1);
+    wrapEdgeSwipe(deltaX, deltaY);
   };
 
   const handleVideoPointerCancel = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -166,10 +183,7 @@ export default function EnvelopeIntro() {
 
     const deltaX = touch.clientX - start.x;
     const deltaY = touch.clientY - start.y;
-    const isHorizontalSwipe = Math.abs(deltaX) > 42 && Math.abs(deltaX) > Math.abs(deltaY) * 1.1;
-
-    if (!isHorizontalSwipe) return;
-    moveToVideo(deltaX < 0 ? activeVideoIndex + 1 : activeVideoIndex - 1);
+    wrapEdgeSwipe(deltaX, deltaY);
   };
 
   const handleVideoReady = (index: number) => {
