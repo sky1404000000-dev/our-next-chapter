@@ -235,11 +235,12 @@ export default function Gallery() {
             >
               {items.map((item, itemIndex) => {
                 const index = logicalPage * pageSize + itemIndex;
+                const isLandscape = item.width !== undefined && item.height !== undefined && item.width > item.height;
 
                 return (
                   <button
                     type="button"
-                    className={`gallery-polaroid gallery-polaroid-${itemIndex + 1} ${item.caption ? 'gallery-polaroid-captioned' : ''}`}
+                    className={`gallery-polaroid gallery-polaroid-${itemIndex + 1} ${isLandscape ? 'gallery-polaroid-landscape' : ''} ${item.caption ? 'gallery-polaroid-captioned' : ''}`}
                     key={`${item.image}-${item.caption ?? 'photo'}-${index}`}
                     onClick={() => openDetail(index)}
                   >

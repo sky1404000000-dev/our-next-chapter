@@ -1283,6 +1283,10 @@ button {
   transform: rotate(-7deg);
 }
 
+.gallery-polaroid-landscape {
+  width: 235px;
+}
+
 .gallery-page-controls {
   width: 208px;
   min-height: 42px;
