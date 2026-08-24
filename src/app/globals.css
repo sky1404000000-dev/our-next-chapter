@@ -631,7 +631,7 @@ button {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
-  touch-action: pan-y;
+  touch-action: pan-x pan-y;
 }
 
 .cover-video-slider::-webkit-scrollbar {
