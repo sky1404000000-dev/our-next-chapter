@@ -256,17 +256,17 @@ export const weddingData = {
     groom: {
       side: '신랑측',
       people: [
-        { relation: '신랑', bank: '카카오뱅크', number: '3333-12-3456789', holder: '김동균' },
-        { relation: '아버지', bank: '국민은행', number: '123456-78-901234', holder: '김영국' },
-        { relation: '어머니', bank: '우리은행', number: '1002-345-678901', holder: '이남숙' }
+        { relation: '신랑', bank: '우리은행', number: '1002-863-726912', holder: '김동균' },
+        { relation: '아버지', bank: 'sc제일은행', number: '737-20-006747', holder: '김응국' },
+        { relation: '어머니', bank: '새마을금고', number: '9002-1421-62615', holder: '이남순' }
       ]
     } as AccountGroup,
     bride: {
       side: '신부측',
       people: [
-        { relation: '신부', bank: '신한은행', number: '110-456-789012', holder: '김은진' },
-        { relation: '아버지', bank: '하나은행', number: '456-910123-45607', holder: '김창성' },
-        { relation: '어머니', bank: '농협은행', number: '302-1234-5678-91', holder: '이춘희' }
+        { relation: '신부', bank: '카카오뱅크', number: '3333-27-7166983', holder: '김은진' },
+        { relation: '아버지', bank: '농협은행', number: '717042-56-094326', holder: '김창성' },
+        { relation: '어머니', bank: '농협은행', number: '352-1206-3656-13', holder: '이춘희' }
       ]
     } as AccountGroup
   },
