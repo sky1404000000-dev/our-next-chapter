@@ -1,9 +1,14 @@
 import { randomUUID } from 'node:crypto';
+import { execFile } from 'node:child_process';
 import { promises as fs } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
+import { promisify } from 'node:util';
 import { isLocalAdminEnabled } from '@/lib/localAdmin';
 
 export const runtime = 'nodejs';
+
+const execFileAsync = promisify(execFile);
 
 const extensionByMime: Record<string, string> = {
   'image/jpeg': 'jpg',
@@ -11,6 +16,22 @@ const extensionByMime: Record<string, string> = {
   'image/webp': 'webp',
   'image/gif': 'gif'
 };
+
+const webpConvertibleMimeTypes = new Set(['image/jpeg', 'image/png']);
+
+async function convertToWebp(source: Buffer, extension: string, destination: string) {
+  const tempSource = path.join(os.tmpdir(), `wedding-upload-${randomUUID()}.${extension}`);
+
+  await fs.writeFile(tempSource, source);
+
+  try {
+    await execFileAsync('cwebp', ['-q', '95', '-m', '6', tempSource, '-o', destination], {
+      windowsHide: true
+    });
+  } finally {
+    await fs.rm(tempSource, { force: true });
+  }
+}
 
 export async function POST(request: Request) {
   if (!isLocalAdminEnabled()) {
@@ -34,12 +55,30 @@ export async function POST(request: Request) {
       return Response.json({ message: 'JPG, PNG, WEBP, GIF 사진만 사용할 수 있습니다.' }, { status: 400 });
     }
 
+    const shouldConvertToWebp = webpConvertibleMimeTypes.has(file.type);
     const relativeDirectory = kind === 'gallery' ? 'images/gallery' : 'images/guide/places';
-    const fileName = `${kind}-${Date.now()}-${randomUUID().slice(0, 8)}.${extension}`;
+    const fileExtension = shouldConvertToWebp ? 'webp' : extension;
+    const fileName = `${kind}-${Date.now()}-${randomUUID().slice(0, 8)}.${fileExtension}`;
     const destinationDirectory = path.join(process.cwd(), 'public', relativeDirectory);
     const destination = path.join(destinationDirectory, fileName);
+    const sourceBuffer = Buffer.from(await file.arrayBuffer());
+
     await fs.mkdir(destinationDirectory, { recursive: true });
-    await fs.writeFile(destination, Buffer.from(await file.arrayBuffer()));
+
+    if (shouldConvertToWebp) {
+      try {
+        await convertToWebp(sourceBuffer, extension, destination);
+      } catch (error) {
+        console.warn('WebP 변환에 실패하여 원본 형식으로 저장합니다.', error);
+        const fallbackFileName = fileName.replace(/\.webp$/, `.${extension}`);
+        const fallbackDestination = path.join(destinationDirectory, fallbackFileName);
+        await fs.writeFile(fallbackDestination, sourceBuffer);
+
+        return Response.json({ image: `/${relativeDirectory.replaceAll('\\', '/')}/${fallbackFileName}` });
+      }
+    } else {
+      await fs.writeFile(destination, sourceBuffer);
+    }
 
     return Response.json({ image: `/${relativeDirectory.replaceAll('\\', '/')}/${fileName}` });
   } catch (error) {

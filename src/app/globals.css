@@ -1898,7 +1898,7 @@ button {
   height: 100dvh;
   max-height: 100dvh;
   display: grid;
-  grid-template-rows: minmax(92px, 15dvh) minmax(0, 1fr) minmax(88px, 13dvh);
+  grid-template-rows: minmax(68px, 8dvh) minmax(0, 1fr) minmax(74px, 10dvh);
   align-items: center;
   overflow: hidden;
   padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
@@ -1939,13 +1939,16 @@ button {
 }
 
 .gallery-modal-image {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: auto !important;
-  height: auto !important;
+  width: 100% !important;
+  height: 100% !important;
   max-width: 100%;
-  max-height: calc(100dvh - max(92px, 15dvh) - max(88px, 13dvh));
+  max-height: 100%;
   aspect-ratio: auto;
   object-fit: contain;
+  object-position: center center;
   background: #fff;
   -webkit-user-drag: none;
   animation: galleryImageReveal 360ms 80ms ease-out both;
@@ -1976,8 +1979,8 @@ button {
 
 .gallery-close {
   position: absolute;
-  top: calc(env(safe-area-inset-top) + 28px);
-  right: 28px;
+  top: calc(env(safe-area-inset-top) + 14px);
+  right: 14px;
   z-index: 4;
   border: 0;
   background: transparent;
@@ -2035,6 +2038,8 @@ button {
   }
 
   .gallery-modal-image {
+    width: 100% !important;
+    height: 100% !important;
     max-width: 708px;
     max-height: 100dvh;
   }

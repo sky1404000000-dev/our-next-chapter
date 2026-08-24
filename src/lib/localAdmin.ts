@@ -4,6 +4,7 @@ import type { GalleryItem, PohangFolder } from '@/data/editableContent';
 
 const projectRoot = process.cwd();
 const publicRoot = path.join(projectRoot, 'public');
+const imageBackupRoot = path.join(projectRoot, 'image-backups');
 
 export const galleryDataPath = path.join(projectRoot, 'src', 'data', 'galleryData.json');
 export const guideDataPath = path.join(projectRoot, 'src', 'data', 'guideData.json');
@@ -63,11 +64,46 @@ export function resolveManagedImage(imagePath: string) {
   return resolved;
 }
 
+function getManagedImageVariants(imagePath: string) {
+  const resolved = resolveManagedImage(imagePath);
+  if (!resolved) return [];
+
+  const parsedPath = path.parse(imagePath);
+  const publicDirectory = path.dirname(resolved);
+  const backupDirectory = imagePath.startsWith('/images/gallery/')
+    ? path.join(imageBackupRoot, 'gallery-original-jpg')
+    : null;
+  const extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif'];
+
+  return extensions.flatMap((extension) => {
+    const candidates = [];
+    candidates.push(path.join(publicDirectory, `${parsedPath.name}${extension}`));
+
+    if (backupDirectory) {
+      candidates.push(path.join(backupDirectory, `${parsedPath.name}${extension}`));
+    }
+
+    return candidates;
+  });
+}
+
 export async function removeUnusedImages(paths: string[], usedImages: Set<string>) {
   for (const imagePath of new Set(paths)) {
     if (usedImages.has(imagePath)) continue;
-    const resolved = resolveManagedImage(imagePath);
-    if (!resolved) continue;
-    await fs.rm(resolved, { force: true });
+    const variants = getManagedImageVariants(imagePath);
+
+    await Promise.all(variants.map(async (variant) => {
+      const relativeToPublic = path.relative(publicRoot, variant);
+      const relativeToBackup = path.relative(imageBackupRoot, variant);
+      const isInPublic = !relativeToPublic.startsWith('..') && !path.isAbsolute(relativeToPublic);
+      const isInBackup = !relativeToBackup.startsWith('..') && !path.isAbsolute(relativeToBackup);
+
+      if (!isInPublic && !isInBackup) return;
+
+      const publicImagePath = isInPublic ? `/${relativeToPublic.split(path.sep).join('/')}` : null;
+      if (publicImagePath && usedImages.has(publicImagePath)) return;
+
+      await fs.rm(variant, { force: true });
+    }));
   }
 }
