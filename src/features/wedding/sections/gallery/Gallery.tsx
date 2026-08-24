@@ -22,6 +22,7 @@ export default function Gallery() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { gallery } = weddingData;
   const selectedItem = selectedIndex === null ? null : galleryItems[selectedIndex];
+  const isDetailOpen = selectedIndex !== null;
   const pages = useMemo(() => {
     const result: GalleryItem[][] = [];
 
@@ -164,15 +165,30 @@ export default function Gallery() {
   }, []);
 
   useEffect(() => {
-    if (selectedIndex === null) return;
+    if (!isDetailOpen) return;
 
+    const scrollY = window.scrollY;
     const originalOverflow = document.body.style.overflow;
+    const originalPosition = document.body.style.position;
+    const originalTop = document.body.style.top;
+    const originalWidth = document.body.style.width;
+    const originalOverscrollBehavior = document.documentElement.style.overscrollBehavior;
+
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = '100%';
+    document.documentElement.style.overscrollBehavior = 'none';
 
     return () => {
       document.body.style.overflow = originalOverflow;
+      document.body.style.position = originalPosition;
+      document.body.style.top = originalTop;
+      document.body.style.width = originalWidth;
+      document.documentElement.style.overscrollBehavior = originalOverscrollBehavior;
+      window.scrollTo(0, scrollY);
     };
-  }, [selectedIndex]);
+  }, [isDetailOpen]);
 
   useEffect(() => {
     if (selectedIndex === null) return;

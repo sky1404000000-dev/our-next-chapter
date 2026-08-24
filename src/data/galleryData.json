@@ -30,10 +30,10 @@
     "height": 3293
   },
   {
-    "image": "/images/gallery/gallery-1787571862051-4c9f28cf.webp",
-    "alt": "웨딩 갤러리 사진 5",
+    "image": "/images/gallery/gallery-1787575062457-f5a4e419.webp",
     "width": 1889,
-    "height": 2834
+    "height": 2834,
+    "alt": "웨딩 갤러리 사진 8"
   },
   {
     "image": "/images/gallery/gallery-1787571862074-c2de9c35.webp",
@@ -42,21 +42,21 @@
     "height": 4475
   },
   {
-    "image": "/images/gallery/gallery-1787571862046-077e6084.webp",
-    "alt": "웨딩 갤러리 사진 3",
-    "width": 2117,
-    "height": 3175
-  },
-  {
     "image": "/images/gallery/gallery-1787573638857-d910c25d.webp",
     "alt": "웨딩 갤러리 사진 10",
     "width": 2730,
     "height": 4096
   },
   {
-    "image": "/images/gallery/gallery-1787571862038-2cfb1a02.webp",
-    "alt": "웨딩 갤러리 사진 4",
-    "width": 2132,
-    "height": 3199
+    "image": "/images/gallery/gallery-1787575062468-a9275fa2.webp",
+    "width": 2117,
+    "height": 3176,
+    "alt": "웨딩 갤러리 사진 9"
+  },
+  {
+    "image": "/images/gallery/gallery-1787575062479-8e71b204.webp",
+    "width": 2211,
+    "height": 3318,
+    "alt": "웨딩 갤러리 사진 10"
   }
 ]
