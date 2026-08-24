@@ -14,6 +14,8 @@ export default function EnvelopeIntro() {
   const hasEnteredRef = useRef(false);
   const [activeVideoIndex, setActiveVideoIndex] = useState<number>();
   const [showVideo, setShowVideo] = useState(true);
+  const [readyVideos, setReadyVideos] = useState(() => hero.videos.map(() => false));
+  const [preloadRemainingVideos, setPreloadRemainingVideos] = useState(false);
   const [datePart, dayPart = 'SAT'] = hero.dateLabel.split(' ');
   const displayDate = datePart.replaceAll('.', ' / ');
 
@@ -45,6 +47,17 @@ export default function EnvelopeIntro() {
       }
     });
   }, [activeVideoIndex, showVideo]);
+
+  useEffect(() => {
+    if (!preloadRemainingVideos) return;
+
+    videoRefs.current.forEach((video) => {
+      if (!video || video.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) return;
+
+      video.preload = 'auto';
+      video.load();
+    });
+  }, [preloadRemainingVideos]);
 
   useEffect(() => {
     const stageElement = stageRef.current;
@@ -96,6 +109,17 @@ export default function EnvelopeIntro() {
     }
   };
 
+  const handleVideoReady = (index: number) => {
+    setReadyVideos((currentReadyVideos) => {
+      if (currentReadyVideos[index]) return currentReadyVideos;
+
+      const nextReadyVideos = [...currentReadyVideos];
+      nextReadyVideos[index] = true;
+      return nextReadyVideos;
+    });
+    setPreloadRemainingVideos(true);
+  };
+
   return (
     <section className="envelope-intro section" id="intro">
       <div className="cover-intro-copy">
@@ -117,19 +141,36 @@ export default function EnvelopeIntro() {
                   >
                     {hero.videos.map((video, index) => (
                       <div className="cover-video-slide" key={video} aria-hidden={index !== activeVideoIndex}>
+                        <Image
+                          src={hero.image}
+                          alt=""
+                          fill
+                          sizes="(max-width: 430px) 100vw, 430px"
+                          className="cover-video-placeholder"
+                          priority={index === activeVideoIndex}
+                          aria-hidden="true"
+                        />
                         <video
                           ref={(element) => {
                             videoRefs.current[index] = element;
                           }}
-                          className="cover-photo"
+                          className={`cover-photo cover-video-media ${readyVideos[index] ? 'is-ready' : ''}`}
                           src={video}
-                          poster={hero.image}
-                          preload={index === activeVideoIndex ? 'metadata' : 'none'}
+                          preload={index === activeVideoIndex || preloadRemainingVideos ? 'auto' : 'none'}
                           autoPlay={index === activeVideoIndex}
                           muted
                           loop
                           playsInline
+                          onCanPlay={() => handleVideoReady(index)}
                         />
+                        <div
+                          className={`cover-video-loading ${readyVideos[index] ? 'is-hidden' : ''}`}
+                          role={index === activeVideoIndex && !readyVideos[index] ? 'status' : undefined}
+                          aria-hidden={index !== activeVideoIndex || readyVideos[index]}
+                        >
+                          <span className="cover-video-spinner" aria-hidden="true" />
+                          <span>영상을 준비하고 있어요</span>
+                        </div>
                       </div>
                     ))}
                   </div>
