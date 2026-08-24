@@ -19,6 +19,80 @@ const extensionByMime: Record<string, string> = {
 
 const webpConvertibleMimeTypes = new Set(['image/jpeg', 'image/png']);
 
+function readJpegSize(source: Buffer) {
+  let offset = 2;
+
+  while (offset < source.length) {
+    if (source[offset] !== 0xff) return null;
+
+    const marker = source[offset + 1];
+    const length = source.readUInt16BE(offset + 2);
+    const isStartOfFrame = marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker);
+
+    if (isStartOfFrame) {
+      return {
+        width: source.readUInt16BE(offset + 7),
+        height: source.readUInt16BE(offset + 5)
+      };
+    }
+
+    offset += 2 + length;
+  }
+
+  return null;
+}
+
+function readPngSize(source: Buffer) {
+  const pngSignature = '89504e470d0a1a0a';
+  if (source.subarray(0, 8).toString('hex') !== pngSignature) return null;
+
+  return {
+    width: source.readUInt32BE(16),
+    height: source.readUInt32BE(20)
+  };
+}
+
+function readWebpSize(source: Buffer) {
+  for (let offset = 12; offset + 8 <= source.length;) {
+    const type = source.toString('ascii', offset, offset + 4);
+    const length = source.readUInt32LE(offset + 4);
+    const payloadOffset = offset + 8;
+
+    if (type === 'VP8X') {
+      return {
+        width: 1 + source.readUIntLE(payloadOffset + 4, 3),
+        height: 1 + source.readUIntLE(payloadOffset + 7, 3)
+      };
+    }
+
+    if (type === 'VP8 ') {
+      return {
+        width: source.readUInt16LE(payloadOffset + 6) & 0x3fff,
+        height: source.readUInt16LE(payloadOffset + 8) & 0x3fff
+      };
+    }
+
+    if (type === 'VP8L') {
+      const bits = source.readUInt32LE(payloadOffset + 1);
+      return {
+        width: (bits & 0x3fff) + 1,
+        height: ((bits >> 14) & 0x3fff) + 1
+      };
+    }
+
+    offset = payloadOffset + length + (length % 2);
+  }
+
+  return null;
+}
+
+function readImageSize(source: Buffer, mimeType: string) {
+  if (mimeType === 'image/jpeg') return readJpegSize(source);
+  if (mimeType === 'image/png') return readPngSize(source);
+  if (mimeType === 'image/webp') return readWebpSize(source);
+  return null;
+}
+
 async function convertToWebp(source: Buffer, extension: string, destination: string) {
   const tempSource = path.join(os.tmpdir(), `wedding-upload-${randomUUID()}.${extension}`);
 
@@ -62,6 +136,7 @@ export async function POST(request: Request) {
     const destinationDirectory = path.join(process.cwd(), 'public', relativeDirectory);
     const destination = path.join(destinationDirectory, fileName);
     const sourceBuffer = Buffer.from(await file.arrayBuffer());
+    const imageSize = readImageSize(sourceBuffer, file.type);
 
     await fs.mkdir(destinationDirectory, { recursive: true });
 
@@ -74,13 +149,21 @@ export async function POST(request: Request) {
         const fallbackDestination = path.join(destinationDirectory, fallbackFileName);
         await fs.writeFile(fallbackDestination, sourceBuffer);
 
-        return Response.json({ image: `/${relativeDirectory.replaceAll('\\', '/')}/${fallbackFileName}` });
+        return Response.json({
+          image: `/${relativeDirectory.replaceAll('\\', '/')}/${fallbackFileName}`,
+          width: imageSize?.width,
+          height: imageSize?.height
+        });
       }
     } else {
       await fs.writeFile(destination, sourceBuffer);
     }
 
-    return Response.json({ image: `/${relativeDirectory.replaceAll('\\', '/')}/${fileName}` });
+    return Response.json({
+      image: `/${relativeDirectory.replaceAll('\\', '/')}/${fileName}`,
+      width: imageSize?.width,
+      height: imageSize?.height
+    });
   } catch (error) {
     console.error(error);
     return Response.json({ message: '사진 업로드 중 오류가 발생했습니다.' }, { status: 500 });

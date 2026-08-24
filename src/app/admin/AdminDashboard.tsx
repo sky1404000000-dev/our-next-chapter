@@ -21,6 +21,11 @@ type AdminDashboardProps = {
 };
 
 type Tab = 'gallery' | 'guide';
+type UploadedImage = {
+  image: string;
+  width?: number;
+  height?: number;
+};
 
 const emptyPlace: PohangPlace = {
   title: '',
@@ -78,9 +83,13 @@ export default function AdminDashboard({ initialGallery, initialGuide }: AdminDa
     formData.append('file', file);
     formData.append('kind', kind);
     const response = await fetch('/api/admin/upload', { method: 'POST', body: formData });
-    const result = await response.json() as { image?: string; message?: string };
+    const result = await response.json() as { image?: string; width?: number; height?: number; message?: string };
     if (!response.ok || !result.image) throw new Error(result.message || '사진 업로드에 실패했습니다.');
-    return result.image;
+    return {
+      image: result.image,
+      width: result.width,
+      height: result.height
+    } satisfies UploadedImage;
   };
 
   const addGalleryImages = async (files: FileList | null) => {
@@ -91,7 +100,10 @@ export default function AdminDashboard({ initialGallery, initialGuide }: AdminDa
       const images = await Promise.all(Array.from(files).map((file) => uploadImage(file, 'gallery')));
       setGallery((current) => [
         ...current,
-        ...images.map((image, index) => ({ image, alt: `웨딩 갤러리 사진 ${current.length + index + 1}` }))
+        ...images.map((uploadedImage, index) => ({
+          ...uploadedImage,
+          alt: `웨딩 갤러리 사진 ${current.length + index + 1}`
+        }))
       ]);
       markDirty();
     } catch (error) {
@@ -148,7 +160,7 @@ export default function AdminDashboard({ initialGallery, initialGuide }: AdminDa
     setMessage('장소 사진을 프로젝트 폴더로 복사하고 있습니다.');
     try {
       const oldImage = selectedFolder.items[itemIndex].image;
-      const image = await uploadImage(file, 'guide');
+      const { image } = await uploadImage(file, 'guide');
       updatePlace(itemIndex, { image });
       if (oldImage) setDeletedImages((current) => [...current, oldImage]);
     } catch (error) {

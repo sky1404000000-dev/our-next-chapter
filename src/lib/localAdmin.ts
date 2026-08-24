@@ -17,11 +17,17 @@ function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
+function isNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
+}
+
 export function isGalleryData(value: unknown): value is GalleryItem[] {
   return Array.isArray(value) && value.every((item) => {
     if (!item || typeof item !== 'object') return false;
     const candidate = item as Record<string, unknown>;
     return isString(candidate.image)
+      && (candidate.width === undefined || isNumber(candidate.width))
+      && (candidate.height === undefined || isNumber(candidate.height))
       && (candidate.caption === undefined || isString(candidate.caption))
       && (candidate.description === undefined || isString(candidate.description))
       && (candidate.alt === undefined || isString(candidate.alt));

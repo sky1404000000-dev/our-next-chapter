@@ -3,6 +3,8 @@ import guideJson from './guideData.json';
 
 export type GalleryItem = {
   image: string;
+  width?: number;
+  height?: number;
   caption?: string;
   description?: string;
   alt?: string;

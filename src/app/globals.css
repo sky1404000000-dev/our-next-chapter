@@ -1171,7 +1171,7 @@ button {
 
 .gallery-collage-page {
   position: relative;
-  min-height: 736px;
+  min-height: 880px;
   padding: 36px 4px 28px;
   opacity: 0.78;
   scroll-snap-align: start;
@@ -1226,8 +1226,7 @@ button {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .gallery-polaroid-caption {
@@ -1258,7 +1257,7 @@ button {
 }
 
 .gallery-polaroid-3 {
-  top: 260px;
+  top: 290px;
   left: 20px;
   z-index: 4;
   width: 176px;
@@ -1267,16 +1266,16 @@ button {
 }
 
 .gallery-polaroid-4 {
-  top: 244px;
+  top: 270px;
   right: 10px;
   z-index: 5;
   width: 178px;
   --tape-tilt: 4deg;
-  transform: rotate(-2deg);
+  transform: rotate(-4deg);
 }
 
 .gallery-polaroid-5 {
-  top: 470px;
+  top: 522px;
   right: 60px;
   z-index: 6;
   width: 188px;

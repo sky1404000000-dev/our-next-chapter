@@ -227,8 +227,8 @@ export default function Gallery() {
                     <Image
                       src={item.image}
                       alt={item.alt ?? `웨딩 갤러리 사진 ${index + 1}`}
-                      width={360}
-                      height={360}
+                      width={item.width ?? 360}
+                      height={item.height ?? 360}
                       className="gallery-polaroid-image"
                     />
                     {item.caption && <span className="gallery-polaroid-caption">{item.caption}</span>}
