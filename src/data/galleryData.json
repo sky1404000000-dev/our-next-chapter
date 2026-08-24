@@ -1,32 +1,22 @@
 [
   {
-    "image": "/images/gallery/1.png"
+    "image": "/images/gallery/gallery-1787564142430-7438e8c2.jpg",
+    "alt": "웨딩 갤러리 사진 1"
   },
   {
-    "image": "/images/gallery/2.png"
+    "image": "/images/gallery/gallery-1787564142505-ac1af5b1.jpg",
+    "alt": "웨딩 갤러리 사진 2"
   },
   {
-    "image": "/images/gallery/3.png"
+    "image": "/images/gallery/gallery-1787564142488-d3b40b71.jpg",
+    "alt": "웨딩 갤러리 사진 3"
   },
   {
-    "image": "/images/gallery/4.png"
+    "image": "/images/gallery/gallery-1787564142498-3cbd1392.jpg",
+    "alt": "웨딩 갤러리 사진 4"
   },
   {
-    "image": "/images/gallery/5.png"
-  },
-  {
-    "image": "/images/gallery/1.png"
-  },
-  {
-    "image": "/images/gallery/2.png"
-  },
-  {
-    "image": "/images/gallery/3.png"
-  },
-  {
-    "image": "/images/gallery/4.png"
-  },
-  {
-    "image": "/images/gallery/5.png"
+    "image": "/images/gallery/gallery-1787564142538-2e60807a.jpg",
+    "alt": "웨딩 갤러리 사진 5"
   }
 ]
