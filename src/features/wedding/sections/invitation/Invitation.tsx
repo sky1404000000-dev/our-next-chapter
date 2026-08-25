@@ -9,10 +9,10 @@ export default function Invitation() {
       <span className="section-kicker">INVITATION</span>
       <h2>{invitation.title}</h2>
       <div className="invitation-card text-center">
-        <p className="multiline">{invitation.groomMessage}</p>
-        <p className="invitation-signature">-동균-</p>
-        <p className="multiline invitation-repeat">{invitation.brideMessage}</p>
+        <p className="multiline">{invitation.brideMessage}</p>
         <p className="invitation-signature">-은진-</p>
+        <p className="multiline invitation-repeat">{invitation.groomMessage}</p>
+        <p className="invitation-signature">-동균-</p>
       </div>
       <Image
         src={invitation.image}
