@@ -16,6 +16,13 @@ type FolderStyle = CSSProperties & {
 
 const closeAnimationDuration = 300;
 
+const folderArtwork = [
+  { src: '/images/guide/folders/green-striped.png', className: styles.folderArtworkGreen },
+  { src: '/images/guide/folders/yellow-gingham.png', className: styles.folderArtworkYellow },
+  { src: '/images/guide/folders/orange-polka.png', className: styles.folderArtworkOrange },
+  { src: '/images/guide/folders/blue-floral.png', className: styles.folderArtworkBlue }
+] as const;
+
 function getFolderStyle(folder: PohangFolder): FolderStyle {
   return {
     '--folder-color': folder.color,
@@ -28,18 +35,15 @@ export default function PohangGuide() {
   const [selectedFolder, setSelectedFolder] = useState<PohangFolder | null>(null);
   const [isClosing, setIsClosing] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasFolderHistoryEntryRef = useRef(false);
+  const isWaitingForHistoryBackRef = useRef(false);
 
-  const openFolder = (folder: PohangFolder) => {
+  const finishClosingFolder = useCallback(() => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    setIsClosing(false);
-    setSelectedFolder(folder);
-  };
-
-  const closeFolder = useCallback(() => {
-    if (isClosing) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setSelectedFolder(null);
+      setIsClosing(false);
       return;
     }
 
@@ -49,7 +53,31 @@ export default function PohangGuide() {
       setIsClosing(false);
       closeTimerRef.current = null;
     }, closeAnimationDuration);
-  }, [isClosing]);
+  }, []);
+
+  const openFolder = (folder: PohangFolder) => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (!hasFolderHistoryEntryRef.current) {
+      window.history.pushState({ ...window.history.state, weddingGuideFolder: true }, '', window.location.href);
+      hasFolderHistoryEntryRef.current = true;
+    }
+    setIsClosing(false);
+    setSelectedFolder(folder);
+  };
+
+  const closeFolder = useCallback(() => {
+    if (isClosing) return;
+
+    if (hasFolderHistoryEntryRef.current) {
+      if (isWaitingForHistoryBackRef.current) return;
+
+      isWaitingForHistoryBackRef.current = true;
+      window.history.back();
+      return;
+    }
+
+    finishClosingFolder();
+  }, [finishClosingFolder, isClosing]);
 
   useEffect(() => {
     return () => {
@@ -74,6 +102,21 @@ export default function PohangGuide() {
     };
   }, [closeFolder, selectedFolder]);
 
+  useEffect(() => {
+    if (!selectedFolder) return;
+
+    const closeOnBrowserBack = () => {
+      if (!hasFolderHistoryEntryRef.current) return;
+
+      hasFolderHistoryEntryRef.current = false;
+      isWaitingForHistoryBackRef.current = false;
+      finishClosingFolder();
+    };
+
+    window.addEventListener('popstate', closeOnBrowserBack);
+    return () => window.removeEventListener('popstate', closeOnBrowserBack);
+  }, [finishClosingFolder, selectedFolder]);
+
   return (
     <section className="section" id="pohang-guide">
       <span className="section-kicker">GUIDE</span>
@@ -82,23 +125,37 @@ export default function PohangGuide() {
 
       <div className={styles.folderCard}>
         <div className={styles.folderGrid} aria-label="포항 추천 폴더">
-          {guideFolders.map((folder) => (
-            <button
-              type="button"
-              className={styles.folderButton}
-              style={getFolderStyle(folder)}
-              key={folder.title}
-              onClick={() => openFolder(folder)}
-              aria-label={`${folder.title} 열기`}
-            >
-              <span className={styles.folderIcon}>
-                <em>{folder.items.length}</em>
-              </span>
-              <span className={styles.folderLabel}>
-                <strong>{folder.title}</strong>
-              </span>
-            </button>
-          ))}
+          {guideFolders.map((folder, index) => {
+            const artwork = folderArtwork[index] ?? folderArtwork[0];
+
+            return (
+              <button
+                type="button"
+                className={styles.folderButton}
+                style={getFolderStyle(folder)}
+                key={folder.title}
+                onClick={() => openFolder(folder)}
+                aria-label={`${folder.title} 열기`}
+              >
+                <span className={styles.folderIcon}>
+                  <Image
+                    src={artwork.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 480px) 42vw, 180px"
+                    className={`${styles.folderArtwork} ${artwork.className}`}
+                  />
+                  <span className={styles.folderOpenHint} aria-hidden="true">
+                    CLICK!
+                  </span>
+                  {/* <em>{folder.items.length}</em> */}
+                </span>
+                <span className={styles.folderLabel}>
+                  <strong>{folder.title}</strong>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 

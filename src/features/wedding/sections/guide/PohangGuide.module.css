@@ -59,45 +59,65 @@
   position: relative;
   z-index: 1;
   display: block;
-  min-height: 148px;
+  width: 100%;
+  aspect-ratio: 3 / 2;
   margin: 0 auto;
   transition: transform 180ms ease;
 }
 
-.folderIcon::before {
-  content: "";
+.folderArtwork {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 42px;
-  height: 112px;
-  border: 1px solid rgba(116, 109, 102, 0.14);
-  border-radius: 6px 6px 8px 8px;
-  background: var(--folder-color);
-  box-shadow: 0 10px 20px rgba(47, 42, 37, 0.07);
+  object-fit: contain;
+  transform: scale(var(--folder-art-scale));
+  transform-origin: center;
+  pointer-events: none;
 }
 
-.folderIcon::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 23px;
-  width: 54%;
-  height: 42px;
-  border: 1px solid rgba(116, 109, 102, 0.14);
-  border-bottom: 0;
-  border-radius: 7px 14px 0 0;
-  background: var(--folder-color);
+.folderArtworkGreen,
+.folderArtworkYellow {
+  --folder-art-scale: 1.4;
+}
+
+.folderArtworkOrange {
+  --folder-art-scale: 1.63;
+}
+
+.folderArtworkBlue {
+  --folder-art-scale: 1.48;
 }
 
 .folderButton:active .folderIcon {
   transform: translateY(3px);
 }
 
+.folderOpenHint {
+  position: absolute;
+  top: 61%;
+  left: 50%;
+  z-index: 2;
+  display: inline-flex;
+  min-width: 58px;
+  height: 25px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 9px;
+  border: 1px solid rgba(255, 254, 249, 0.92);
+  border-radius: 999px;
+  background: rgba(255, 254, 249, 0.88);
+  box-shadow: 0 5px 12px rgba(47, 42, 37, 0.1);
+  color: rgba(60, 54, 49, 0.74);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotate(-2deg);
+}
+
 .folderIcon em {
   position: absolute;
-  top: 54px;
-  right: 10px;
+  top: -8%;
+  right: -4%;
   z-index: 3;
   display: grid;
   place-items: center;
@@ -121,7 +141,7 @@
   display: grid;
   justify-items: center;
   min-height: 36px;
-  margin-top: 20px;
+  margin-top: 18px;
   color: var(--ink);
   text-align: center;
 }
@@ -284,22 +304,31 @@
 .panelHeader button {
   position: absolute;
   z-index: 2;
-  top: 5px;
+  top: 8px;
   right: 18px;
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(116, 109, 102, 0.14);
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(60, 54, 49, 0.2);
   border-radius: 999px;
-  background: rgba(255, 254, 249, 0.88);
+  background: rgba(255, 254, 249, 0.96);
+  box-shadow: 0 7px 16px rgba(47, 42, 37, 0.13);
   cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.panelHeader button:active {
+  background: #fffef9;
+  transform: scale(0.94);
 }
 
 .panelHeader button svg {
-  width: 19px;
-  height: 19px;
-  stroke-width: 1.9;
+  width: 23px;
+  height: 23px;
+  stroke-width: 2.35;
 }
 
 .modalContent {
@@ -479,7 +508,7 @@ a.placeImageWrap:active .placeImage {
 @keyframes guideFolderPanelHide {
   to {
     opacity: 0;
-    transform: translateY(18px) scale(0.975);
+    transform: translateX(38px) scale(0.98);
   }
 }
 

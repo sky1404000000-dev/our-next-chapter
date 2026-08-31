@@ -59,19 +59,16 @@ export default function OurStory() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasStoryHistoryEntryRef = useRef(false);
+  const isWaitingForHistoryBackRef = useRef(false);
   const daysTogether = getDaysTogether();
 
-  const openStory = () => {
+  const finishClosingStory = useCallback(() => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
-    setIsClosing(false);
-    setIsOpen(true);
-  };
-
-  const closeStory = useCallback(() => {
-    if (isClosing) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsOpen(false);
+      setIsClosing(false);
       return;
     }
 
@@ -81,7 +78,31 @@ export default function OurStory() {
       setIsClosing(false);
       closeTimerRef.current = null;
     }, closeAnimationDuration);
-  }, [isClosing]);
+  }, []);
+
+  const openStory = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (!hasStoryHistoryEntryRef.current) {
+      window.history.pushState({ ...window.history.state, weddingStory: true }, '', window.location.href);
+      hasStoryHistoryEntryRef.current = true;
+    }
+    setIsClosing(false);
+    setIsOpen(true);
+  };
+
+  const closeStory = useCallback(() => {
+    if (isClosing) return;
+
+    if (hasStoryHistoryEntryRef.current) {
+      if (isWaitingForHistoryBackRef.current) return;
+
+      isWaitingForHistoryBackRef.current = true;
+      window.history.back();
+      return;
+    }
+
+    finishClosingStory();
+  }, [finishClosingStory, isClosing]);
 
   useEffect(() => {
     return () => {
@@ -105,6 +126,21 @@ export default function OurStory() {
       window.removeEventListener('keydown', closeOnEscape);
     };
   }, [closeStory, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const closeOnBrowserBack = () => {
+      if (!hasStoryHistoryEntryRef.current) return;
+
+      hasStoryHistoryEntryRef.current = false;
+      isWaitingForHistoryBackRef.current = false;
+      finishClosingStory();
+    };
+
+    window.addEventListener('popstate', closeOnBrowserBack);
+    return () => window.removeEventListener('popstate', closeOnBrowserBack);
+  }, [finishClosingStory, isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;

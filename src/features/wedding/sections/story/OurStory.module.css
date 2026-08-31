@@ -273,13 +273,27 @@
 .panelHeader button {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line);
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(60, 54, 49, 0.2);
   border-radius: 999px;
-  background: rgba(255, 253, 248, 0.92);
-  box-shadow: 0 10px 24px rgba(47, 42, 37, 0.12);
+  background: rgba(255, 254, 249, 0.96);
+  box-shadow: 0 7px 16px rgba(47, 42, 37, 0.13);
   cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.panelHeader button:active {
+  background: #fffef9;
+  transform: scale(0.94);
+}
+
+.panelHeader button svg {
+  width: 23px;
+  height: 23px;
+  stroke-width: 2.35;
 }
 
 .content {
@@ -494,7 +508,7 @@
 @keyframes modalPanelHide {
   to {
     opacity: 0;
-    transform: translateY(18px) scale(0.975);
+    transform: translateX(38px) scale(0.98);
   }
 }
 
@@ -521,8 +535,8 @@
   }
 
   .panelHeader button {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .content {
@@ -612,8 +626,8 @@
   }
 
   .panelHeader button {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .content {

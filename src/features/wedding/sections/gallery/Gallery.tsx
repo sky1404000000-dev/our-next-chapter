@@ -16,6 +16,8 @@ export default function Gallery() {
   const carouselSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const detailDragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
+  const hasDetailHistoryEntryRef = useRef(false);
+  const isWaitingForHistoryBackRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [detailDirection, setDetailDirection] = useState<'prev' | 'next'>('next');
   const [isClosing, setIsClosing] = useState(false);
@@ -108,9 +110,31 @@ export default function Gallery() {
     });
   }, [isClosing]);
 
+  const finishClosingDetail = useCallback(() => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    detailDragStartRef.current = null;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setSelectedIndex(null);
+      setIsClosing(false);
+      return;
+    }
+
+    setIsClosing(true);
+    closeTimerRef.current = setTimeout(() => {
+      setSelectedIndex(null);
+      setIsClosing(false);
+      closeTimerRef.current = null;
+    }, closeAnimationDuration);
+  }, []);
+
   const openDetail = (index: number) => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     closeTimerRef.current = null;
+    if (!hasDetailHistoryEntryRef.current) {
+      window.history.pushState({ ...window.history.state, weddingGalleryDetail: true }, '', window.location.href);
+      hasDetailHistoryEntryRef.current = true;
+    }
     setIsClosing(false);
     setDetailDirection('next');
     setSelectedIndex(index);
@@ -119,15 +143,16 @@ export default function Gallery() {
   const closeDetail = useCallback(() => {
     if (isClosing) return;
 
-    setIsClosing(true);
-    detailDragStartRef.current = null;
+    if (hasDetailHistoryEntryRef.current) {
+      if (isWaitingForHistoryBackRef.current) return;
 
-    closeTimerRef.current = setTimeout(() => {
-      setSelectedIndex(null);
-      setIsClosing(false);
-      closeTimerRef.current = null;
-    }, closeAnimationDuration);
-  }, [isClosing]);
+      isWaitingForHistoryBackRef.current = true;
+      window.history.back();
+      return;
+    }
+
+    finishClosingDetail();
+  }, [finishClosingDetail, isClosing]);
 
   const handleDetailPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!event.isPrimary || event.button !== 0) return;
@@ -192,6 +217,21 @@ export default function Gallery() {
       document.documentElement.style.overscrollBehavior = originalOverscrollBehavior;
     };
   }, [isDetailOpen]);
+
+  useEffect(() => {
+    if (!isDetailOpen) return;
+
+    const closeOnBrowserBack = () => {
+      if (!hasDetailHistoryEntryRef.current) return;
+
+      hasDetailHistoryEntryRef.current = false;
+      isWaitingForHistoryBackRef.current = false;
+      finishClosingDetail();
+    };
+
+    window.addEventListener('popstate', closeOnBrowserBack);
+    return () => window.removeEventListener('popstate', closeOnBrowserBack);
+  }, [finishClosingDetail, isDetailOpen]);
 
   useEffect(() => {
     if (selectedIndex === null) return;
