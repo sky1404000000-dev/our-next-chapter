@@ -208,7 +208,7 @@ export default function OurStory() {
           </p>
           <p className={styles.archiveScript}>Our story</p>
         </div>
-        <p className={styles.archiveCaption}>Milestone Documentation. These moments, carefully documented and lovingly preserved.</p>
+        <p className={styles.archiveCaption}>아래를 클릭하시면 우리의 이야기를 볼 수 있어요.</p>
 
         <button type="button" className={styles.openButton} onClick={openStory}>
           우리의 이야기 펼쳐보기

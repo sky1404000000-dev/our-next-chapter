@@ -8,8 +8,8 @@
       {
         "title": "죽천회타운",
         "image": "/images/guide/places/jukcheon.jpg",
-        "description": "광양남자도 고개 끄덕인 포항식 물회.",
-        "tip": "오빠랑 저는 여기 가면 늘 참가자미 물회를 먹어요.\n책상 위에 장을 조금 더 넣고, 꼭 “얼음 주세요!” 해서 얼음까지 넣어 시원하게 먹는 게 포인트예요 :)",
+        "description": "광양 남자도 고개 끄덕인 포항식 물회.",
+        "tip": "오빠랑 저는 여기 가면 늘 참가자미 물회를 먹어요.\n테이블에 있는 장을 조금 더 넣고, 꼭 “얼음 주세요!” 해서 얼음까지 넣어 시원하게 먹는 게 포인트예요 :)",
         "tags": [
           "만인의 픽",
           "포항물회",
@@ -34,7 +34,7 @@
       {
         "title": "꼬막짬뽕",
         "image": "/images/guide/places/kkomak.png",
-        "description": "꼬막 듬뿍 들어간 얼큰한 해장 추천 한 그릇.",
+        "description": "꼬막 듬뿍 들어간 얼큰한 국물로 속 풀기 좋은 한 그릇",
         "tags": [
           "신부부모님픽",
           "꼬막짬뽕",
@@ -47,7 +47,7 @@
         "title": "미남장어",
         "image": "/images/guide/places/minam-eel.jpg",
         "description": "오동통한 장어를 바로 구워 든든하게 채우는 한 끼",
-        "tip": "손질된 장어를 눈으로 직접보고 선택해 \n 구워먹을 수 있는 식육식당st의 식당이에요.",
+        "tip": "손질된 장어를 직접 보고 골라 바로 구워 먹을 수 있는 식육식당 스타일의 곳이에요.",
         "tags": [
           "신부가족픽",
           "미남장어",
@@ -71,8 +71,8 @@
       {
         "title": "알카노",
         "image": "/images/guide/places/alcano.jpg",
-        "description": "영일대 해수욕장 근처의 양식 맛집",
-        "tip": "알카노에 간다면 오징어먹물 리소토는 꼭 주문해보세요!\n자신있게 추천하는 메뉴예요.웃을 때 먹물 주의^_^",
+        "description": "영일대 해수욕장 근처에서 즐기기 좋은 양식 맛집.",
+        "tip": "알카노에 간다면 오징어먹물 리소토는 꼭 주문해보세요!\n자신 있게 추천하는 메뉴예요. 웃을 때 먹물 주의^_^",
         "tags": [
           "신부가족픽",
           "알카노",
@@ -176,7 +176,80 @@
           "돈까스"
         ],
         "link": "https://naver.me/x5Gok1EX"
-      }
+      },
+        {
+    "title": "죽도 숯불 간받이",
+    "image": "/images/guide/places/jukdo-ganbadi.jpg",
+    "description": "숯불 향 제대로 입은 간받이와 제비추리를 맛볼 수 있는 죽도시장 고깃집",
+    "tags": [
+      "포항토박이픽",
+      "죽도숯불간받이",
+      "간받이",
+      "죽도시장맛집"
+    ],
+    "link": "https://naver.me/FzSZSFBp"
+  },
+  {
+    "title": "밀레니엄",
+    "image": "/images/guide/places/millennium-agusuyuk.jpg",
+    "description": "부드럽고 담백한 생아구수육으로 이름난 포항 현지인 맛집",
+    "tip": "여기서는 생아구수육을 추천해요. 찾는 사람이 많은 곳이라 방문 전 미리 예약하고 가는 편이 좋아요.",
+    "tags": [
+      "포항토박이픽",
+      "밀레니엄",
+      "아구수육",
+      "포항현지인맛집"
+    ],
+    "link": "https://naver.me/GzEDEo66"
+    },
+    {
+      "title": "우현 해물찜",
+      "image": "/images/guide/places/woohyun-haemuljjim.jpg",
+      "description": "푸짐한 해산물에 매콤한 양념이 어우러진 우현동 해물찜 맛집",
+      "tags": [
+        "포항토박이픽",
+        "우현해물찜",
+        "해물찜",
+        "우현동맛집"
+      ],
+      "link": "https://naver.me/Fy236yU6"
+    },
+    {
+      "title": "광스시",
+      "image": "/images/guide/places/gwang-sushi.jpg",
+      "description": "신선한 횟감을 한 피스씩 제대로 즐길 수 있는 포항 초밥 맛집",
+      "tags": [
+        "포항토박이픽",
+        "광스시",
+        "초밥맛집",
+        "포항스시"
+      ],
+      "link": "https://naver.me/GubOd0DV"
+    },
+    {
+      "title": "마이땅 곱창",
+      "image": "/images/guide/places/maittang-gopchang.jpg",
+      "description": "곱창부터 대창과 막창까지 골고루 즐기기 좋은 이동 곱창 맛집",
+      "tags": [
+        "포항토박이픽",
+        "마이땅곱창",
+        "곱창모듬",
+        "이동맛집"
+      ],
+      "link": "https://naver.me/IFgqw6Eu"
+    },
+    {
+      "title": "허정우 숯불이야기",
+      "image": "/images/guide/places/heojeongwoo-sutbul.jpg",
+      "description": "두툼한 숙성 돼지고기를 숯불에 구워 먹는 포항 고깃집",
+      "tags": [
+        "포항토박이픽",
+        "허정우숯불이야기",
+        "숙성오겹살",
+        "포항고기맛집"
+      ],
+      "link": "https://naver.me/5CW7gwWG"
+    }
     ]
   },
   {

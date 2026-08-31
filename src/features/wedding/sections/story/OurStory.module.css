@@ -19,15 +19,23 @@
 .storyCard::before {
   content: "";
   position: absolute;
-  top: -16px;
+
+  top: -28px;
   left: 50%;
   z-index: 2;
-  width: 120px;
-  height: 30px;
-  background: rgba(255, 226, 122, 0.76);
-  border: 1px solid rgba(237, 200, 79, 0.34);
+
+  width: 138px;
+  height: 62px;
+
+  background-image: url("/images/share/flower.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
   transform: translateX(-50%) rotate(-1.5deg);
-  box-shadow: 0 8px 16px rgba(63, 48, 36, 0.08);
+
+  border: none;
+  box-shadow: none;
 }
 
 .storyHeader {
@@ -125,18 +133,18 @@
 }
 
 .archiveCaption {
-  padding: 8px 10px 0;
-  color: var(--ink-faint);
+  padding: 20px 10px 0;
+  color: #3c3631;
   font-family: var(--sans);
-  font-size: 9px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.;
   text-align: center;
 }
 
 .openButton {
   width: max-content;
   min-height: 48px;
-  margin: 28px auto 2px;
+  margin: 20px auto 2px;
   padding: 6px 7px 6px 18px;
   display: flex;
   align-items: center;

@@ -3,17 +3,26 @@ import { weddingData } from '@/data/weddingData';
 
 export default function AboutUs() {
   const { aboutUs } = weddingData;
-  const subtitle = 'subtitle' in aboutUs && typeof aboutUs.subtitle === 'string' ? aboutUs.subtitle : undefined;
+  const subtitle =
+    'subtitle' in aboutUs && typeof aboutUs.subtitle === 'string'
+      ? aboutUs.subtitle
+      : undefined;
 
   return (
     <section className="section about-section" id="about-us">
       <span className="section-kicker">{aboutUs.kicker}</span>
       <h2>{aboutUs.title}</h2>
-      {subtitle && <p className="section-description">{subtitle}</p>}
+
+      {subtitle && (
+        <p className="section-description">{subtitle}</p>
+      )}
 
       <div className="about-profile-card">
-        {aboutUs.people.map((person) => (
-          <article className="about-person" key={`${person.role}-${person.name}`}>
+        {aboutUs.people.map((person, index) => (
+          <article
+            className="about-person"
+            key={`${person.role}-${person.name}`}
+          >
             <Image
               src={person.image}
               alt={person.imageAlt}
@@ -22,18 +31,38 @@ export default function AboutUs() {
               sizes="(max-width: 520px) 50vw, 240px"
               className="about-photo"
             />
+
             <div className="about-person-details">
               <h3>
                 <span>{person.role}</span> {person.name}
               </h3>
-              <p className="about-profile-meta">{person.parents}</p>
+
+              <p className="about-profile-meta">
+                {person.parents}
+              </p>
+
               <p className="about-profile-text">
                 {person.birth}
                 <br />
                 <span>{person.note}</span>
-                {person.note2 && <span className="about-profile-note2">{person.note2}</span>}
+
+                {person.note2 && (
+                  <span className="about-profile-note2">
+                    {person.note2}
+                  </span>
+                )}
               </p>
             </div>
+
+            {index === 0 && (
+              <Image
+                src="/images/people/heart.jpg"
+                alt=""
+                width={60}
+                height={60}
+                className="about-heart"
+              />
+            )}
           </article>
         ))}
       </div>

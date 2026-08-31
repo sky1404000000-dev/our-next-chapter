@@ -812,29 +812,73 @@ button {
   line-height: 1.6;
 }
 
-.cover-polaroid::before,
-.schedule-card::before,
+/* 커버 - 무지 연노랑 테이프 */
+.cover-polaroid::before {
+  content: "";
+  position: absolute;
+
+  top: -33px;
+  left: 50%;
+  z-index: 2;
+
+  width: 150px;
+  height: 70px;
+
+  background-image: url("/images/share/plain.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  transform: translateX(-50%) rotate(1deg);
+
+  border: none;
+  box-shadow: none;
+}
+
+/* 예식일 - 무지 연노랑 테이프 */
+.schedule-card::before {
+  content: "";
+  position: absolute;
+
+  top: -30px;
+  left: 50%;
+  z-index: 2;
+
+  width: 140px;
+  height: 60px;
+
+  background-image: url("/images/share/plain.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  transform: translateX(-50%) rotate(-5deg);
+
+  border: none;
+  box-shadow: none;
+}
+
 .about-profile-card::before {
   content: "";
   position: absolute;
-  top: -14px;
+
+  top: -35px;
   left: 50%;
   z-index: 2;
-  width: 108px;
-  height: 28px;
-  background: rgba(255, 226, 122, 0.72);
-  border: 1px solid rgba(237, 200, 79, 0.34);
-  transform: translateX(-50%) rotate(-2deg);
-  box-shadow: 0 8px 16px rgba(63, 48, 36, 0.08);
-}
 
-.cover-polaroid::before {
-  top: -15px;
-  width: 118px;
-  height: 30px;
-  transform: translateX(-50%) rotate(1deg);
-}
+  width: 148px;
+  height: 66px;
 
+  background-image: url("/images/share/check.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
+  transform: translateX(-50%) rotate(-5deg);
+
+  border: none;
+  box-shadow: none;
+}
 .section > .section-kicker {
   text-transform: uppercase;
 }
@@ -1002,7 +1046,7 @@ button {
 }
 
 .calendar-wedding-day {
-  background: var(--accent);
+  background: #ffe27a;
   color: #3c3631;
   font-weight: 700;
   box-shadow: 0 8px 18px rgba(237, 200, 79, 0.2);
@@ -1056,19 +1100,16 @@ button {
   text-align: left;
 }
 
-.about-person:first-child::after {
-  content: "♡";
+.about-heart {
   position: absolute;
   top: calc(100% + 35px);
   left: 50%;
   z-index: 2;
-  color: #d96663;
-  font-family: var(--script);
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 1;
+
+  width: 50px;
+  height: auto;
+
   transform: translate(-50%, -50%) rotate(-12deg);
-  text-shadow: 0 4px 9px rgba(196, 76, 72, 0.14);
 }
 
 .about-photo {
@@ -1213,14 +1254,47 @@ button {
 .gallery-polaroid::before {
   content: "";
   position: absolute;
-  top: -8px;
+
+  top: -15px;
   left: 50%;
   z-index: 2;
-  width: 54px;
-  height: 16px;
-  background: var(--tape);
+
+  width: 75px;
+  height: 35px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
   transform: translateX(-50%) rotate(var(--tape-tilt, 2deg));
-  box-shadow: 0 4px 8px rgba(63, 48, 36, 0.06);
+
+  border: none;
+  box-shadow: none;
+}
+
+/* 1번 - 무지 */
+.gallery-polaroid-1::before {
+  background-image: url("/images/share/plain.png");
+}
+
+/* 2번 - 체크 */
+.gallery-polaroid-2::before {
+  background-image: url("/images/share/check.png");
+}
+
+/* 3번 - 꽃 */
+.gallery-polaroid-3::before {
+  background-image: url("/images/share/flower.png");
+}
+
+/* 4번 - 무지 */
+.gallery-polaroid-4::before {
+  background-image: url("/images/share/plain.png");
+}
+
+/* 5번 - 체크 */
+.gallery-polaroid-5::before {
+  background-image: url("/images/share/check.png");
 }
 
 .gallery-polaroid-image {
@@ -1244,7 +1318,7 @@ button {
   left: 20px;
   z-index: 2;
   width: 174px;
-  --tape-tilt: -4deg;
+  --tape-tilt: -7deg;
   transform: rotate(-5deg);
 }
 
@@ -1262,7 +1336,7 @@ button {
   left: 25px;
   z-index: 4;
   width: 176px;
-  --tape-tilt: 1deg;
+  --tape-tilt: 3deg;
   transform: rotate(4deg);
 }
 
@@ -1271,7 +1345,7 @@ button {
   right: 15px;
   z-index: 5;
   width: 178px;
-  --tape-tilt: 4deg;
+  --tape-tilt: -10deg;
   transform: rotate(-4deg);
 }
 
@@ -1610,15 +1684,37 @@ button {
 .closing-mini-photo::before {
   content: "";
   position: absolute;
-  top: -11px;
+
+  top: -27px;
   left: 50%;
   z-index: 2;
-  width: 84px;
-  height: 22px;
-  border: 1px solid rgba(237, 200, 79, 0.26);
-  background: rgba(255, 226, 122, 0.58);
-  box-shadow: 0 5px 10px rgba(63, 48, 36, 0.06);
+
+  width: 130px;
+  height: 58px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
   transform: translateX(-50%) rotate(var(--mini-tape-tilt, -2deg));
+
+  border: none;
+  box-shadow: none;
+}
+
+/* 마지막 사진 1 - 무지 */
+.closing-mini-photo:nth-child(1)::before {
+  background-image: url("/images/share/plain.png");
+}
+
+/* 마지막 사진 2 - 체크 */
+.closing-mini-photo:nth-child(2)::before {
+  background-image: url("/images/share/check.png");
+}
+
+/* 마지막 사진 3 - 무지 */
+.closing-mini-photo:nth-child(3)::before {
+  background-image: url("/images/share/plain.png");
 }
 
 .closing-mini-photo:nth-child(2) {

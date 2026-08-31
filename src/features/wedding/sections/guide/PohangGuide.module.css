@@ -3,18 +3,27 @@
   margin-top: 24px;
 }
 
+/* 포항 가이드 - 세이지 도트 테이프 */
 .folderCard::before {
   content: "";
   position: absolute;
-  top: -14px;
+
+  top: -29px;
   left: 50%;
   z-index: 3;
-  width: 108px;
-  height: 28px;
-  border: 1px solid rgba(237, 200, 79, 0.3);
-  background: rgba(255, 226, 122, 0.62);
-  box-shadow: 0 8px 16px rgba(63, 48, 36, 0.08);
+
+  width: 138px;
+  height: 62px;
+
+  background-image: url("/images/share/dot.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+
   transform: translateX(-50%) rotate(-2deg);
+
+  border: none;
+  box-shadow: none;
 }
 
 .folderGrid {
