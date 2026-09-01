@@ -817,12 +817,12 @@ button {
   content: "";
   position: absolute;
 
-  top: -33px;
+  top: -30px;
   left: 50%;
   z-index: 2;
 
-  width: 150px;
-  height: 70px;
+  width: 138px;
+  height: 62px;
 
   background-image: url("/images/share/plain.png");
   background-repeat: no-repeat;
@@ -844,8 +844,8 @@ button {
   left: 50%;
   z-index: 2;
 
-  width: 140px;
-  height: 60px;
+  width: 138px;
+  height: 62px;
 
   background-image: url("/images/share/plain.png");
   background-repeat: no-repeat;
@@ -866,8 +866,8 @@ button {
   left: 50%;
   z-index: 2;
 
-  width: 148px;
-  height: 66px;
+  width: 138px;
+  height: 62px;
 
   background-image: url("/images/share/check.png");
   background-repeat: no-repeat;
@@ -994,7 +994,6 @@ button {
 }
 
 .schedule-card,
-.account-card,
 .about-profile-card {
   position: relative;
   margin-top: 24px;
@@ -1007,8 +1006,7 @@ button {
 }
 
 .schedule-time,
-.schedule-note,
-.account-message {
+.schedule-note {
   color: var(--ink-soft);
   font-family: var(--sans);
   font-size: 14px;
@@ -1465,195 +1463,6 @@ button {
   box-shadow: 0 10px 24px rgba(47, 42, 37, 0.12);
 }
 
-.account-card {
-  display: grid;
-  gap: 14px;
-  margin-top: 26px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.account-message {
-  margin: 0 auto 26px;
-  max-width: 290px;
-  white-space: pre-line;
-  color: rgba(75, 68, 63, 0.78);
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.account-panel {
-  width: min(100%, 342px);
-  justify-self: center;
-  overflow: hidden;
-  border: 1px solid rgba(233, 224, 212, 0.72);
-  border-radius: 14px;
-  background: rgba(255, 226, 122, 0.38);
-  font-family: var(--sans);
-  box-shadow: 0 10px 24px rgba(73, 62, 51, 0.045);
-}
-
-.account-panel + .account-panel {
-  margin-top: 2px;
-}
-
-.account-panel-toggle {
-  position: relative;
-  width: 100%;
-  min-height: 55px;
-  padding: 0 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 226, 122, 0.38);
-  color: var(--ink);
-  outline: 0;
-}
-
-.account-panel-toggle:focus,
-.account-panel-toggle:focus-visible {
-  outline: 0;
-  box-shadow: none;
-}
-
-.account-side {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-align: center;
-}
-
-.account-chevron {
-  position: absolute;
-  right: 22px;
-  top: 50%;
-  width: 18px;
-  height: 18px;
-  color: var(--sage);
-  transform: translateY(-50%);
-  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.account-panel.is-open .account-chevron {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.account-panel-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  background: var(--paper-card);
-  opacity: 0;
-  transition:
-    grid-template-rows 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 260ms ease;
-}
-
-.account-panel.is-open .account-panel-body {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.account-panel-body-inner {
-  min-height: 0;
-  overflow: hidden;
-  display: grid;
-  gap: 0;
-  padding: 0 18px;
-}
-
-.account-panel.is-open .account-panel-body-inner {
-  padding-bottom: 14px;
-}
-
-.account-person {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px;
-  align-items: center;
-  padding: 15px 0;
-  border-top: 1px solid rgba(233, 224, 212, 0.74);
-  font-family: var(--sans);
-}
-
-.account-person-info {
-  display: grid;
-  gap: 4px;
-  text-align: left;
-}
-
-.account-person-info strong {
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.account-person-info span {
-  display: block;
-  color: var(--ink-soft);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.account-person-info a[href^="tel:"],
-.account-person-info a[x-apple-data-detectors] {
-  color: inherit !important;
-  text-decoration: none !important;
-  pointer-events: none;
-}
-
-.account-copy {
-  min-width: 64px;
-  min-height: 30px;
-  padding: 0 11px;
-  display: inline-flex;
-  justify-content: center;
-  gap: 4px;
-  align-items: center;
-  border: 1px solid rgba(116, 109, 102, 0.18);
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.86);
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: none;
-}
-
-.account-copy svg {
-  width: 13px;
-  height: 13px;
-  color: var(--ink-soft);
-  stroke-width: 1.8;
-}
-
-.account-copy-toast {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  z-index: 120;
-  padding: 11px 18px;
-  border-radius: 999px;
-  background: rgba(95, 127, 84, 0.94);
-  color: #fffef9;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, calc(-50% + 10px));
-  transition:
-    opacity 180ms ease,
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.account-copy-toast.is-visible {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
-
 .closing {
   padding: 72px 0 0;
   margin-bottom: -56px;
@@ -1769,7 +1578,7 @@ button {
   font-family: var(--script);
   font-size: 50px;
   font-style: normal;
-  line-height: 1.2;
+  line-height: 1.5;
 }
 
 .closing-date-table {
