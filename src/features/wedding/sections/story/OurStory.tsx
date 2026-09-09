@@ -61,7 +61,12 @@ export default function OurStory() {
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const hasStoryHistoryEntryRef = useRef(false);
   const isWaitingForHistoryBackRef = useRef(false);
-  const daysTogether = getDaysTogether();
+
+  const [daysTogether, setDaysTogether] = useState<number | null>(null);
+
+  useEffect(() => {
+    setDaysTogether(getDaysTogether());
+  }, []);
 
   const finishClosingStory = useCallback(() => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
@@ -181,9 +186,14 @@ export default function OurStory() {
       <article className={styles.storyCard}>
         <div className={styles.storyHeader}>
           <p>우리가 함께 보낸 소중한 날들</p>
-          <strong className={styles.daysCount} suppressHydrationWarning>
-            + {daysTogether.toLocaleString('ko-KR')}<small>일</small>
-          </strong>
+            <strong className={styles.daysCount}>
+              {daysTogether !== null && (
+                <>
+                  + {daysTogether.toLocaleString('ko-KR')}
+                  <small>일</small>
+                </>
+              )}
+            </strong>
         </div>
 
         <button
