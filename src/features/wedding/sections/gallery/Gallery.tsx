@@ -340,14 +340,14 @@ export default function Gallery() {
                 onPointerUp={handleDetailPointerUp}
                 onPointerCancel={handleDetailPointerCancel}
               >
-                <Image
-                  src={selectedItem.image}
-                  alt={selectedItem.alt ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
-                  width={selectedItem.width ?? 760}
-                  height={selectedItem.height ?? 900}
-                  className="gallery-modal-image"
-                  draggable={false}
-                />
+              <Image
+                src={selectedItem.image}
+                alt={selectedItem.alt ?? `웨딩 갤러리 사진 ${(selectedIndex ?? 0) + 1}`}
+                fill
+                sizes="100vw"
+                className="gallery-modal-image"
+                draggable={false}
+              />
               </div>
 
               <div className="gallery-modal-controls" aria-label="사진 이동">
