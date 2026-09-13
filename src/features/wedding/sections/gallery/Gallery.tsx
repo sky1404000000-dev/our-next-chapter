@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import './Gallery.css';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import type { PointerEvent as ReactPointerEvent } from 'react';
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
@@ -195,26 +196,28 @@ export default function Gallery() {
   useEffect(() => {
     if (!isDetailOpen) return;
 
-    const modalHeight = window.visualViewport?.height ?? window.innerHeight;
     const originalHtmlOverflow = document.documentElement.style.overflow;
     const originalOverflow = document.body.style.overflow;
-    const originalOverscrollBehavior = document.documentElement.style.overscrollBehavior;
+    const originalOverscrollBehavior =
+      document.documentElement.style.overscrollBehavior;
+
     const preventTouchMove = (event: TouchEvent) => {
       event.preventDefault();
     };
 
-    document.documentElement.style.setProperty('--gallery-modal-height', `${modalHeight}px`);
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overscrollBehavior = 'none';
-    document.addEventListener('touchmove', preventTouchMove, { passive: false });
+    document.addEventListener('touchmove', preventTouchMove, {
+      passive: false,
+    });
 
     return () => {
       document.removeEventListener('touchmove', preventTouchMove);
-      document.documentElement.style.removeProperty('--gallery-modal-height');
       document.documentElement.style.overflow = originalHtmlOverflow;
       document.body.style.overflow = originalOverflow;
-      document.documentElement.style.overscrollBehavior = originalOverscrollBehavior;
+      document.documentElement.style.overscrollBehavior =
+        originalOverscrollBehavior;
     };
   }, [isDetailOpen]);
 
