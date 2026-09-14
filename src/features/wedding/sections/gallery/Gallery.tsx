@@ -71,7 +71,7 @@ export default function Gallery() {
 
     carousel.scrollTo({
       left: carousel.clientWidth * nextPhysicalPage,
-      behavior: 'smooth'
+      behavior: 'auto'
     });
   };
 
