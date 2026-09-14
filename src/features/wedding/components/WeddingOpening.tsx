@@ -42,13 +42,17 @@ export default function WeddingOpening() {
       setDebugEvent('POPSTATE');
     };
 
-    const handlePageShow = (event: PageTransitionEvent) => {
-      if (event.persisted) {
-        setDebugEvent('PAGESHOW / BFCACHE');
-      } else {
-        setDebugEvent('PAGESHOW');
-      }
-    };
+const handlePageShow = (event: PageTransitionEvent) => {
+  const navigation = performance.getEntriesByType(
+    'navigation'
+  )[0] as PerformanceNavigationTiming | undefined;
+
+  const navigationType = navigation?.type ?? 'unknown';
+
+  setDebugEvent(
+    `PAGESHOW / ${navigationType} / H${window.history.length}`
+  );
+};
 
     const handleVisibilityChange = () => {
       setDebugEvent(
