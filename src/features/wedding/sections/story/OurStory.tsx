@@ -12,24 +12,10 @@ const closeAnimationDuration = 300;
 
 function getDaysTogether() {
   const today = new Date();
+  const start = new Date(storyStartDate.getFullYear(), storyStartDate.getMonth(), storyStartDate.getDate());
+  const current = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-  const start = new Date(
-    storyStartDate.getFullYear(),
-    storyStartDate.getMonth(),
-    storyStartDate.getDate()
-  );
-
-  const current = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
-
-  return (
-    Math.floor(
-      (current.getTime() - start.getTime()) / 86400000
-    ) + 1
-  );
+  return Math.floor((current.getTime() - start.getTime()) / 86400000) + 1;
 }
 
 type TimelineItemProps = {
@@ -37,24 +23,14 @@ type TimelineItemProps = {
   reverse: boolean;
 };
 
-function TimelineItem({
-  item,
-  reverse
-}: TimelineItemProps) {
+function TimelineItem({ item, reverse }: TimelineItemProps) {
   return (
     <article
-      className={`${styles.timelineItem} ${
-        reverse ? styles.reverse : ''
-      }`}
+      className={`${styles.timelineItem} ${reverse ? styles.reverse : ''}`}
       data-story-timeline-item
     >
-      <div
-        className={styles.timelineMarker}
-        aria-hidden
-      >
-        <span>
-          <Heart />
-        </span>
+      <div className={styles.timelineMarker} aria-hidden>
+        <span><Heart /></span>
       </div>
 
       {item.image && (
@@ -80,36 +56,28 @@ function TimelineItem({
 
 export default function OurStory() {
   const { story } = weddingData;
-
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [daysTogether, setDaysTogether] =
-    useState<number | null>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const hasStoryHistoryEntryRef = useRef(false);
+  const isWaitingForHistoryBackRef = useRef(false);
 
-  const closeTimerRef =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [daysTogether, setDaysTogether] = useState<number | null>(null);
 
   useEffect(() => {
     setDaysTogether(getDaysTogether());
   }, []);
 
   const finishClosingStory = useCallback(() => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
-    }
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
 
-    if (
-      window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches
-    ) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setIsOpen(false);
       setIsClosing(false);
       return;
     }
 
     setIsClosing(true);
-
     closeTimerRef.current = setTimeout(() => {
       setIsOpen(false);
       setIsClosing(false);
@@ -118,11 +86,11 @@ export default function OurStory() {
   }, []);
 
   const openStory = () => {
-    if (closeTimerRef.current) {
-      clearTimeout(closeTimerRef.current);
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    if (!hasStoryHistoryEntryRef.current) {
+      window.history.pushState({ ...window.history.state, weddingStory: true }, '', window.location.href);
+      hasStoryHistoryEntryRef.current = true;
     }
-
-    closeTimerRef.current = null;
     setIsClosing(false);
     setIsOpen(true);
   };
@@ -130,72 +98,63 @@ export default function OurStory() {
   const closeStory = useCallback(() => {
     if (isClosing) return;
 
+    if (hasStoryHistoryEntryRef.current) {
+      if (isWaitingForHistoryBackRef.current) return;
+
+      isWaitingForHistoryBackRef.current = true;
+      window.history.back();
+      return;
+    }
+
     finishClosingStory();
   }, [finishClosingStory, isClosing]);
 
   useEffect(() => {
     return () => {
-      if (closeTimerRef.current) {
-        clearTimeout(closeTimerRef.current);
-      }
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
     };
   }, []);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    const originalOverflow =
-      document.body.style.overflow;
-
-    const closeOnEscape = (
-      event: KeyboardEvent
-    ) => {
-      if (event.key === 'Escape') {
-        closeStory();
-      }
+    const originalOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeStory();
     };
 
     document.body.style.overflow = 'hidden';
-
-    window.addEventListener(
-      'keydown',
-      closeOnEscape
-    );
+    window.addEventListener('keydown', closeOnEscape);
 
     return () => {
-      document.body.style.overflow =
-        originalOverflow;
-
-      window.removeEventListener(
-        'keydown',
-        closeOnEscape
-      );
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
     };
   }, [closeStory, isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
 
-    const panel =
-      document.querySelector<HTMLElement>(
-        '[data-story-panel]'
-      );
+    const closeOnBrowserBack = () => {
+      if (!hasStoryHistoryEntryRef.current) return;
 
-    const items =
-      document.querySelectorAll<HTMLElement>(
-        '[data-story-timeline-item]'
-      );
+      hasStoryHistoryEntryRef.current = false;
+      isWaitingForHistoryBackRef.current = false;
+      finishClosingStory();
+    };
 
-    if (
-      !panel ||
-      !('IntersectionObserver' in window)
-    ) {
-      items.forEach((item) =>
-        item.classList.add(
-          styles.timelineItemVisible
-        )
-      );
+    window.addEventListener('popstate', closeOnBrowserBack);
+    return () => window.removeEventListener('popstate', closeOnBrowserBack);
+  }, [finishClosingStory, isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const panel = document.querySelector<HTMLElement>('[data-story-panel]');
+    const items = document.querySelectorAll<HTMLElement>('[data-story-timeline-item]');
+
+    if (!panel || !('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add(styles.timelineItemVisible));
       return;
     }
 
@@ -203,11 +162,7 @@ export default function OurStory() {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-
-          entry.target.classList.add(
-            styles.timelineItemVisible
-          );
-
+          entry.target.classList.add(styles.timelineItemVisible);
           observer.unobserve(entry.target);
         });
       },
@@ -218,39 +173,27 @@ export default function OurStory() {
       }
     );
 
-    items.forEach((item) =>
-      observer.observe(item)
-    );
+    items.forEach((item) => observer.observe(item));
 
     return () => observer.disconnect();
   }, [isOpen]);
 
   return (
-    <section
-      className={`section ${styles.storySection}`}
-      id="our-story"
-    >
-      <span className="section-kicker">
-        {story.kicker}
-      </span>
-
+    <section className={`section ${styles.storySection}`} id="our-story">
+      <span className="section-kicker">{story.kicker}</span>
       <h2>{story.title}</h2>
 
       <article className={styles.storyCard}>
         <div className={styles.storyHeader}>
           <p>우리가 함께 보낸 소중한 날들</p>
-
-          <strong className={styles.daysCount}>
-            {daysTogether !== null && (
-              <>
-                +{' '}
-                {daysTogether.toLocaleString(
-                  'ko-KR'
-                )}
-                <small>일</small>
-              </>
-            )}
-          </strong>
+            <strong className={styles.daysCount}>
+              {daysTogether !== null && (
+                <>
+                  + {daysTogether.toLocaleString('ko-KR')}
+                  <small>일</small>
+                </>
+              )}
+            </strong>
         </div>
 
         <button
@@ -273,103 +216,56 @@ export default function OurStory() {
             <span>Collection :</span>
             <span>Ongoing Records</span>
           </p>
-
-          <p className={styles.archiveScript}>
-            Our story
-          </p>
+          <p className={styles.archiveScript}>Our story</p>
         </div>
+        <p className={styles.archiveCaption}>아래를 클릭하시면 우리의 이야기를 볼 수 있어요.</p>
 
-        <p className={styles.archiveCaption}>
-          아래를 클릭하시면 우리의 이야기를 볼
-          수 있어요.
-        </p>
-
-        <button
-          type="button"
-          className={styles.openButton}
-          onClick={openStory}
-        >
+        <button type="button" className={styles.openButton} onClick={openStory}>
           우리의 이야기 펼쳐보기
-
           <span aria-hidden>
             <ArrowRight />
           </span>
         </button>
       </article>
 
-      {isOpen &&
-        createPortal(
-          <div
-            className={`${styles.modal} ${
-              isClosing
-                ? styles.modalClosing
-                : ''
-            }`}
-            role="dialog"
-            aria-modal="true"
-            aria-label={story.title}
-          >
-            <button
-              type="button"
-              className={styles.backdrop}
-              onClick={closeStory}
-              aria-label="우리의 이야기 닫기"
-            />
+      {isOpen && createPortal(
+        <div
+          className={`${styles.modal} ${isClosing ? styles.modalClosing : ''}`}
+          role="dialog"
+          aria-modal="true"
+          aria-label={story.title}
+        >
+          <button type="button" className={styles.backdrop} onClick={closeStory} aria-label="우리의 이야기 닫기" />
+          <article className={styles.panel} data-story-panel>
+            <header className={styles.panelHeader}>
+              <span>Timeline</span>
+              <button type="button" onClick={closeStory} aria-label="우리의 이야기 닫기">
+                <X aria-hidden />
+              </button>
+            </header>
 
-            <article
-              className={styles.panel}
-              data-story-panel
-            >
-              <header
-                className={styles.panelHeader}
-              >
-                <span>Timeline</span>
-
-                <button
-                  type="button"
-                  onClick={closeStory}
-                  aria-label="우리의 이야기 닫기"
-                >
-                  <X aria-hidden />
-                </button>
-              </header>
-
-              <div className={styles.content}>
-                <div
-                  className={
-                    styles.timelineIntro
-                  }
-                >
-                  <span>Our story</span>
-                  <h3>{story.title}</h3>
-                  <p>{story.intro}</p>
-                </div>
-
-                <div className={styles.timeline}>
-                  {story.items.map(
-                    (item, index) => (
-                      <TimelineItem
-                        key={`${item.date}-${item.title}-${index}`}
-                        item={item}
-                        reverse={
-                          index % 2 === 1
-                        }
-                      />
-                    )
-                  )}
-
-                  <Heart
-                    className={
-                      styles.timelineEnd
-                    }
-                    aria-hidden
-                  />
-                </div>
+            <div className={styles.content}>
+              <div className={styles.timelineIntro}>
+                <span>Our story</span>
+                <h3>{story.title}</h3>
+                <p>{story.intro}</p>
               </div>
-            </article>
-          </div>,
-          document.body
-        )}
+
+              <div className={styles.timeline}>
+                {story.items.map((item, index) => (
+                  <TimelineItem
+                    key={`${item.date}-${item.title}-${index}`}
+                    item={item}
+                    reverse={index % 2 === 1}
+                  />
+                ))}
+                <Heart className={styles.timelineEnd} aria-hidden />
+              </div>
+            </div>
+          </article>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }
