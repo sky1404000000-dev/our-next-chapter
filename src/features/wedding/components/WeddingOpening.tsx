@@ -16,18 +16,38 @@ const openingImages = [
 
 const openingTitle = 'Our Wedding Day';
 
+type WeddingWindow = Window & {
+  __weddingOpeningCompleted?: boolean;
+};
+
 export default function WeddingOpening() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
+  // 현재 페이지에서 이미 인트로를 봤는지 확인
   useEffect(() => {
-    if (isVisible) return;
+    const pageWindow = window as WeddingWindow;
 
-    window.dispatchEvent(new Event('wedding-opening-complete'));
-  }, [isVisible]);
+    const hasCompletedOpening =
+      pageWindow.__weddingOpeningCompleted === true;
 
+    setIsVisible(!hasCompletedOpening);
+    setIsReady(true);
+  }, []);
+
+  // 인트로가 끝났을 때 다른 컴포넌트에 알려주기
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isReady || isVisible) return;
+
+    window.dispatchEvent(
+      new Event('wedding-opening-complete')
+    );
+  }, [isReady, isVisible]);
+
+  // 인트로 자동 재생 및 종료
+  useEffect(() => {
+    if (!isReady || !isVisible) return;
 
     const previousOverflow = document.body.style.overflow;
 
@@ -50,25 +70,32 @@ export default function WeddingOpening() {
       };
     }
 
-    const leaveTimer = window.setTimeout(
-      () => setIsLeaving(true),
-      leaveDelay
-    );
+    const leaveTimer = window.setTimeout(() => {
+      setIsLeaving(true);
+    }, leaveDelay);
 
-    const finishTimer = window.setTimeout(
-      () => setIsVisible(false),
-      finishDelay
-    );
+    const finishTimer = window.setTimeout(() => {
+      const pageWindow = window as WeddingWindow;
+
+      pageWindow.__weddingOpeningCompleted = true;
+
+      setIsVisible(false);
+    }, finishDelay);
 
     return () => {
       window.clearTimeout(leaveTimer);
       window.clearTimeout(finishTimer);
       document.body.style.overflow = previousOverflow;
     };
-  }, [isVisible]);
+  }, [isReady, isVisible]);
 
+  // 화면 클릭 또는 SKIP
   const dismissOpening = () => {
     if (isLeaving) return;
+
+    const pageWindow = window as WeddingWindow;
+
+    pageWindow.__weddingOpeningCompleted = true;
 
     setIsLeaving(true);
 
@@ -77,7 +104,7 @@ export default function WeddingOpening() {
     }, 850);
   };
 
-  if (!isVisible) return null;
+  if (!isReady || !isVisible) return null;
 
   return (
     <div
@@ -86,7 +113,10 @@ export default function WeddingOpening() {
       aria-label="웨딩 초대장 인트로"
       onClick={dismissOpening}
     >
-      <div className="wedding-opening-images" aria-hidden="true">
+      <div
+        className="wedding-opening-images"
+        aria-hidden="true"
+      >
         {openingImages.map((image, index) => (
           <figure
             className={`wedding-opening-slide wedding-opening-slide-${index + 1}`}
@@ -104,8 +134,13 @@ export default function WeddingOpening() {
         ))}
       </div>
 
-      <p className="wedding-opening-title" aria-label={openingTitle}>
-        <span aria-hidden="true">{openingTitle}</span>
+      <p
+        className="wedding-opening-title"
+        aria-label={openingTitle}
+      >
+        <span aria-hidden="true">
+          {openingTitle}
+        </span>
       </p>
 
       <p className="wedding-opening-hint">
