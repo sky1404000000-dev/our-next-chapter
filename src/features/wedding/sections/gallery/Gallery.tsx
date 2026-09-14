@@ -17,8 +17,6 @@ export default function Gallery() {
   const carouselSettleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const detailDragStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
-  const hasDetailHistoryEntryRef = useRef(false);
-  const isWaitingForHistoryBackRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [detailDirection, setDetailDirection] = useState<'prev' | 'next'>('next');
   const [isClosing, setIsClosing] = useState(false);
@@ -131,11 +129,8 @@ export default function Gallery() {
 
   const openDetail = (index: number) => {
     if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+
     closeTimerRef.current = null;
-    if (!hasDetailHistoryEntryRef.current) {
-      window.history.pushState({ ...window.history.state, weddingGalleryDetail: true }, '', window.location.href);
-      hasDetailHistoryEntryRef.current = true;
-    }
     setIsClosing(false);
     setDetailDirection('next');
     setSelectedIndex(index);
@@ -143,14 +138,6 @@ export default function Gallery() {
 
   const closeDetail = useCallback(() => {
     if (isClosing) return;
-
-    if (hasDetailHistoryEntryRef.current) {
-      if (isWaitingForHistoryBackRef.current) return;
-
-      isWaitingForHistoryBackRef.current = true;
-      window.history.back();
-      return;
-    }
 
     finishClosingDetail();
   }, [finishClosingDetail, isClosing]);
@@ -220,21 +207,6 @@ export default function Gallery() {
         originalOverscrollBehavior;
     };
   }, [isDetailOpen]);
-
-  useEffect(() => {
-    if (!isDetailOpen) return;
-
-    const closeOnBrowserBack = () => {
-      if (!hasDetailHistoryEntryRef.current) return;
-
-      hasDetailHistoryEntryRef.current = false;
-      isWaitingForHistoryBackRef.current = false;
-      finishClosingDetail();
-    };
-
-    window.addEventListener('popstate', closeOnBrowserBack);
-    return () => window.removeEventListener('popstate', closeOnBrowserBack);
-  }, [finishClosingDetail, isDetailOpen]);
 
   useEffect(() => {
     if (selectedIndex === null) return;

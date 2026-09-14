@@ -13,6 +13,7 @@ const openingImages = [
     alt: '은진과 동균의 웨딩 인트로 사진 2'
   }
 ];
+
 const openingTitle = 'Our Wedding Day';
 
 export default function WeddingOpening() {
@@ -29,10 +30,15 @@ export default function WeddingOpening() {
     if (!isVisible) return;
 
     const previousOverflow = document.body.style.overflow;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
     const isDebugMode =
       process.env.NODE_ENV === 'development' &&
       new URLSearchParams(window.location.search).get('introDebug') === '1';
+
     const leaveDelay = prefersReducedMotion ? 600 : 4500;
     const finishDelay = prefersReducedMotion ? 1050 : 5400;
 
@@ -44,8 +50,15 @@ export default function WeddingOpening() {
       };
     }
 
-    const leaveTimer = window.setTimeout(() => setIsLeaving(true), leaveDelay);
-    const finishTimer = window.setTimeout(() => setIsVisible(false), finishDelay);
+    const leaveTimer = window.setTimeout(
+      () => setIsLeaving(true),
+      leaveDelay
+    );
+
+    const finishTimer = window.setTimeout(
+      () => setIsVisible(false),
+      finishDelay
+    );
 
     return () => {
       window.clearTimeout(leaveTimer);
@@ -58,7 +71,10 @@ export default function WeddingOpening() {
     if (isLeaving) return;
 
     setIsLeaving(true);
-    window.setTimeout(() => setIsVisible(false), 850);
+
+    window.setTimeout(() => {
+      setIsVisible(false);
+    }, 850);
   };
 
   if (!isVisible) return null;
@@ -72,7 +88,10 @@ export default function WeddingOpening() {
     >
       <div className="wedding-opening-images" aria-hidden="true">
         {openingImages.map((image, index) => (
-          <figure className={`wedding-opening-slide wedding-opening-slide-${index + 1}`} key={image.src}>
+          <figure
+            className={`wedding-opening-slide wedding-opening-slide-${index + 1}`}
+            key={image.src}
+          >
             <Image
               src={image.src}
               alt={image.alt}
@@ -88,7 +107,11 @@ export default function WeddingOpening() {
       <p className="wedding-opening-title" aria-label={openingTitle}>
         <span aria-hidden="true">{openingTitle}</span>
       </p>
-      <p className="wedding-opening-hint">화면을 누르면 바로 시작합니다</p>
+
+      <p className="wedding-opening-hint">
+        화면을 누르면 바로 시작합니다
+      </p>
+
       <button
         type="button"
         className="wedding-opening-skip"
