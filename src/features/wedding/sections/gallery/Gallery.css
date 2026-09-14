@@ -23,6 +23,9 @@
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y;
 }
 
 .gallery-collage-carousel::-webkit-scrollbar {
